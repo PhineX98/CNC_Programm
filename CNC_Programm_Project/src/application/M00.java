@@ -4,7 +4,9 @@ public class M00 {
 	
 	public static void exec() {
 		Drill.drillStop();
-		Fraeser.startFraeser();
+		Fraeser.stopFraeser();
+		Fraeser.cutSpeed = 0;
+		Fraeser.coolingStatus = false;
 		
 	}
 	
