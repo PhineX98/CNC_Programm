@@ -1,0 +1,42 @@
+[
+    {
+        "command": {
+            "number":"N0010",
+			"code":"M03",
+			"parameters": {
+				
+			}
+        }
+    },
+    {
+        "command": {
+            "number":"N0020",
+			"code":"M08",
+			"parameters": {
+
+			}	
+        }
+    },
+	{
+        "command": {
+           "number":"N0030",
+			"code":"G01",
+			"parameters": { 
+				"x":0,
+				"y":100
+			}	
+        }
+    },
+    {
+        "command": {
+            "number":"N0040",
+			"code":"G02",
+			"parameters": {
+				"x":0,
+				"y":10,
+				"i":0,
+				"j":5
+			}	
+        }
+    }
+]

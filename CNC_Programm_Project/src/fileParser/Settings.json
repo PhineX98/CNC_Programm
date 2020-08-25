@@ -1,0 +1,12 @@
+{
+  "homePosX": 0,
+  "homePosY": 0,
+  "speedCooling": 2,
+  "speedNoCooling": 3,
+  "speedNoDrill": 6,
+  "drillDiameter": 15,
+  "surfaceColor": "grey",
+  "surfaceDrilledColor": "black",
+  "drillColor": "red",
+  "homePosColor": "green"
+}
