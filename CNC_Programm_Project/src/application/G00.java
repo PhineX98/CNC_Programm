@@ -1,5 +1,9 @@
 package application;
 
 public class G00 {
-	//!!!Nur möglich wenn fräser aus!!!
+	/**
+	 * Verfahrbewegung im Eilgang(nur ohne Bohren/Fräsen möglich
+	 * !!!Nur möglich wenn fräser aus!!!
+	 * 
+	 */
 }

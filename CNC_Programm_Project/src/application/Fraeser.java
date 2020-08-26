@@ -14,7 +14,7 @@ public class Fraeser {
 		Fraeser.posY = y;
 	}
 
-	// ALLE METHODEN MÜSSEN SATIC SEIN
+	// ALLE METHODEN MÜSSEN STATIC SEIN
 
 	// Fäser Starten
 	public static void startFraeser() {
