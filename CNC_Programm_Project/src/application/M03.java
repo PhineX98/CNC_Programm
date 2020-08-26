@@ -4,9 +4,9 @@ public class M03 {
 	
 	//Spindel ein im Uhrezigersinn (Rechtslauf)
 	
-	public static void exec() {
-		Spindel.startRight();
-		Fraeser.setSchnittSpeed(2);
+	public void exec(Spindel s, Fraeser f) {
+		s.startRight();
+		f.setSchnittSpeed(2);
 	}
 	
 	//Spindel ein

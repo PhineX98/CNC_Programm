@@ -4,12 +4,11 @@ public class M00 {
 	
 	//Programmhalt
 	
-	public static void exec() {
-		Spindel.drillStop();
-		Fraeser.stopFraeser();
-		Fraeser.schnittSpeed = 0;
-		Fraeser.coolingStatus = false;
-		
+	public void exec(Spindel s, Fraeser f) {
+		s.stop();
+		f.stopFraeser();
+		f.setSchnittSpeed(0);
+		f.setCoolingStatus(false);
 	}
 	
 	//Spindel aus

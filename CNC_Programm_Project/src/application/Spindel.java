@@ -1,39 +1,39 @@
 package application;
 
 public class Spindel {
-	public static  boolean drillStatus = false;
+	public   boolean drillStatus = false;
 	
 	//false -> Rechtslauf  |  true -> Linkslauf
-	public static boolean drillRichtung = false;
+	public  boolean drillRichtung = false;
 	
-	
+
 	
 	
 	
 	//Drill Stoppen
-	public static  void drillStop() {
+	public   void stop() {
 		drillStatus = false;
 	}
 	
 	//Drill Starten rechtsherum
-	public static void startRight() {
+	public  void startRight() {
 		drillStatus = true;
 		drillRichtung = false;
 	}
 	
 	//Drill Starten linksrum
-	public static void startLeft() {
+	public  void startLeft() {
 		drillStatus = true;
 		drillRichtung = true;
 	}
 	
 	//get Drill Status
-	public static boolean getDrillStatus() {
+	public  boolean getStatus() {
 		return drillStatus;
 	}
 	
 	//get Drill Richtung 
-	public static boolean getDrillRichtung() {
+	public  boolean getRichtung() {
 		return drillRichtung;
 	}
 	

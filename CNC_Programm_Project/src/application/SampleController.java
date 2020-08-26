@@ -1,17 +1,21 @@
 package application;
 
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
 
 
-public class SampleController {
+public class SampleController implements Initializable{
 
-	public Label statX;
+	public static Label statX;
 	public Label statY;
 	public Label statCooling;
 	public Label statDirection;
@@ -23,6 +27,8 @@ public class SampleController {
     public Label lblSpeedNoCooling;
     public Label lblSpeedNoDrill;
     public Label lblDrillDiameter;
+    
+    public TextField tesTextField;
 
     
     public Rectangle drillSurface;
@@ -63,6 +69,7 @@ public class SampleController {
     
     public void btnPause() {
     	System.out.println("5");
+    	tesTextField.setText("etst");
     }
     
     
@@ -78,5 +85,21 @@ public class SampleController {
     	lblSpeedNoDrill.setText(settings[3]);
     	lblDrillDiameter.setText(settings[4]);
     }
+    
+    
+    
+    public static void setX(String s) {
+    	statX.setText(s);
+    }
+    public Label getX() {
+        return statX;
+    }
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
