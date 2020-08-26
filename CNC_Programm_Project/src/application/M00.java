@@ -1,6 +1,8 @@
 package application;
 
-public class M00 {
+
+
+public class M00{
 	
 	//Programmhalt
 	
@@ -9,6 +11,9 @@ public class M00 {
 		f.stopFraeser();
 		f.setSchnittSpeed(0);
 		f.setCoolingStatus(false);
+		
+		
+		
 	}
 	
 	//Spindel aus

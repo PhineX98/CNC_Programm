@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 
 public class SampleController implements Initializable{
 
-	public static Label statX;
+	public Label statX  = new Label();
 	public Label statY;
 	public Label statCooling;
 	public Label statDirection;
@@ -28,7 +28,7 @@ public class SampleController implements Initializable{
     public Label lblSpeedNoDrill;
     public Label lblDrillDiameter;
     
-    public TextField tesTextField;
+    public TextField tesTextField = new TextField();
 
     
     public Rectangle drillSurface;
@@ -59,6 +59,7 @@ public class SampleController implements Initializable{
 	
     public void btnStart() {
     	System.out.println("3");
+    	
     }
     
     
@@ -88,7 +89,7 @@ public class SampleController implements Initializable{
     
     
     
-    public static void setX(String s) {
+    public  void setX(String s) {
     	statX.setText(s);
     }
     public Label getX() {
