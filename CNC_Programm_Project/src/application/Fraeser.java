@@ -2,8 +2,8 @@ package application;
 
 public class Fraeser {
 
-	public static double driveSpeed;
-	public static double cutSpeed;
+	public static double fahrSpeed;
+	public static double schnittSpeed;
 	public static boolean fraeserStatus = false;
 	public static boolean coolingStatus = false;
 	public static double posX;
@@ -37,23 +37,23 @@ public class Fraeser {
 	}
 
 	// drivespeed setzten
-	public static void setDriveSpeed(double speed) {
-		driveSpeed = speed;
+	public static void setFahrSpeed(double speed) {
+		fahrSpeed = speed;
 	}
 
 	// getten
-	public static double getDriveSpeed() {
-		return driveSpeed;
+	public static double getFahrSpeed() {
+		return fahrSpeed;
 	}
 
 	// schnittgeschwindigkeit setzen
-	public static void setCutSpeed(double speed) {
-		cutSpeed = speed;
+	public static void setSchnittSpeed(double speed) {
+		schnittSpeed = speed;
 	}
 
 	// getten
-	public static double getCutSpeed() {
-		return cutSpeed;
+	public static double getSchnittSpeed() {
+		return schnittSpeed;
 	}
 
 	// posX setzen

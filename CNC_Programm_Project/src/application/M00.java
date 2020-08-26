@@ -5,9 +5,9 @@ public class M00 {
 	//Programmhalt
 	
 	public static void exec() {
-		Drill.drillStop();
+		Spindel.drillStop();
 		Fraeser.stopFraeser();
-		Fraeser.cutSpeed = 0;
+		Fraeser.schnittSpeed = 0;
 		Fraeser.coolingStatus = false;
 		
 	}

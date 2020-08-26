@@ -52,7 +52,7 @@
    <right>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <left>
-            <Rectangle fx:id="drillSurface" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="550.0" stroke="BLACK" strokeType="INSIDE" width="700.0" BorderPane.alignment="CENTER" />
+            <Rectangle fx:id="drillSurface" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="525.0" stroke="BLACK" strokeType="INSIDE" width="700.0" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <Rectangle fill="YELLOW" height="200.0" opacity="0.0" smooth="false" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" width="29.0" BorderPane.alignment="CENTER" />

@@ -1,6 +1,6 @@
 package application;
 
-public class Drill {
+public class Spindel {
 	public static  boolean drillStatus = false;
 	
 	//false -> Rechtslauf  |  true -> Linkslauf

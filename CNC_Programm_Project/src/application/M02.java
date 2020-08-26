@@ -5,10 +5,10 @@ public class M02 {
 	public static void exec() {
 		//Programm beenden
 		
-		Drill.drillStop();
+		Spindel.drillStop();
 		Fraeser.setFraeserStatus(false);
 		Fraeser.setCoolingStatus(false);
-		Fraeser.setDriveSpeed(0);
+		Fraeser.setFahrSpeed(0);
 	}
 	
 	//Programm Ende
