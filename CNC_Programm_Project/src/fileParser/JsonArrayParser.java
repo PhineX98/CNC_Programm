@@ -22,7 +22,7 @@ public class JsonArrayParser {
     public ArrayList<CommandCode> parse(String path) {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
-        ArrayList<CommandCode> list = new ArrayList<>();
+		ArrayList<CommandCode> list = new ArrayList<>();
 
 
         //try (FileReader reader = new FileReader("C:\\Users\\janni\\Desktop\\Befehlscode.json"))

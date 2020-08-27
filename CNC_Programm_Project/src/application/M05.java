@@ -1,15 +1,18 @@
 package application;
 
-public class M05 extends Befehl{
-	
-	//Spindel stopp
+/**
+ *
+ * @author Jannik Orth
+ */
+public class M05 extends Befehl {
+
+	// Spindel stopp
 	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.stop();
-		
+
 		resetStatus(s, f, c);
 	}
-	
-	
-	//Spindel aus
-    //Bohrspeed = 2
+
+	// Spindel aus
+	// Bohrspeed = 2
 }
