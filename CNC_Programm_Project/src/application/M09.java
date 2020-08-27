@@ -1,15 +1,19 @@
 package application;
 
-public class M09 extends Befehl{
-	
-	//Kühlmittel aus
+/**
+ *
+ * @author Jannik Orth
+ */
+public class M09 extends Befehl {
+
+	// Kühlmittel aus
 	public void exec(Spindel s, Fraeser f, SampleController c) {
 		f.setCoolingStatus(false);
 		f.setSchnittSpeed(2);
-		
+
 		resetStatus(s, f, c);
 	}
-	//Kühlung aus
-    //Bohrspeed = 2
+	// Kühlung aus
+	// Bohrspeed = 2
 
 }
