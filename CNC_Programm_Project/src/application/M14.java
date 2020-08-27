@@ -7,7 +7,10 @@ public class M14 extends Befehl{
 		s.startLeft();
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
+		
+		resetStatus(s, f, c);
 	}
+	
 	//Spindel ein
     //Vorschub ein?
     //Drehrichtung links
