@@ -2,7 +2,7 @@ package application;
 
 public class M13 extends Befehl{
 	
-	//Spindel ein, Rechtslauf und Kühlmittel ein
+	//Spindel ein, Rechtslauf und KÃ¼hlmittel ein
 	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.startRight();
 		f.setCoolingStatus(true);
@@ -11,6 +11,6 @@ public class M13 extends Befehl{
 	//Spindel ein
     //Vorschub ein?
     //Drehrichtung rechts
-    //Kühlmittel an
+    //KÃ¼hlmittel an
     //Bohrspeed = 3
 }

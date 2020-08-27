@@ -2,11 +2,11 @@ package application;
 
 public class M08 extends Befehl{
 	
-	//Kühlmittel ein
+	//KÃ¼hlmittel ein
 	public void exec(Spindel s, Fraeser f, SampleController c) {
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
 	}
-	//Kühlung ein
+	//KÃ¼hlung ein
     //Bohrspeed = 3
 }

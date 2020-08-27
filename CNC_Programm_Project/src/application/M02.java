@@ -1,3 +1,4 @@
+
 package application;
 
 public class M02 extends Befehl{
@@ -14,6 +15,7 @@ public class M02 extends Befehl{
 	//Programm Ende
     //Spindel aus
     //Vorschub aus
-    //Kühlmittel aus
+    //KÃ¼hlmittel aus
     //Bohrspeed = 0
 }
+
