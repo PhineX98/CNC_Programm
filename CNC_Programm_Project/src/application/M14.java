@@ -7,7 +7,6 @@ public class M14 extends Befehl{
 		s.startLeft();
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
-		
 	}
 	//Spindel ein
     //Vorschub ein?
