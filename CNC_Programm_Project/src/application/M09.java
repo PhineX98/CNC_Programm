@@ -1,9 +1,9 @@
 package application;
 
-public class M09 {
+public class M09 extends Befehl{
 	
 	//Kühlmittel aus
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		f.setCoolingStatus(false);
 		f.setSchnittSpeed(2);
 	}

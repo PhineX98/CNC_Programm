@@ -1,9 +1,9 @@
 package application;
 
-public class M05 {
+public class M05 extends Befehl{
 	
 	//Spindel stopp
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.stop();
 	}
 	

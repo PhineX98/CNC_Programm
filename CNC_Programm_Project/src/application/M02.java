@@ -1,8 +1,8 @@
 package application;
 
-public class M02 {
+public class M02 extends Befehl{
 	
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		//Programm beenden
 		
 		s.stop();

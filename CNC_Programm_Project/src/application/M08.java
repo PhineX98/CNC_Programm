@@ -1,9 +1,9 @@
 package application;
 
-public class M08 {
+public class M08 extends Befehl{
 	
 	//Kühlmittel ein
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
 	}

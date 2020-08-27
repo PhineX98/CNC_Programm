@@ -1,5 +1,7 @@
 package fileParser;
 
+import application.M00;
+
 /**
  * zur Speicherung der einzelnen Kommandobefehle in einer Arraylist diesen Typs.
  * Spätere Manipulation der Werte ist möglich.
@@ -14,6 +16,8 @@ public class CommandCode{
     private double y;
     private double i;
     private double j;
+    
+  
 
     public String getPos() {
         return pos;

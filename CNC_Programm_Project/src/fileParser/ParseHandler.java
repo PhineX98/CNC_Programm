@@ -33,13 +33,14 @@ public class ParseHandler {
         settingsParser.readSettings(settingsPath);
 
         
-        String a = (Long.toString(settingsParser.getHomePosX()) + " ; " + Long.toString(settingsParser.getHomePosY()));
+        String a = (Long.toString(settingsParser.getHomePosX()));
+        String b = (Long.toString(settingsParser.getHomePosY()));
         String c = (Long.toString(settingsParser.getSpeedCooling()));
         String d = (Long.toString(settingsParser.getSpeedNoCooling()));
         String e = (Long.toString(settingsParser.getSpeedNoDrill()));
         String f = (Long.toString(settingsParser.getDrillDiameter()));
         
-        String[] settings = {a, c, d, e, f};
+        String[] settings = {a, b, c, d, e, f};
         
 		return settings;
         

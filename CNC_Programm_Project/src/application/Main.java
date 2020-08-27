@@ -1,9 +1,9 @@
 package application;
 	
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
@@ -22,14 +22,13 @@ public class Main extends Application {
 			primaryStage.show();
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("CNC Simulation");
-			Label geschwindigkeit = new Label("Geschwindigkeit: + /min");
 			
-			root.getChildren().add(geschwindigkeit);
-		
-		} catch(Exception e) {
+				
+		   } catch(Exception e) {
 			e.printStackTrace();
 			
 		}
+		
 		
 
 	}
@@ -39,6 +38,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		
+		/*
 		Spindel spindel = new Spindel();
 		Fraeser fraeser = new Fraeser(0,0);
 		
@@ -53,6 +53,12 @@ public class Main extends Application {
 		System.out.println(spindel.getStatus());
 		System.out.println(spindel.getRichtung());
 		System.out.println(fraeser.getCoolingStatus());
+		*/
+		
 		
 	}
+	
+	
+
+	
 }

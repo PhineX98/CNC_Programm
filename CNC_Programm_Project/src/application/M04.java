@@ -1,10 +1,10 @@
 package application;
 
-public class M04 {
+public class M04 extends Befehl{
 	
 	//Spindel ein gegen den Uhrzeigersinn (Linkslauf)
 	
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.startLeft();
 		f.setSchnittSpeed(2);
 	}

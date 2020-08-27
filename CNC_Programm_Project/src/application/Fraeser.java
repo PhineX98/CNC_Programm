@@ -1,5 +1,7 @@
 package application;
 
+
+
 public class Fraeser {
 
 	public  double fahrSpeed;
@@ -8,22 +10,39 @@ public class Fraeser {
 	public  boolean coolingStatus = false;
 	public  double posX;
 	public  double posY;
-
-	public Fraeser(double x, double y) {
-		this.posX = x;
-		this.posY = y;
+	public  double homePosX;
+	public  double homePosY;
+	
+	
+	public double getHomePosX() {
+		return homePosX;
 	}
+
+	public void setHomePosX(double homePosX) {
+		this.homePosX = homePosX;
+	}
+
+	public double getHomePosY() {
+		return homePosY;
+	}
+
+	public void setHomePosY(double homePosY) {
+		this.homePosY = homePosY;
+	}
+
+
+	
 
 	// ALLE METHODEN MÜSSEN STATIC SEIN
 
 	// Fäser Starten
 	public  void startFraeser() {
-		fraeserStatus = true;
+		this.fraeserStatus = true;
 	}
 
 	// Fräser Stoppen
 	public  void stopFraeser() {
-		fraeserStatus = false;
+		this.fraeserStatus = false;
 	}
 
 	// Fräser Status ausgeben
@@ -33,12 +52,12 @@ public class Fraeser {
 
 	// fräasenstatus setzen
 	public  void setFraeserStatus(boolean status) {
-		fraeserStatus = status;
+		this.fraeserStatus = status;
 	}
 
 	// drivespeed setzten
 	public  void setFahrSpeed(double speed) {
-		fahrSpeed = speed;
+		this.fahrSpeed = speed;
 	}
 
 	// getten
@@ -48,7 +67,7 @@ public class Fraeser {
 
 	// schnittgeschwindigkeit setzen
 	public  void setSchnittSpeed(double speed) {
-		schnittSpeed = speed;
+		this.schnittSpeed = speed;
 	}
 
 	// getten
@@ -58,7 +77,7 @@ public class Fraeser {
 
 	// posX setzen
 	public  void setPosX(double pos) {
-		posX = pos;
+		this.posX = pos;
 	}
 
 	// getten
@@ -78,7 +97,7 @@ public class Fraeser {
 
 	// cooling setzen
 	public  void setCoolingStatus(boolean stat) {
-		coolingStatus = stat;
+		this.coolingStatus = stat;
 	}
 
 	// cooling getten
