@@ -9,6 +9,8 @@ public abstract class Befehl {
 		
 	}
 	
+	
+	
 	public void resetStatus(Spindel s, Fraeser f, SampleController c) {
 		
 		//Setzen des eingestellten Fräserstatus

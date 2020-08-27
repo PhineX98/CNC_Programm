@@ -7,6 +7,8 @@ public class M04 extends Befehl{
 	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.startLeft();
 		f.setSchnittSpeed(2);
+		
+		resetStatus(s, f, c);
 	}
 	
 	//Spindel ein

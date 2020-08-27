@@ -10,6 +10,8 @@ public class M02 extends Befehl{
 		f.setFraeserStatus(false);
 		f.setCoolingStatus(false);
 		f.setFahrSpeed(0);
+		
+		resetStatus(s, f, c);
 	}
 	
 	//Programm Ende

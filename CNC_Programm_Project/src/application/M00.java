@@ -24,7 +24,7 @@ public class M00 extends Befehl{
 	
 	//Spindel aus
     //Vorschub aus
-    //KÃ¼hlmittel aus
+    //Kühlmittel aus
     //Bohrspeed = 0
 }
 
