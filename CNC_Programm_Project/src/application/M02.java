@@ -1,9 +1,9 @@
+
 package application;
 
-public class M02 extends MCommand{
+public class M02 extends Befehl{
 	
-	@Override
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		//Programm beenden
 		
 		s.stop();
@@ -15,6 +15,7 @@ public class M02 extends MCommand{
 	//Programm Ende
     //Spindel aus
     //Vorschub aus
-    //Kühlmittel aus
+    //KÃ¼hlmittel aus
     //Bohrspeed = 0
 }
+

@@ -10,14 +10,14 @@
 
 <BorderPane prefHeight="653.0" prefWidth="216.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <left>
-      <AnchorPane prefHeight="645.0" prefWidth="217.0" style="-fx-background-color: skyblue;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="719.0" prefWidth="228.0" style="-fx-background-color: skyblue;" BorderPane.alignment="CENTER">
          <children>
             <Button layoutX="23.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnStart" prefHeight="58.0" prefWidth="64.0" text="Start" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
             <Button layoutX="23.0" layoutY="543.0" mnemonicParsing="false" onAction="#btnPause" prefHeight="25.0" prefWidth="184.0" text="Pause" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
             <Button layoutX="23.0" layoutY="510.0" mnemonicParsing="false" onAction="#btnSettingsRead" prefHeight="25.0" prefWidth="179.0" text="JSON Settings lesen" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
             <Button layoutX="137.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnStopp" prefHeight="58.0" prefWidth="64.0" text="Stopp" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
             <Button layoutX="23.0" layoutY="476.0" mnemonicParsing="false" onAction="#btnCommandsRead" prefHeight="25.0" prefWidth="178.0" text="JSON Commands lesen" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-            <Label layoutX="26.0" layoutY="26.0" text="STATUS">
+            <Label layoutX="26.0" layoutY="26.0" text="STATUS" AnchorPane.leftAnchor="15.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -44,7 +44,23 @@
             <Label fx:id="lblSpeedNoCooling" layoutX="165.0" layoutY="233.0" text="load" />
             <Label fx:id="lblSpeedNoDrill" layoutX="165.0" layoutY="250.0" text="load" />
             <Label fx:id="lblDrillDiameter" layoutX="165.0" layoutY="267.0" text="load" />
-            <TextField editable="false" layoutX="31.0" layoutY="352.0" />
+            <TextField fx:id="field_Pos" layoutX="21.0" layoutY="327.0" prefHeight="25.0" prefWidth="61.0" promptText="Position" text="N00" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="146.0" />
+            <TextField fx:id="field_Befehl" layoutX="21.0" layoutY="359.0" prefHeight="25.0" prefWidth="61.0" promptText="Befehl" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="146.0" />
+            <TextField fx:id="field_x" layoutX="102.0" layoutY="327.0" prefHeight="25.0" prefWidth="40.0" promptText="X" text="0" AnchorPane.topAnchor="327.0" />
+            <TextField fx:id="field_i" layoutX="102.0" layoutY="359.0" prefHeight="25.0" prefWidth="40.0" promptText="i" text="0" />
+            <TextField fx:id="field_y" layoutX="161.0" layoutY="327.0" prefHeight="25.0" prefWidth="40.0" promptText="Y" text="0" />
+            <TextField fx:id="field_j" layoutX="161.0" layoutY="359.0" prefHeight="25.0" prefWidth="40.0" promptText="j" text="0" />
+            <Button layoutX="10.0" layoutY="392.0" mnemonicParsing="false" onAction="#btnAddCommand" prefHeight="25.0" prefWidth="202.0" text="Add" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+            <Button layoutX="17.0" layoutY="441.0" mnemonicParsing="false" onAction="#btnCommandsDelete" prefHeight="25.0" prefWidth="178.0" text="Commandliste löschen" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+            <Label layoutX="14.0" layoutY="300.0" text="Manuelle Eingabe" AnchorPane.leftAnchor="14.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="statX1" layoutX="154.0" layoutY="331.0" text="Y" />
+            <Label fx:id="statY1" layoutX="94.0" layoutY="331.0" text="X" />
+            <Label fx:id="statY11" layoutX="94.0" layoutY="363.0" text="i" />
+            <Label fx:id="statX11" layoutX="154.0" layoutY="363.0" text="j" />
          </children>
       </AnchorPane>
    </left>
@@ -52,7 +68,7 @@
       <Rectangle fill="#ffffff00" height="200.0" opacity="0.0" smooth="false" stroke="BLACK" strokeLineCap="BUTT" strokeMiterLimit="0.0" strokeType="INSIDE" width="29.0" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="291.0" prefWidth="729.0" BorderPane.alignment="CENTER">
          <left>
             <Rectangle fx:id="drillSurface" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="525.0" stroke="BLACK" strokeType="INSIDE" width="700.0" BorderPane.alignment="CENTER" />
          </left>

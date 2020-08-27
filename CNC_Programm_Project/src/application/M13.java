@@ -1,11 +1,9 @@
 package application;
 
-public class M13 extends MCommand{
+public class M13 extends Befehl{
 	
-	//Spindel ein, Rechtslauf und Kühlmittel ein
-	
-	@Override
-	public void exec(Spindel s, Fraeser f) {
+	//Spindel ein, Rechtslauf und KÃ¼hlmittel ein
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.startRight();
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
@@ -13,6 +11,6 @@ public class M13 extends MCommand{
 	//Spindel ein
     //Vorschub ein?
     //Drehrichtung rechts
-    //Kühlmittel an
+    //KÃ¼hlmittel an
     //Bohrspeed = 3
 }

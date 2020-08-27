@@ -1,24 +1,30 @@
 package application;
 
 
-
-public class M00 extends MCommand{
+public class M00 extends Befehl{
 	
 	//Programmhalt
 	
-	@Override
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.stop();
 		f.stopFraeser();
 		f.setSchnittSpeed(0);
 		f.setCoolingStatus(false);
 		
+		/*
+		c.statFraeser.setText("AUS");
+		c.statDirection.setText("-");
+		c.statCooling.setText("AUS");
+		c.statSpeed.setText("0");
+		*/
 		
+		resetStatus(s, f, c);
 		
 	}
 	
 	//Spindel aus
     //Vorschub aus
-    //Kühlmittel aus
+    //KÃ¼hlmittel aus
     //Bohrspeed = 0
 }
+

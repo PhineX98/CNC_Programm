@@ -1,11 +1,11 @@
+
 package application;
 
-public class M03 extends MCommand {
+public class M03 extends Befehl{
 	
 	//Spindel ein im Uhrezigersinn (Rechtslauf)
 	
-	@Override
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.startRight();
 		f.setSchnittSpeed(2);
 	}

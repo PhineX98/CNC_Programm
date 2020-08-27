@@ -1,11 +1,9 @@
 package application;
 
-public class M05 extends MCommand{
+public class M05 extends Befehl{
 	
 	//Spindel stopp
-	
-	@Override
-	public void exec(Spindel s, Fraeser f) {
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		s.stop();
 	}
 	

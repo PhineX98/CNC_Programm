@@ -1,15 +1,13 @@
 package application;
 
-public class M09 extends MCommand{
+public class M09 extends Befehl{
 	
-	//Kühlmittel aus
-	
-	@Override
-	public void exec(Spindel s, Fraeser f) {
+	//KÃ¼hlmittel aus
+	public void exec(Spindel s, Fraeser f, SampleController c) {
 		f.setCoolingStatus(false);
 		f.setSchnittSpeed(2);
 	}
-	//Kühlung aus
+	//KÃ¼hlung aus
     //Bohrspeed = 2
 
 }
