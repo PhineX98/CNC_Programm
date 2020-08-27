@@ -1,8 +1,10 @@
 package application;
 
-public class M13 {
+public class M13 extends MCommand{
 	
 	//Spindel ein, Rechtslauf und Kühlmittel ein
+	
+	@Override
 	public void exec(Spindel s, Fraeser f) {
 		s.startRight();
 		f.setCoolingStatus(true);

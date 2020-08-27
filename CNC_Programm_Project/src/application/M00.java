@@ -2,10 +2,11 @@ package application;
 
 
 
-public class M00{
+public class M00 extends MCommand{
 	
 	//Programmhalt
 	
+	@Override
 	public void exec(Spindel s, Fraeser f) {
 		s.stop();
 		f.stopFraeser();

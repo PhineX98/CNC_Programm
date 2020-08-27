@@ -1,7 +1,8 @@
 package application;
 
-public class M02 {
+public class M02 extends MCommand{
 	
+	@Override
 	public void exec(Spindel s, Fraeser f) {
 		//Programm beenden
 		
