@@ -7,10 +7,11 @@ public class M14 extends Befehl{
 		s.startLeft();
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
+		
 	}
 	//Spindel ein
     //Vorschub ein?
     //Drehrichtung links
-    //KÃ¼hlmittel an
+    //Kühlmittel an
     //Bohrspeed = 3
 }
