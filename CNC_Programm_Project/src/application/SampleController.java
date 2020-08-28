@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
 import javafx.event.ActionEvent;
@@ -11,7 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.HLineTo;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -47,6 +54,7 @@ public class SampleController implements Initializable {
 	public Rectangle drillSurface;
 	public Circle circHomePosition;
 	public Circle circDrill;
+	public Path path;
 	
 
 	public ListView<String> logList;
@@ -146,6 +154,7 @@ public class SampleController implements Initializable {
 		circDrill.setRadius(Double.parseDouble(settings[5])/2);
 		
 		
+		
 		btnManager.settingsInitialized(sc);
 	}
 
@@ -235,11 +244,15 @@ public class SampleController implements Initializable {
 	}
 	
 	public void btnExportLog(ActionEvent actionEvent)  {
+		MoveTo m2 = new MoveTo();
+		m2.setX(10);
+		m2.setY(10);
+		sc.path.getElements().add(m2);
+		
 		if (btnManager.getLoggingDeleted()) {
 			errorHandler.thereIsNoLog();
 		}else {
-			btnManager.exportLog(sc, logger);
-			
+			btnManager.exportLog(sc, logger);	
 		}
 	}
 	
@@ -306,6 +319,39 @@ public class SampleController implements Initializable {
 			handleG28.exec(spindel, fraeser, sc, logger, paramList);
 			break;
 		}
+	}
+	
+	
+	public void btnTest(ActionEvent actionEvent) {
+		
+		
+		MoveTo moveTo = new MoveTo();
+		moveTo.setX(0.0f);
+		moveTo.setY(0.0f);
+
+		
+
+		QuadCurveTo quadCurveTo = new QuadCurveTo();
+		quadCurveTo.setX(120.0f);
+		quadCurveTo.setY(60.0f);
+		quadCurveTo.setControlX(100.0f);
+		quadCurveTo.setControlY(0.0f);
+
+		LineTo lineTo = new LineTo();
+		lineTo.setX(175.0f);
+		lineTo.setY(55.0f);
+
+		ArcTo arcTo = new ArcTo();
+		arcTo.setX(50.0f);
+		arcTo.setY(50.0f);
+		arcTo.setRadiusX(50.0f);
+		arcTo.setRadiusY(50.0f);
+
+		path.getElements().add(moveTo);
+		path.getElements().add(quadCurveTo);
+		path.getElements().add(lineTo);
+		path.getElements().add(arcTo);
+		
 	}
 
 	@Override

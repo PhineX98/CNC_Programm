@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Path?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -82,6 +83,7 @@
                   <Label fx:id="lblInfo" layoutX="12.0" layoutY="66.0" textFill="BLUE" underline="true" AnchorPane.leftAnchor="15.0" />
                   <Button layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnDeleteLog" prefHeight="25.0" prefWidth="167.0" text="Log löschen" AnchorPane.rightAnchor="15.0" />
                   <Button layoutX="747.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnExportLog" prefHeight="25.0" prefWidth="169.0" text="Log exportieren" />
+                  <Button layoutX="644.0" layoutY="33.0" mnemonicParsing="false" onAction="#btnTest" text="Button" />
                </children>
             </AnchorPane>
          </bottom>
@@ -104,7 +106,8 @@
                <children>
                   <Rectangle fx:id="drillSurface" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0" />
                   <Circle fx:id="circHomePosition" fill="#1beb1b" layoutX="100.0" layoutY="100.0" radius="8.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fx:id="circDrill" fill="RED" layoutX="100.0" layoutY="50.0" radius="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circDrill" fill="RED" radius="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Path fx:id="path" fill="DODGERBLUE" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                </children>
             </Pane>
          </left>
