@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
 import javafx.event.ActionEvent;
@@ -14,7 +13,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.HLineTo;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -22,8 +20,8 @@ import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Dies ist die ControllerKlasse der Anwendung
- * Von hier aus werden alle Button Events gesteuert
+ * Dies ist die ControllerKlasse der Anwendung Von hier aus werden alle Button
+ * Events gesteuert
  * 
  * @author Jannik Orth
  */
@@ -50,15 +48,14 @@ public class SampleController implements Initializable {
 	public TextField field_y;
 	public TextField field_i;
 	public TextField field_j;
-	
+
 	public Rectangle drillSurface;
 	public Circle circHomePosition;
 	public Circle circDrill;
 	public Path path;
-	
 
 	public ListView<String> logList;
-	
+
 	ArrayList<CommandCode> commands = new ArrayList<>();
 	ArrayList<CommandCode> tempCommands = new ArrayList<>();
 	Fraeser fraeser = new Fraeser();
@@ -88,43 +85,45 @@ public class SampleController implements Initializable {
 	////////////////////////////////////////
 
 	public void btnAddCommand(ActionEvent actionEvent) {
-		
-		if (!btnManager.getCommandListSet()) {
-			if (field_Befehl.getText().length() > 1) {
-				CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
-						field_Befehl.getText().toUpperCase(), Double.parseDouble(field_x.getText()),
-						Double.parseDouble(field_y.getText()), Double.parseDouble(field_i.getText()),
-						Double.parseDouble(field_j.getText()));
+		btnManager.checkCommand(field_Befehl.getText(), sc);
 
-				tempCommands.add(cc);
+		if (btnManager.checkCommand(field_Befehl.getText(), sc)) {
+			if (!btnManager.getCommandListSet()) {
+				if (field_Befehl.getText().length() > 1) {
+					CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
+							field_Befehl.getText().toUpperCase(), Double.parseDouble(field_x.getText()),
+							Double.parseDouble(field_y.getText()), Double.parseDouble(field_i.getText()),
+							Double.parseDouble(field_j.getText()));
 
-				for (int i = 1; i < tempCommands.size(); i++) {
-					for (int j = 0; j < tempCommands.size() - i; j++) {
-						if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
-								.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
+					tempCommands.add(cc);
 
-							CommandCode temp = tempCommands.get(j);
-							tempCommands.set(j, tempCommands.get(j + 1));
-							tempCommands.set(j + 1, temp);
+					for (int i = 1; i < tempCommands.size(); i++) {
+						for (int j = 0; j < tempCommands.size() - i; j++) {
+							if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
+									.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
+
+								CommandCode temp = tempCommands.get(j);
+								tempCommands.set(j, tempCommands.get(j + 1));
+								tempCommands.set(j + 1, temp);
+							}
 						}
 					}
+
+					int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
+					field_Pos.setText("N" + zaehler);
+					commands = tempCommands;
+
+					// Ausgabe in der Konsole
+					for (int i = 0; i < commands.size(); i++) {
+						commands.get(i).printValues();
+					}
+
+					btnManager.commandAdded(sc);
 				}
 
-				int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
-				field_Pos.setText("N" + zaehler);
-				commands = tempCommands;
-
-				// Ausgabe in der Konsole
-				for (int i = 0; i < commands.size(); i++) {
-					commands.get(i).printValues();
-				}
-
-				
-				btnManager.commandAdded(sc);
+			} else {
+				errorHandler.firstDeleteCommands();
 			}
-
-		} else {
-			errorHandler.firstDeleteCommands();
 		}
 
 	}
@@ -136,7 +135,6 @@ public class SampleController implements Initializable {
 			commands.get(i).printValues();
 		}
 
-
 		btnManager.commandDeleted(sc);
 	}
 
@@ -145,16 +143,13 @@ public class SampleController implements Initializable {
 		String[] settings = ph1.handleSettings();
 		setSettings(settings);
 
-		
-		//Einstellungen für Oberfläche setzten
+		// Einstellungen für Oberfläche setzten
 		circHomePosition.setLayoutX(Double.parseDouble(settings[0]));
 		circHomePosition.setLayoutY(Double.parseDouble(settings[1]));
 		circDrill.setLayoutX(Double.parseDouble(settings[0]));
 		circDrill.setLayoutY(Double.parseDouble(settings[1]));
-		circDrill.setRadius(Double.parseDouble(settings[5])/2);
-		
-		
-		
+		circDrill.setRadius(Double.parseDouble(settings[5]) / 2);
+
 		btnManager.settingsInitialized(sc);
 	}
 
@@ -191,15 +186,12 @@ public class SampleController implements Initializable {
 			btnManager.startProcess(sc);
 
 			// Startpunkt anfahren
-			
+
 			// Liste mit commands anfahren
 			for (int i = 0; i < commands.size(); i++) {
 				cutCode(commands.get(i));
 				logger.refreshLog(sc);
 			}
-			
-
-			
 
 			// Stop
 
@@ -233,17 +225,17 @@ public class SampleController implements Initializable {
 		}
 
 	}
-	
-	public void btnDeleteLog(ActionEvent actionEvent)  {
+
+	public void btnDeleteLog(ActionEvent actionEvent) {
 		if (btnManager.getLoggingDeleted()) {
 			errorHandler.thereIsNoLog();
-		}else {
+		} else {
 			btnManager.logDelete(sc, logger);
-			
+
 		}
 	}
-	
-	public void btnExportLog(ActionEvent actionEvent)  {
+
+	public void btnExportLog(ActionEvent actionEvent) {
 		MoveTo m2 = new MoveTo();
 		m2.setX(10);
 		m2.setY(10);
@@ -251,13 +243,10 @@ public class SampleController implements Initializable {
 		
 		if (btnManager.getLoggingDeleted()) {
 			errorHandler.thereIsNoLog();
-		}else {
-			btnManager.exportLog(sc, logger);	
+		} else {
+			btnManager.exportLog(sc, logger);
 		}
 	}
-	
-	
-	
 
 	// geladene Einstellungen auf Anzeige und Fräser übertragen
 	public void setSettings(String[] settings) {
@@ -271,7 +260,6 @@ public class SampleController implements Initializable {
 		fraeser.setHomePosY(Double.parseDouble(settings[1]));
 	}
 
-	
 	private void cutCode(CommandCode paramList) {
 
 		switch (paramList.getBefehl()) {
@@ -320,16 +308,12 @@ public class SampleController implements Initializable {
 			break;
 		}
 	}
-	
-	
+
 	public void btnTest(ActionEvent actionEvent) {
-		
-		
+
 		MoveTo moveTo = new MoveTo();
 		moveTo.setX(0.0f);
 		moveTo.setY(0.0f);
-
-		
 
 		QuadCurveTo quadCurveTo = new QuadCurveTo();
 		quadCurveTo.setX(120.0f);
@@ -351,7 +335,7 @@ public class SampleController implements Initializable {
 		path.getElements().add(quadCurveTo);
 		path.getElements().add(lineTo);
 		path.getElements().add(arcTo);
-		
+
 	}
 
 	@Override

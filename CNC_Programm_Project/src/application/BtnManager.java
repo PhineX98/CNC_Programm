@@ -102,6 +102,18 @@ public class BtnManager {
 		sc.lblInfo.setText("Log wurde exportiert");
 		logger.exportLog();
 	}
+
+	public boolean checkCommand(String cmd, SampleController sc) {
+		cmd = cmd.toUpperCase();
+		if (cmd.equals("M00") || cmd.equals("M02") || cmd.equals("M03") || cmd.equals("M04") || cmd.equals("M05") || cmd.equals("M08") || cmd.equals("M09") || cmd.equals("M13") || cmd.equals("M14")
+		    || cmd.equals("G00") || cmd.equals("G01") || cmd.equals("G02") || cmd.equals("G03") || cmd.equals("G28")) {
+			return true;
+		}else {
+			sc.lblInfo.setText("Ungültiger Befehl!");
+			return false;
+		}
+		
+	}
 	
 
 }
