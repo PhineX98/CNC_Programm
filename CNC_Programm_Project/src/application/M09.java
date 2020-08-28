@@ -1,6 +1,10 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M09 Befehl des G-Codes ->
+ *
+ *  // Kühhlung aus
+	// Bohrspeed = 2
  *
  * @author Jannik Orth
  */
@@ -14,7 +18,6 @@ public class M09 extends Befehl {
 		l.addToLog("M09 ausgeführt");
 		resetStatus(s, f, c);
 	}
-	// KÃ¼hlung aus
-	// Bohrspeed = 2
+	
 
 }

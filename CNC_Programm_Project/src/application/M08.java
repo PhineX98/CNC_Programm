@@ -1,6 +1,10 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M08 Befehl des G-Codes ->
+ *
+ *  // Kühlung ein
+	// Bohrspeed = 3
  *
  * @author Jannik Orth
  */
@@ -14,6 +18,5 @@ public class M08 extends Befehl {
 		l.addToLog("M08 ausgeführt");
 		resetStatus(s, f, c);
 	}
-	// KÃ¼hlung ein
-	// Bohrspeed = 3
+	
 }

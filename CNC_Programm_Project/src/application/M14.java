@@ -1,6 +1,13 @@
 package application;
 
 /**
+ * Diese Klasse implementiert den M14 Befehl des G-Codes ->
+ *
+ *	// Spindel ein
+	// Vorschub ein?
+	// Drehrichtung links
+	// Kühlmittel an
+	// Bohrspeed = 3
  *
  * @author Jannik Orth
  */
@@ -16,9 +23,5 @@ public class M14 extends Befehl {
 		resetStatus(s, f, c);
 	}
 
-	// Spindel ein
-	// Vorschub ein?
-	// Drehrichtung links
-	// Kühlmittel an
-	// Bohrspeed = 3
+
 }

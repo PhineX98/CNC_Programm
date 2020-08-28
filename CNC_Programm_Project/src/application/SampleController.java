@@ -335,6 +335,7 @@ public class SampleController implements Initializable {
 		path.getElements().add(quadCurveTo);
 		path.getElements().add(lineTo);
 		path.getElements().add(arcTo);
+		
 
 	}
 

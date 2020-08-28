@@ -1,6 +1,10 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M05 Befehl des G-Codes ->
+ *
+ *  // Spindel aus
+	// Bohrspeed = 2
  *
  * @author Jannik Orth
  */
@@ -14,6 +18,5 @@ public class M05 extends Befehl {
 		resetStatus(s, f, c);
 	}
 
-	// Spindel aus
-	// Bohrspeed = 2
+	
 }
