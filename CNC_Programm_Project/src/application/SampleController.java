@@ -343,6 +343,7 @@ public class SampleController implements Initializable {
 		// TODO Auto-generated method stub
 		sc = this;
 
+		
 	}
 
 }
