@@ -31,17 +31,8 @@ public class Fraeser {
 		this.homePosY = homePosY;
 	}
 
-	// ALLE METHODEN MÜSSEN STATIC SEIN
 
-	// Fäser Starten
-	public void startFraeser() {
-		this.fraeserStatus = true;
-	}
 
-	// Fräser Stoppen
-	public void stopFraeser() {
-		this.fraeserStatus = false;
-	}
 
 	// Fräser Status ausgeben
 	public boolean getFraeserStatus() {

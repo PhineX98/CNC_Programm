@@ -10,6 +10,7 @@ public class M03 extends Befehl {
 
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startRight();
+		f.setFraeserStatus(true);
 		f.setSchnittSpeed(2);
 
 		l.addToLog("M03 ausgeführt");

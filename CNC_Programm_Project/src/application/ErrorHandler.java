@@ -58,8 +58,18 @@ public class ErrorHandler {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Achtung!");
 		alert.setHeaderText(null);
-		alert.setContentText("Du hast den Prozess bereits gestoppt");
+		alert.setContentText("Du hast den Prozess bereits gestoppt.");
 
 		alert.showAndWait();
+	}
+	
+	public void thereIsNoLog() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Achtung!");
+		alert.setHeaderText(null);
+		alert.setContentText("Es existiert noch kein Log.");
+
+		alert.showAndWait();
+		
 	}
 }

@@ -43,10 +43,10 @@
             <Label layoutX="35.0" layoutY="250.0" text="SpeedNoDrill" />
             <Label layoutX="35.0" layoutY="267.0" text="DrillDiameter" />
             <Label fx:id="lblHomePos" layoutX="165.0" layoutY="199.0" text="-" textAlignment="CENTER" />
-            <Label fx:id="lblSpeedCooling" layoutX="165.0" layoutY="216.0" text="-" textAlignment="CENTER" />
-            <Label fx:id="lblSpeedNoCooling" layoutX="165.0" layoutY="233.0" text="-" textAlignment="CENTER" />
-            <Label fx:id="lblSpeedNoDrill" layoutX="165.0" layoutY="250.0" text="-" textAlignment="CENTER" />
-            <Label fx:id="lblDrillDiameter" layoutX="165.0" layoutY="267.0" text="-" textAlignment="CENTER" />
+            <Label fx:id="lblSpeedCooling" layoutX="165.0" layoutY="216.0" text="-" textAlignment="RIGHT" />
+            <Label fx:id="lblSpeedNoCooling" layoutX="165.0" layoutY="233.0" text="-" textAlignment="RIGHT" />
+            <Label fx:id="lblSpeedNoDrill" layoutX="165.0" layoutY="250.0" text="-" textAlignment="RIGHT" />
+            <Label fx:id="lblDrillDiameter" layoutX="165.0" layoutY="267.0" text="-" textAlignment="RIGHT" />
             <TextField fx:id="field_Pos" layoutX="21.0" layoutY="327.0" prefHeight="25.0" prefWidth="61.0" promptText="Position" text="N00" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="146.0" />
             <TextField fx:id="field_Befehl" layoutX="21.0" layoutY="359.0" prefHeight="25.0" prefWidth="61.0" promptText="Befehl" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="146.0" />
             <TextField fx:id="field_x" layoutX="102.0" layoutY="327.0" prefHeight="25.0" prefWidth="40.0" promptText="X" text="0" AnchorPane.topAnchor="327.0" />
@@ -80,6 +80,8 @@
                <children>
                   <Label layoutX="17.0" layoutY="49.0" text="Info:" AnchorPane.leftAnchor="15.0" />
                   <Label fx:id="lblInfo" layoutX="12.0" layoutY="66.0" textFill="BLUE" underline="true" AnchorPane.leftAnchor="15.0" />
+                  <Button layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnDeleteLog" prefHeight="25.0" prefWidth="167.0" text="Log löschen" AnchorPane.rightAnchor="15.0" />
+                  <Button layoutX="747.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnExportLog" prefHeight="25.0" prefWidth="169.0" text="Log exportieren" />
                </children>
             </AnchorPane>
          </bottom>
@@ -101,8 +103,8 @@
             <Pane prefHeight="525.0" prefWidth="700.0" BorderPane.alignment="CENTER">
                <children>
                   <Rectangle fx:id="drillSurface" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0" />
-                  <Circle fx:id="homePosition" fill="#1beb1b" radius="8.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fx:id="drill" fill="RED" radius="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circHomePosition" fill="#1beb1b" layoutX="100.0" layoutY="100.0" radius="8.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circDrill" fill="RED" layoutX="100.0" layoutY="50.0" radius="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                </children>
             </Pane>
          </left>
