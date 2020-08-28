@@ -1,6 +1,13 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M02 Befehl des G-Codes ->
+ *
+ *	// Programm Ende
+	// Spindel aus
+	// Vorschub aus
+	// Kühlmittel aus
+	// Bohrspeed = 0
  *
  * @author Jannik Orth
  */

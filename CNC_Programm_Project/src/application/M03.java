@@ -1,6 +1,12 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M03 Befehl des G-Codes ->
+ *
+ *  // Spindel ein
+	// Vorschub ein?
+	// Drehrichtung rechts
+	// Bohrspeed = 2
  *
  * @author Jannik Orth
  */
@@ -17,8 +23,5 @@ public class M03 extends Befehl {
 		resetStatus(s, f, c);
 	}
 
-	// Spindel ein
-	// Vorschub ein?
-	// Drehrichtung rechts
-	// Bohrspeed = 2
+	
 }

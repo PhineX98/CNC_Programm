@@ -1,6 +1,7 @@
 package application;
 
 /**
+*Diese Klasse abstrahiert den Fräser mit seinen Eigenschaften um diesen steuern zu können.
 *
 * @author Jannik Orth
 */

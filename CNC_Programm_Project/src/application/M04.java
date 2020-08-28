@@ -1,6 +1,12 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M04 Befehl des G-Codes ->
+ *
+ *	// Spindel ein
+	// Vorschub ein?
+	// Drehrichtung links
+	// Bohrspeed = 2
  *
  * @author Jannik Orth
  */
@@ -16,8 +22,5 @@ public class M04 extends Befehl {
 		resetStatus(s, f, c);
 	}
 
-	// Spindel ein
-	// Vorschub ein?
-	// Drehrichtung links
-	// Bohrspeed = 2
+
 }

@@ -2,7 +2,10 @@ package application;
 
 
 /**
+ *Diese Klasse überprüft in welchem Zustand sich die Simulation befindet
  *
+ *Hierüber kann geprüft werden ob der Nutzer bestimmte Tätigkeiten bereits gemacht hat
+ *um zu beispielsweise zu schauen, ob man das Programm stoppen kann, oder ein Log File exportierbar ist
  * @author Jannik Orth
  */
 public class BtnManager {

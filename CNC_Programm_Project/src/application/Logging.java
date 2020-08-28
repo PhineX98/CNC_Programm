@@ -1,14 +1,16 @@
 package application;
 
-
-
-
 import com.google.gson.Gson;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
+/**
+ *Diese Klasse implementiert die Funktionen um die angefahrenen und ausgeführten
+ *Befehle zu notieren und speichern zu können.
+ *
+ * @author Jannik Orth
+ */
 public class Logging {
 	
 	private Long timeStart;
