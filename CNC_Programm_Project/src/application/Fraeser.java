@@ -1,5 +1,9 @@
 package application;
 
+/**
+*
+* @author Jannik Orth
+*/
 public class Fraeser {
 
 	public double fahrSpeed;

@@ -7,11 +7,12 @@ package application;
 public class M13 extends Befehl {
 
 	// Spindel ein, Rechtslauf und KÃ¼hlmittel ein
-	public void exec(Spindel s, Fraeser f, SampleController c) {
+	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startRight();
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
 
+		l.addToLog("M13 ausgeführt");
 		resetStatus(s, f, c);
 	}
 	// Spindel ein

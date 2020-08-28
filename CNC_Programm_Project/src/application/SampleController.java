@@ -6,14 +6,19 @@ import java.util.ResourceBundle;
 
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
+ * Dies ist die ControllerKlasse der Anwendung
+ * Von hier aus werden alle Button Events gesteuert
+ * 
  * @author Jannik Orth
  */
 
@@ -31,6 +36,7 @@ public class SampleController implements Initializable {
 	public Label lblSpeedNoCooling;
 	public Label lblSpeedNoDrill;
 	public Label lblDrillDiameter;
+	public Label lblInfo;
 
 	public TextField field_Befehl;
 	public TextField field_Pos;
@@ -38,15 +44,23 @@ public class SampleController implements Initializable {
 	public TextField field_y;
 	public TextField field_i;
 	public TextField field_j;
-
+	
 	public Rectangle drillSurface;
+	public Circle homePosition;
+	public Circle drill;
+	
 
+	public ListView<String> logList;
+	
 	ArrayList<CommandCode> commands = new ArrayList<>();
 	ArrayList<CommandCode> tempCommands = new ArrayList<>();
 	Fraeser fraeser = new Fraeser();
 	Spindel spindel = new Spindel();
 
 	public static SampleController sc;
+	public Logging logger = new Logging();
+	public BtnManager btnManager = new BtnManager();
+	public ErrorHandler errorHandler = new ErrorHandler();
 
 	////////////////////////////////////////
 	// Handlers
@@ -66,42 +80,47 @@ public class SampleController implements Initializable {
 	G28 handleG28 = new G28();
 	////////////////////////////////////////
 
-	public void setX(String s) {
-		lblDrillDiameter.setText(s);
-	}
-
 	public void btnAddCommand(ActionEvent actionEvent) {
+		
+		if (!btnManager.getCommandListSet()) {
+			if (field_Befehl.getText().length() > 1) {
+				CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
+						field_Befehl.getText().toUpperCase(), Double.parseDouble(field_x.getText()),
+						Double.parseDouble(field_y.getText()), Double.parseDouble(field_i.getText()),
+						Double.parseDouble(field_j.getText()));
 
-		if (field_Befehl.getText().length() > 1) {
-			CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(), field_Befehl.getText().toUpperCase(),
-					Double.parseDouble(field_x.getText()), Double.parseDouble(field_y.getText()),
-					Double.parseDouble(field_i.getText()), Double.parseDouble(field_j.getText()));
+				tempCommands.add(cc);
 
-			tempCommands.add(cc);
+				for (int i = 1; i < tempCommands.size(); i++) {
+					for (int j = 0; j < tempCommands.size() - i; j++) {
+						if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
+								.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
 
-			for (int i = 1; i < tempCommands.size(); i++) {
-				for (int j = 0; j < tempCommands.size() - i; j++) {
-					if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
-							.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
-
-						CommandCode temp = tempCommands.get(j);
-						tempCommands.set(j, tempCommands.get(j + 1));
-						tempCommands.set(j + 1, temp);
+							CommandCode temp = tempCommands.get(j);
+							tempCommands.set(j, tempCommands.get(j + 1));
+							tempCommands.set(j + 1, temp);
+						}
 					}
 				}
+
+				int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
+				field_Pos.setText("N" + zaehler);
+				commands = tempCommands;
+
+				// Ausgabe in der Konsole
+				for (int i = 0; i < commands.size(); i++) {
+					commands.get(i).printValues();
+				}
+
+				System.out.println("wurde hinzugefügt");
+				btnManager.commandAdded(sc);
+
 			}
 
-			int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
-			field_Pos.setText("N" + zaehler);
-			commands = tempCommands;
-
-			// Ausgabe in der Konsole
-			for (int i = 0; i < commands.size(); i++) {
-				commands.get(i).printValues();
-			}
-
-			System.out.println("wurde hinzugefügt");
+		} else {
+			errorHandler.firstDeleteCommands();
 		}
+
 	}
 
 	public void btnCommandsDelete(ActionEvent actionEvent) {
@@ -110,7 +129,9 @@ public class SampleController implements Initializable {
 		for (int i = 0; i < commands.size(); i++) {
 			commands.get(i).printValues();
 		}
+
 		System.out.println("wurde gelöscht");
+		btnManager.commandDeleted(sc);
 
 	}
 
@@ -118,43 +139,84 @@ public class SampleController implements Initializable {
 		ParseHandler ph1 = new ParseHandler();
 		String[] settings = ph1.handleSettings();
 		setSettings(settings);
+
+		btnManager.settingsInitialized(sc);
 	}
 
 	public void btnCommandsRead(ActionEvent actionEvent) { // Alle Commands in die ArrayList commands einlesen
-		ParseHandler ph2 = new ParseHandler();
-		commands = ph2.handleCommand();
+		if (!btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
+			ParseHandler ph2 = new ParseHandler();
+			commands = ph2.handleCommand();
 
-		// Ausgabe in der Konsole
-		for (int i = 0; i < commands.size(); i++) {
-			commands.get(i).printValues();
+			// Ausgabe in der Konsole
+			for (int i = 0; i < commands.size(); i++) {
+				commands.get(i).printValues();
+			}
+
+			btnManager.commandListInitialized(sc);
+		} else {
+			errorHandler.firstDeleteCommands();
 		}
 
 	}
 
-	public void btnStart(ActionEvent actionEvent) {
+	public void btnStart(ActionEvent actionEvent) throws InterruptedException {
+		if (!btnManager.getSettingsSet() && !btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
+			errorHandler.firstReadSettingsCommands();
+		} else if (!btnManager.getSettingsSet() && (btnManager.getCommandsSet() || btnManager.getCommandListSet())) {
+			errorHandler.firstReadSettings();
+		} else if (btnManager.getSettingsSet() && !btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
+			errorHandler.firstReadCommands();
+		} else {
 
-		// Startpunkt anfahren
+			/////////////////////////
+			// STARTEN DER SIMULATION
+			/////////////////////////
+			System.out.println("Fräse startet");
+			btnManager.startProcess(sc);
 
-		// Liste mit commands anfahren
+			// Startpunkt anfahren
+			
+			// Liste mit commands anfahren
+			for (int i = 0; i < commands.size(); i++) {
+				cutCode(commands.get(i));
+				logger.refreshLog(sc);
+			}
+			
 
-		// Stop
-		System.out.println(field_Befehl.getText());
+			
 
-	}
+			// Stop
 
-	public void btnStopp(ActionEvent actionEvent) throws InterruptedException {
-		System.out.println("4");
-
-		// Thread aussenrum bauen
-		for (int i = 0; i < 20; i++) {
-
-			lblDrillDiameter.setText(String.valueOf(i));
-			Thread.sleep(100);
 		}
+
 	}
 
 	public void btnPause(ActionEvent actionEvent) {
 		System.out.println("5");
+		if (!btnManager.getProcessStarted() || btnManager.getProcessStopped()) {
+			errorHandler.firstStartProcess();
+		} else {
+
+			// Programm Pausieren
+
+			btnManager.pauseProcess(sc);
+		}
+
+	}
+
+	public void btnStopp(ActionEvent actionEvent) throws InterruptedException {
+		if (btnManager.getProcessStopped()) {
+			errorHandler.youStoppedProcess();
+		} else if (!btnManager.getProcessPaused() && !btnManager.getProcessStarted()) {
+			errorHandler.firstStartProcess();
+		} else {
+
+			// ProgrammS Stoppen
+
+			btnManager.stopProcess(sc);
+		}
+
 	}
 
 	// geladene Einstellungen auf Anzeige und Fräser übertragen
@@ -173,47 +235,47 @@ public class SampleController implements Initializable {
 
 		switch (paramList.getBefehl()) {
 		case "M00":
-			handleM00.exec(spindel, fraeser, sc);
+			handleM00.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M02":
-			handleM02.exec(spindel, fraeser, sc);
+			handleM02.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M03":
-			handleM03.exec(spindel, fraeser, sc);
+			handleM03.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M04":
-			handleM04.exec(spindel, fraeser, sc);
+			handleM04.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M05":
-			handleM05.exec(spindel, fraeser, sc);
+			handleM05.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M08":
-			handleM08.exec(spindel, fraeser, sc);
+			handleM08.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M09":
-			handleM09.exec(spindel, fraeser, sc);
+			handleM09.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M13":
-			handleM13.exec(spindel, fraeser, sc);
+			handleM13.exec(spindel, fraeser, sc, logger);
 			break;
 		case "M14":
-			handleM14.exec(spindel, fraeser, sc);
+			handleM14.exec(spindel, fraeser, sc, logger);
 			break;
 
 		case "G00":
-			handleG00.exec(spindel, fraeser, sc);
+			handleG00.exec(spindel, fraeser, sc, logger);
 			break;
 		case "G01":
-			handleG01.exec(spindel, fraeser, sc);
+			handleG01.exec(spindel, fraeser, sc, logger);
 			break;
 		case "G02":
-			handleG02.exec(spindel, fraeser, sc);
+			handleG02.exec(spindel, fraeser, sc, logger);
 			break;
 		case "G03":
-			handleG02.exec(spindel, fraeser, sc);
+			handleG02.exec(spindel, fraeser, sc, logger);
 			break;
 		case "G28":
-			handleG28.exec(spindel, fraeser, sc);
+			handleG28.exec(spindel, fraeser, sc, logger);
 			break;
 		}
 	}
