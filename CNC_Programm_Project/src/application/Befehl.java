@@ -5,10 +5,9 @@ package application;
  * 
  * @author Jannik
  */
-
 public abstract class Befehl {
 
-	public void exec(Spindel s, Fraeser f, SampleController c) {
+	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 
 		// Wird von jeder Unterklasse einzeln implementiert, zum richtigen Handling der
 		// Commands.

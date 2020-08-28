@@ -7,11 +7,12 @@ package application;
 public class M14 extends Befehl {
 
 	// Spindel ein, Linkslauf und KÃ¼hlmittel ein
-	public void exec(Spindel s, Fraeser f, SampleController c) {
+	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startLeft();
 		f.setCoolingStatus(true);
 		f.setSchnittSpeed(3);
-
+		
+		l.addToLog("M14 ausgeführt");
 		resetStatus(s, f, c);
 	}
 

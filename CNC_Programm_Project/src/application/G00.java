@@ -11,7 +11,11 @@ public class G00 extends Befehl {
 	 * 
 	 */
 
-	public void exec(Spindel s, Fraeser f, SampleController c) {
-
+	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
+		l.zeitStarten();
+		
+		
+		
+		l.addToLog("G00 ausgeführt in " + l.zeitGebraucht());
 	}
 }

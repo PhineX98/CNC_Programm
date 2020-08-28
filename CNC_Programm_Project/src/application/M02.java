@@ -6,7 +6,7 @@ package application;
  */
 public class M02 extends Befehl {
 
-	public void exec(Spindel s, Fraeser f, SampleController c) {
+	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		// Programm beenden
 
 		s.stop();
@@ -14,6 +14,7 @@ public class M02 extends Befehl {
 		f.setCoolingStatus(false);
 		f.setFahrSpeed(0);
 
+		l.addToLog("M02 ausgeführt");
 		resetStatus(s, f, c);
 	}
 

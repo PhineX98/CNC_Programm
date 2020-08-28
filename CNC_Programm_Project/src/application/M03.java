@@ -8,10 +8,11 @@ public class M03 extends Befehl {
 
 	// Spindel ein im Uhrezigersinn (Rechtslauf)
 
-	public void exec(Spindel s, Fraeser f, SampleController c) {
+	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startRight();
 		f.setSchnittSpeed(2);
 
+		l.addToLog("M03 ausgeführt");
 		resetStatus(s, f, c);
 	}
 
