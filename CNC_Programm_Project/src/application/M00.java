@@ -10,7 +10,7 @@ public class M00 extends Befehl {
 
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.stop();
-		f.stopFraeser();
+		f.setFraeserStatus(false);
 		f.setSchnittSpeed(0);
 		f.setCoolingStatus(false);
 

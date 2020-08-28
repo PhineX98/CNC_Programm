@@ -1,7 +1,9 @@
 package application;
 
 
-import java.util.ArrayList;
+
+
+import com.google.gson.Gson;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,19 +11,26 @@ import javafx.collections.ObservableList;
 
 public class Logging {
 	
-	private ArrayList<String> log = new ArrayList<>(); 
 	private Long timeStart;
-	private ObservableList<String> teStrings = FXCollections.observableArrayList();
+	private ObservableList<String> log = FXCollections.observableArrayList();
 
 	
 	public void addToLog(String logEvent) {
 		log.add(logEvent);
-		teStrings.add(logEvent);
 	}
 	
 	
-	public void exportLog() {
-		//Export Logging to Jsonfile
+	public String exportLog() {
+		Gson gson = new Gson();
+	    StringBuilder sb = new StringBuilder();
+	    
+	    for (int j = 0; j < log.size(); j++) {
+	    	sb.append(gson.toJson(log.get(j)));
+		}
+	    
+	    String output = sb.toString();
+	    System.out.println(output);
+	    return output;
 	}
 	
 	public void zeitStarten(){
@@ -37,6 +46,11 @@ public class Logging {
 
 	public void refreshLog(SampleController sc) {
 		sc.logList.getItems().clear();
-		sc.logList.getItems().addAll(teStrings);
+		sc.logList.getItems().addAll(log);
+	}
+	
+	public void clearLogs(SampleController sc) {
+		log.clear();
+		sc.logList.getItems().clear();
 	}
 }

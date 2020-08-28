@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -46,8 +45,8 @@ public class SampleController implements Initializable {
 	public TextField field_j;
 	
 	public Rectangle drillSurface;
-	public Circle homePosition;
-	public Circle drill;
+	public Circle circHomePosition;
+	public Circle circDrill;
 	
 
 	public ListView<String> logList;
@@ -112,9 +111,8 @@ public class SampleController implements Initializable {
 					commands.get(i).printValues();
 				}
 
-				System.out.println("wurde hinzugefügt");
+				
 				btnManager.commandAdded(sc);
-
 			}
 
 		} else {
@@ -130,9 +128,8 @@ public class SampleController implements Initializable {
 			commands.get(i).printValues();
 		}
 
-		System.out.println("wurde gelöscht");
-		btnManager.commandDeleted(sc);
 
+		btnManager.commandDeleted(sc);
 	}
 
 	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables übertragen
@@ -140,6 +137,15 @@ public class SampleController implements Initializable {
 		String[] settings = ph1.handleSettings();
 		setSettings(settings);
 
+		
+		//Einstellungen für Oberfläche setzten
+		circHomePosition.setLayoutX(Double.parseDouble(settings[0]));
+		circHomePosition.setLayoutY(Double.parseDouble(settings[1]));
+		circDrill.setLayoutX(Double.parseDouble(settings[0]));
+		circDrill.setLayoutY(Double.parseDouble(settings[1]));
+		circDrill.setRadius(Double.parseDouble(settings[5])/2);
+		
+		
 		btnManager.settingsInitialized(sc);
 	}
 
@@ -218,19 +224,41 @@ public class SampleController implements Initializable {
 		}
 
 	}
+	
+	public void btnDeleteLog(ActionEvent actionEvent)  {
+		if (btnManager.getLoggingDeleted()) {
+			errorHandler.thereIsNoLog();
+		}else {
+			btnManager.logDelete(sc, logger);
+			
+		}
+	}
+	
+	public void btnExportLog(ActionEvent actionEvent)  {
+		if (btnManager.getLoggingDeleted()) {
+			errorHandler.thereIsNoLog();
+		}else {
+			btnManager.exportLog(sc, logger);
+			
+		}
+	}
+	
+	
+	
 
 	// geladene Einstellungen auf Anzeige und Fräser übertragen
 	public void setSettings(String[] settings) {
 		lblHomePos.setText(settings[0] + " ; " + settings[1]);
-		lblSpeedCooling.setText(settings[2]);
-		lblSpeedNoCooling.setText(settings[3]);
-		lblSpeedNoDrill.setText(settings[4]);
-		lblDrillDiameter.setText(settings[5]);
+		lblSpeedCooling.setText(settings[2] + "m/min");
+		lblSpeedNoCooling.setText(settings[3] + "m/min");
+		lblSpeedNoDrill.setText(settings[4] + "m/min");
+		lblDrillDiameter.setText(settings[5] + "mm");
 
 		fraeser.setHomePosX(Double.parseDouble(settings[0]));
 		fraeser.setHomePosY(Double.parseDouble(settings[1]));
 	}
 
+	
 	private void cutCode(CommandCode paramList) {
 
 		switch (paramList.getBefehl()) {
@@ -263,19 +291,19 @@ public class SampleController implements Initializable {
 			break;
 
 		case "G00":
-			handleG00.exec(spindel, fraeser, sc, logger);
+			handleG00.exec(spindel, fraeser, sc, logger, paramList);
 			break;
 		case "G01":
-			handleG01.exec(spindel, fraeser, sc, logger);
+			handleG01.exec(spindel, fraeser, sc, logger, paramList);
 			break;
 		case "G02":
-			handleG02.exec(spindel, fraeser, sc, logger);
+			handleG02.exec(spindel, fraeser, sc, logger, paramList);
 			break;
 		case "G03":
-			handleG02.exec(spindel, fraeser, sc, logger);
+			handleG02.exec(spindel, fraeser, sc, logger, paramList);
 			break;
 		case "G28":
-			handleG28.exec(spindel, fraeser, sc, logger);
+			handleG28.exec(spindel, fraeser, sc, logger, paramList);
 			break;
 		}
 	}

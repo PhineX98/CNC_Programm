@@ -1,5 +1,7 @@
 package application;
 
+import fileParser.CommandCode;
+
 /**
  *
  * @author Jannik Orth
@@ -7,7 +9,7 @@ package application;
 public class G01 extends Befehl {
 	// Gerade
 
-	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
+	public void exec(Spindel s, Fraeser f, SampleController c, Logging l, CommandCode values) {
 		l.zeitStarten();
 		
 		

@@ -52,6 +52,7 @@ public abstract class Befehl {
 		} else {
 			c.statSpeed.setText("-");
 		}
+		
 
 	}
 }
