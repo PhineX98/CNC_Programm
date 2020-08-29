@@ -1,6 +1,12 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M04 Befehl des G-Codes ->
+ *
+ *	// Spindel ein
+	// Vorschub ein?
+	// Drehrichtung links
+	// Bohrspeed = 2
  *
  * @author Jannik Orth
  */
@@ -10,14 +16,11 @@ public class M04 extends Befehl {
 
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startLeft();
-		f.setSchnittSpeed(2);
+		f.setAktSpeed(s);
 
 		l.addToLog("M04 ausgeführt");
 		resetStatus(s, f, c);
 	}
 
-	// Spindel ein
-	// Vorschub ein?
-	// Drehrichtung links
-	// Bohrspeed = 2
+
 }

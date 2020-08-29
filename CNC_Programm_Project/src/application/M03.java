@@ -1,6 +1,12 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M03 Befehl des G-Codes ->
+ *
+ *  // Spindel ein
+	// Vorschub ein?
+	// Drehrichtung rechts
+	// Bohrspeed = 2
  *
  * @author Jannik Orth
  */
@@ -11,14 +17,11 @@ public class M03 extends Befehl {
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startRight();
 		f.setFraeserStatus(true);
-		f.setSchnittSpeed(2);
+		f.setAktSpeed(s);
 
 		l.addToLog("M03 ausgeführt");
 		resetStatus(s, f, c);
 	}
 
-	// Spindel ein
-	// Vorschub ein?
-	// Drehrichtung rechts
-	// Bohrspeed = 2
+	
 }

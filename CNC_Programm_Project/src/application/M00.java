@@ -1,6 +1,12 @@
 package application;
 
 /**
+ *Diese Klasse implementiert den M00 Befehl des G-Codes ->
+ *
+ *	// Spindel aus
+	// Vorschub aus
+	// Kühlmittel aus
+	// Bohrspeed = 0
  *
  * @author Jannik Orth
  */
@@ -11,7 +17,7 @@ public class M00 extends Befehl {
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.stop();
 		f.setFraeserStatus(false);
-		f.setSchnittSpeed(0);
+		f.setAktSpeed(s);
 		f.setCoolingStatus(false);
 
 		/*
@@ -24,8 +30,5 @@ public class M00 extends Befehl {
 
 	}
 
-	// Spindel aus
-	// Vorschub aus
-	// Kühlmittel aus
-	// Bohrspeed = 0
+
 }

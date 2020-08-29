@@ -1,8 +1,14 @@
 package application;
 
 
+
+import javafx.scene.paint.Color;
+
 /**
+ *Diese Klasse überprüft in welchem Zustand sich die Simulation befindet
  *
+ *Hierüber kann geprüft werden ob der Nutzer bestimmte Tätigkeiten bereits gemacht hat
+ *um zu beispielsweise zu schauen, ob man das Programm stoppen kann, oder ein Log File exportierbar ist
  * @author Jannik Orth
  */
 public class BtnManager {
@@ -111,6 +117,32 @@ public class BtnManager {
 		}else {
 			sc.lblInfo.setText("Ungültiger Befehl!");
 			return false;
+		}
+		
+	}
+
+	public Color colorHandler(String string) {
+		switch (string) {
+		case "grey":
+			return Color.GRAY;
+		case "green":
+			return Color.LIGHTGREEN;
+		case "red":
+			return Color.RED;
+		case "blue":
+			return Color.BLUE;
+		case "yellow":
+			return Color.YELLOW;
+		case "black":
+			return Color.BLACK;
+		case "purple":
+			return Color.PURPLE;
+		case "white":
+			return Color.WHITE;
+		default:
+			return Color.BLACK;
+
+					
 		}
 		
 	}

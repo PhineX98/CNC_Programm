@@ -14,8 +14,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -57,7 +60,9 @@ public class SampleController implements Initializable {
 	public Circle circHomePosition;
 	public Circle circDrill;
 	public Path path;
-	
+
+	public Pane drawPane;
+
 
 	public ListView<String> logList;
 
@@ -144,17 +149,12 @@ public class SampleController implements Initializable {
 		btnManager.commandDeleted(sc);
 	}
 
-	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables ¸bertragen
+	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables √ºbertragen
 		ParseHandler ph1 = new ParseHandler();
 		String[] settings = ph1.handleSettings();
 		setSettings(settings);
 
-		// Einstellungen f¸r Oberfl‰che setzten
-		circHomePosition.setLayoutX(Double.parseDouble(settings[0]));
-		circHomePosition.setLayoutY(Double.parseDouble(settings[1]));
-		circDrill.setLayoutX(Double.parseDouble(settings[0]));
-		circDrill.setLayoutY(Double.parseDouble(settings[1]));
-		circDrill.setRadius(Double.parseDouble(settings[5]) / 2);
+		
 
 		btnManager.settingsInitialized(sc);
 	}
@@ -188,7 +188,7 @@ public class SampleController implements Initializable {
 			/////////////////////////
 			// STARTEN DER SIMULATION
 			/////////////////////////
-			System.out.println("Fr‰se startet");
+			System.out.println("Fr√§se startet");
 			btnManager.startProcess(sc);
 
 			// Startpunkt anfahren
@@ -242,11 +242,6 @@ public class SampleController implements Initializable {
 	}
 
 	public void btnExportLog(ActionEvent actionEvent) {
-		MoveTo m2 = new MoveTo();
-		m2.setX(10);
-		m2.setY(10);
-		sc.path.getElements().add(m2);
-		
 		if (btnManager.getLoggingDeleted()) {
 			errorHandler.thereIsNoLog();
 		} else {
@@ -254,16 +249,32 @@ public class SampleController implements Initializable {
 		}
 	}
 
-	// geladene Einstellungen auf Anzeige und Fr‰ser ¸bertragen
+	// geladene Einstellungen auf Anzeige und Fr√§ser √ºbertragen
 	public void setSettings(String[] settings) {
-		lblHomePos.setText(settings[0] + " ; " + settings[1]);
-		lblSpeedCooling.setText(settings[2] + "m/min");
-		lblSpeedNoCooling.setText(settings[3] + "m/min");
-		lblSpeedNoDrill.setText(settings[4] + "m/min");
-		lblDrillDiameter.setText(settings[5] + "mm");
-
-		fraeser.setHomePosX(Double.parseDouble(settings[0]));
-		fraeser.setHomePosY(Double.parseDouble(settings[1]));
+		fraeser.setHomePosX(Double.parseDouble(settings[0]));				//HomePos x
+		fraeser.setHomePosY(Double.parseDouble(settings[1]));				//HomePos y
+		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));	//Speed k√ºhlung an
+		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));	//Speed k√ºhlung aus
+		fraeser.setFahrSpeed(Double.parseDouble(settings[4]));				//Speed zum verfahren
+		fraeser.setDrillDiameter(Double.parseDouble(settings[5]));			//Fr√§ser Durchmesser
+		circDrill.setFill(btnManager.colorHandler(settings[6]));			//Farbe Fr√§ser
+		drillSurface.setFill(btnManager.colorHandler(settings[7]));			//Farbe Oberfl√§che
+		//circDrill.setFill(btnManager.colorHandler(settings[8]));			//Farbe bearbeitete Oberfl√§che
+		circHomePosition.setFill(btnManager.colorHandler(settings[9]));		//Farbe HomePos
+		
+		lblHomePos.setText(fraeser.getPosX() + " ; " + fraeser.getHomePosY());
+		lblSpeedCooling.setText(fraeser.getSchnittSpeedCooling() + "m/min");
+		lblSpeedNoCooling.setText(fraeser.getSchnittSpeedNoCooling() + "m/min");
+		lblSpeedNoDrill.setText(fraeser.getFahrSpeed() + "m/min");
+		lblDrillDiameter.setText(fraeser.getDrillDiameter() + "mm");
+		
+		circHomePosition.setLayoutX(fraeser.getHomePosX());
+		circHomePosition.setLayoutY(fraeser.getHomePosY());
+		circDrill.setLayoutX(fraeser.getHomePosX());
+		circDrill.setLayoutY(fraeser.getHomePosY());
+		circDrill.setRadius(fraeser.getDrillDiameter() / 2);
+		
+		
 	}
 
 	private void cutCode(CommandCode paramList) {
@@ -316,6 +327,17 @@ public class SampleController implements Initializable {
 	}
 
 	public void btnTest(ActionEvent actionEvent) {
+		
+		Line line = new Line();
+		line.setStartX(50);
+		line.setStartY(50);
+		line.setEndX(100);
+		line.setEndY(50);
+		line.setStroke(Color.RED);
+		
+		drawPane.getChildren().add(line);
+
+		//////////////////////////////////////////
 
 		MoveTo moveTo = new MoveTo();
 		moveTo.setX(50);
