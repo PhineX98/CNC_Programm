@@ -60,11 +60,9 @@ public class SampleController implements Initializable {
 	public Circle circHomePosition;
 	public Circle circDrill;
 	public Path path;
-<<<<<<< HEAD
-	
-=======
+
 	public Pane drawPane;
->>>>>>> branch 'master' of https://github.com/PhineX98/CNC_Programm.git
+
 
 	public ListView<String> logList;
 
@@ -151,7 +149,7 @@ public class SampleController implements Initializable {
 		btnManager.commandDeleted(sc);
 	}
 
-	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables übertragen
+	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables Ã¼bertragen
 		ParseHandler ph1 = new ParseHandler();
 		String[] settings = ph1.handleSettings();
 		setSettings(settings);
@@ -190,7 +188,7 @@ public class SampleController implements Initializable {
 			/////////////////////////
 			// STARTEN DER SIMULATION
 			/////////////////////////
-			System.out.println("Fräse startet");
+			System.out.println("FrÃ¤se startet");
 			btnManager.startProcess(sc);
 
 			// Startpunkt anfahren
@@ -251,17 +249,17 @@ public class SampleController implements Initializable {
 		}
 	}
 
-	// geladene Einstellungen auf Anzeige und Fräser übertragen
+	// geladene Einstellungen auf Anzeige und FrÃ¤ser Ã¼bertragen
 	public void setSettings(String[] settings) {
 		fraeser.setHomePosX(Double.parseDouble(settings[0]));				//HomePos x
 		fraeser.setHomePosY(Double.parseDouble(settings[1]));				//HomePos y
-		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));	//Speed kühlung an
-		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));	//Speed kühlung aus
+		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));	//Speed kÃ¼hlung an
+		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));	//Speed kÃ¼hlung aus
 		fraeser.setFahrSpeed(Double.parseDouble(settings[4]));				//Speed zum verfahren
-		fraeser.setDrillDiameter(Double.parseDouble(settings[5]));			//Fräser Durchmesser
-		circDrill.setFill(btnManager.colorHandler(settings[6]));			//Farbe Fräser
-		drillSurface.setFill(btnManager.colorHandler(settings[7]));			//Farbe Oberfläche
-		//circDrill.setFill(btnManager.colorHandler(settings[8]));			//Farbe bearbeitete Oberfläche
+		fraeser.setDrillDiameter(Double.parseDouble(settings[5]));			//FrÃ¤ser Durchmesser
+		circDrill.setFill(btnManager.colorHandler(settings[6]));			//Farbe FrÃ¤ser
+		drillSurface.setFill(btnManager.colorHandler(settings[7]));			//Farbe OberflÃ¤che
+		//circDrill.setFill(btnManager.colorHandler(settings[8]));			//Farbe bearbeitete OberflÃ¤che
 		circHomePosition.setFill(btnManager.colorHandler(settings[9]));		//Farbe HomePos
 		
 		lblHomePos.setText(fraeser.getPosX() + " ; " + fraeser.getHomePosY());

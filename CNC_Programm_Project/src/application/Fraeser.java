@@ -1,7 +1,7 @@
 package application;
 
 /**
-*Diese Klasse abstrahiert den Fr‰ser mit seinen Eigenschaften um diesen steuern zu kˆnnen.
+*Diese Klasse abstrahiert den Fr√§ser mit seinen Eigenschaften um diesen steuern zu k√∂nnen.
 *
 * @author Jannik Orth
 */
@@ -16,12 +16,9 @@ public class Fraeser {
 	public double posY;
 	public double homePosX;
 	public double homePosY;
-<<<<<<< HEAD
-	
-=======
+
 	private double drillDiameter;
 	private double aktSpeed;
->>>>>>> branch 'master' of https://github.com/PhineX98/CNC_Programm.git
 
 	public double getHomePosX() {
 		return homePosX;
@@ -58,12 +55,12 @@ public class Fraeser {
 	}
 	
 
-	// Fr‰ser Status ausgeben
+	// Fr√§ser Status ausgeben
 	public boolean getFraeserStatus() {
 		return fraeserStatus;
 	}
 
-	// fr‰asenstatus setzen
+	// fr√§asenstatus setzen
 	public void setFraeserStatus(boolean status) {
 		this.fraeserStatus = status;
 	}
@@ -126,9 +123,7 @@ public class Fraeser {
 		return coolingStatus;
 	}
 
-<<<<<<< HEAD
 
-=======
 	public void setDrillDiameter(double diameter) {
 		this.drillDiameter = diameter;
 	}
@@ -138,4 +133,4 @@ public class Fraeser {
 	}
 
 }
->>>>>>> branch 'master' of https://github.com/PhineX98/CNC_Programm.git
+
