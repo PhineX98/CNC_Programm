@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.Canvas;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -96,9 +97,9 @@ public class SampleController implements Initializable {
 	////////////////////////////////////////
 
 	public void btnAddCommand(ActionEvent actionEvent) {
-		btnManager.checkCommand(field_Befehl.getText(), sc);
+		btnManager.checkCommand(sc);
 
-		if (btnManager.checkCommand(field_Befehl.getText(), sc)) {
+		if (btnManager.checkCommand(sc)) {
 			if (!btnManager.getCommandListSet()) {
 				if (field_Befehl.getText().length() > 1) {
 					CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
@@ -241,7 +242,7 @@ public class SampleController implements Initializable {
 		}
 	}
 
-	public void btnExportLog(ActionEvent actionEvent) {
+	public void btnExportLog(ActionEvent actionEvent) throws IOException {
 		if (btnManager.getLoggingDeleted()) {
 			errorHandler.thereIsNoLog();
 		} else {
@@ -256,7 +257,7 @@ public class SampleController implements Initializable {
 		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));	//Speed kühlung an
 		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));	//Speed kühlung aus
 		fraeser.setFahrSpeed(Double.parseDouble(settings[4]));				//Speed zum verfahren
-		fraeser.setDrillDiameter(Double.parseDouble(settings[5]));			//Fräser Durchmesser
+		fraeser.setDrillDiameter(Double.parseDouble(settings[5])/2);		//Fräser Durchmesser
 		circDrill.setFill(btnManager.colorHandler(settings[6]));			//Farbe Fräser
 		drillSurface.setFill(btnManager.colorHandler(settings[7]));			//Farbe Oberfläche
 		//circDrill.setFill(btnManager.colorHandler(settings[8]));			//Farbe bearbeitete Oberfläche
@@ -272,7 +273,7 @@ public class SampleController implements Initializable {
 		circHomePosition.setLayoutY(fraeser.getHomePosY());
 		circDrill.setLayoutX(fraeser.getHomePosX());
 		circDrill.setLayoutY(fraeser.getHomePosY());
-		circDrill.setRadius(fraeser.getDrillDiameter() / 2);
+		circDrill.setRadius(fraeser.getDrillDiameter()/2);
 		
 		
 	}

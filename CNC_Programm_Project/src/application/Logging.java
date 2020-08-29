@@ -1,6 +1,13 @@
 package application;
 
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +29,8 @@ public class Logging {
 	}
 	
 	
-	public String exportLog() {
+	public String exportLog() throws IOException {
+		/*
 		Gson gson = new Gson();
 	    StringBuilder sb = new StringBuilder();
 	    
@@ -33,6 +41,15 @@ public class Logging {
 	    String output = sb.toString();
 	    System.out.println(output);
 	    return output;
+	    
+	    */
+	 
+		 ArrayList<String> mylist = new ArrayList<String> ();
+		 for (int i = 0; i < log.size(); i++) {
+			mylist.add(log.get(i));
+		}
+	   return "";
+	    
 	}
 	
 	public void zeitStarten(){
