@@ -1,14 +1,14 @@
 package application;
 
-
-
 import javafx.scene.paint.Color;
 
 /**
- *Diese Klasse überprüft in welchem Zustand sich die Simulation befindet
+ * Diese Klasse überprüft in welchem Zustand sich die Simulation befindet
  *
- *Hierüber kann geprüft werden ob der Nutzer bestimmte Tätigkeiten bereits gemacht hat
- *um zu beispielsweise zu schauen, ob man das Programm stoppen kann, oder ein Log File exportierbar ist
+ * Hierüber kann geprüft werden ob der Nutzer bestimmte Tätigkeiten bereits
+ * gemacht hat um zu beispielsweise zu schauen, ob man das Programm stoppen
+ * kann, oder ein Log File exportierbar ist
+ * 
  * @author Jannik Orth
  */
 public class BtnManager {
@@ -21,9 +21,8 @@ public class BtnManager {
 	private boolean processStopped = false;
 	private boolean logDeleted = true;
 
-	
 	////////////////////////////////
-	//Getter um aktuellen Status abfragen zu können
+	// Getter um aktuellen Status abfragen zu können
 	public boolean getSettingsSet() {
 		return settingsSet;
 	}
@@ -47,15 +46,14 @@ public class BtnManager {
 	public boolean getProcessStopped() {
 		return processStopped;
 	}
-	
+
 	public boolean getLoggingDeleted() {
 		return logDeleted;
 	}
 
-	
 	////////////////////////////////
-	//Aktuellen Status setzten, wenn Buttons betätigt werden
-	public void settingsInitialized(SampleController sc ) {
+	// Aktuellen Status setzten, wenn Buttons betätigt werden
+	public void settingsInitialized(SampleController sc) {
 		sc.lblInfo.setText("Einstellungen geladen.");
 		settingsSet = true;
 	}
@@ -111,14 +109,15 @@ public class BtnManager {
 
 	public boolean checkCommand(String cmd, SampleController sc) {
 		cmd = cmd.toUpperCase();
-		if (cmd.equals("M00") || cmd.equals("M02") || cmd.equals("M03") || cmd.equals("M04") || cmd.equals("M05") || cmd.equals("M08") || cmd.equals("M09") || cmd.equals("M13") || cmd.equals("M14")
-		    || cmd.equals("G00") || cmd.equals("G01") || cmd.equals("G02") || cmd.equals("G03") || cmd.equals("G28")) {
+		if (cmd.equals("M00") || cmd.equals("M02") || cmd.equals("M03") || cmd.equals("M04") || cmd.equals("M05")
+				|| cmd.equals("M08") || cmd.equals("M09") || cmd.equals("M13") || cmd.equals("M14") || cmd.equals("G00")
+				|| cmd.equals("G01") || cmd.equals("G02") || cmd.equals("G03") || cmd.equals("G28")) {
 			return true;
-		}else {
+		} else {
 			sc.lblInfo.setText("Ungültiger Befehl!");
 			return false;
 		}
-		
+
 	}
 
 	public Color colorHandler(String string) {
@@ -142,10 +141,8 @@ public class BtnManager {
 		default:
 			return Color.BLACK;
 
-					
 		}
-		
+
 	}
-	
 
 }
