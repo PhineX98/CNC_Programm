@@ -1,5 +1,7 @@
 package application;
 
+
+
 /**
 *Diese Klasse abstrahiert den Fräser mit seinen Eigenschaften um diesen steuern zu können.
 *
@@ -130,6 +132,17 @@ public class Fraeser {
 	
 	public double getDrillDiameter() {
 		return drillDiameter;
+	}
+	
+	public void printValues() {
+
+		System.out.println(fahrSpeed);
+		System.out.println(schnittSpeedCooling);
+		System.out.println(schnittSpeedNoCooling);
+		System.out.println(homePosX+ posX);
+		System.out.println(homePosY+ posY);
+		System.out.println(this.drillDiameter);
+
 	}
 
 }

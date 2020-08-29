@@ -1,6 +1,7 @@
 package application;
 
 /**
+ * Dies ist die Abstraktion der Spindel des Fräskopfes
  *
  * @author Jannik Orth
  */
