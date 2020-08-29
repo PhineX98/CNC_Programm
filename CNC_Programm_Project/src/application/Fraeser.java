@@ -14,6 +14,7 @@ public class Fraeser {
 	public double posY;
 	public double homePosX;
 	public double homePosY;
+	
 
 	public double getHomePosX() {
 		return homePosX;
@@ -94,4 +95,4 @@ public class Fraeser {
 		return coolingStatus;
 	}
 
-}
+

@@ -5,6 +5,8 @@ package application;
  * @author Jannik Orth
  */
 public class Spindel {
+	
+	
 	public boolean drillStatus = false;
 
 	// false -> Rechtslauf | true -> Linkslauf
