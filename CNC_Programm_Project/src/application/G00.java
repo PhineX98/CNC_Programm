@@ -16,7 +16,7 @@ public class G00 extends Befehl {
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l, CommandCode values) {
 		l.zeitStarten();
 		
-		SampleController.path1.getElements().add(new MoveTo(values.getX(),values.getY()));
+		
 		
 		l.addToLog("G00 ausgeführt in " + l.zeitGebraucht());
 	}
