@@ -102,11 +102,11 @@
             </AnchorPane>
          </top>
          <left>
-            <Pane prefHeight="525.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="drawPane" prefHeight="525.0" prefWidth="700.0" BorderPane.alignment="CENTER">
                <children>
-                  <Rectangle fx:id="drillSurface" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0" />
-                  <Circle fx:id="circHomePosition" fill="#1beb1b" layoutX="100.0" layoutY="100.0" radius="8.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fx:id="circDrill" fill="RED" radius="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Rectangle fx:id="drillSurface" arcHeight="5.0" arcWidth="5.0" fill="GREEN" height="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0" />
+                  <Circle fx:id="circHomePosition" fill="WHITE" layoutX="100.0" layoutY="100.0" radius="8.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circDrill" fill="YELLOW" layoutX="50.0" layoutY="50.0" radius="7.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <Path fx:id="path" fill="DODGERBLUE" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                </children>
             </Pane>

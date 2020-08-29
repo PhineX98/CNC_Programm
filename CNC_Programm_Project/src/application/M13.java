@@ -17,7 +17,7 @@ public class M13 extends Befehl {
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startRight();
 		f.setCoolingStatus(true);
-		f.setSchnittSpeed(3);
+		f.setAktSpeed(s);
 
 		l.addToLog("M13 ausgeführt");
 		resetStatus(s, f, c);

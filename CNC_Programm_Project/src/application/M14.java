@@ -17,7 +17,7 @@ public class M14 extends Befehl {
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startLeft();
 		f.setCoolingStatus(true);
-		f.setSchnittSpeed(3);
+		f.setAktSpeed(s);
 		
 		l.addToLog("M14 ausgeführt");
 		resetStatus(s, f, c);

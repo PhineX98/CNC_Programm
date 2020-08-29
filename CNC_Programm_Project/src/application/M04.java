@@ -16,7 +16,7 @@ public class M04 extends Befehl {
 
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l) {
 		s.startLeft();
-		f.setSchnittSpeed(2);
+		f.setAktSpeed(s);
 
 		l.addToLog("M04 ausgeführt");
 		resetStatus(s, f, c);
