@@ -1,20 +1,27 @@
 package application;
 
 /**
+*Diese Klasse abstrahiert den Fräser mit seinen Eigenschaften um diesen steuern zu können.
 *
 * @author Jannik Orth
 */
 public class Fraeser {
 
 	public double fahrSpeed;
-	public double schnittSpeed;
+	public double schnittSpeedCooling;
+	public double schnittSpeedNoCooling;
 	public boolean fraeserStatus = false;
 	public boolean coolingStatus = false;
 	public double posX;
 	public double posY;
 	public double homePosX;
 	public double homePosY;
+<<<<<<< HEAD
 	
+=======
+	private double drillDiameter;
+	private double aktSpeed;
+>>>>>>> branch 'master' of https://github.com/PhineX98/CNC_Programm.git
 
 	public double getHomePosX() {
 		return homePosX;
@@ -33,7 +40,23 @@ public class Fraeser {
 	}
 
 
-
+	
+	public void setAktSpeed(Spindel s) {
+		if (coolingStatus && fraeserStatus) {
+			this.aktSpeed = schnittSpeedCooling;
+		}else if (!coolingStatus && fraeserStatus) {
+			this.aktSpeed = schnittSpeedNoCooling;
+		}else if (fraeserStatus && !s.getStatus()) {
+			this.aktSpeed = fahrSpeed;
+		}else {
+			this.aktSpeed = 0;
+		}
+	}
+	
+	public double getAktSpeed(){
+		return aktSpeed;
+	}
+	
 
 	// Fräser Status ausgeben
 	public boolean getFraeserStatus() {
@@ -56,13 +79,21 @@ public class Fraeser {
 	}
 
 	// schnittgeschwindigkeit setzen
-	public void setSchnittSpeed(double speed) {
-		this.schnittSpeed = speed;
+	public void setSchnittSpeedCooling(double speed) {
+		this.schnittSpeedCooling = speed;
 	}
 
 	// getten
-	public double getSchnittSpeed() {
-		return schnittSpeed;
+	public double getSchnittSpeedCooling() {
+		return schnittSpeedCooling;
+	}
+	
+	public double getSchnittSpeedNoCooling() {
+		return schnittSpeedNoCooling;
+	}
+
+	public void setSchnittSpeedNoCooling(double schnittSpeedNoCooling) {
+		this.schnittSpeedNoCooling = schnittSpeedNoCooling;
 	}
 
 	// posX setzen
@@ -95,4 +126,16 @@ public class Fraeser {
 		return coolingStatus;
 	}
 
+<<<<<<< HEAD
 
+=======
+	public void setDrillDiameter(double diameter) {
+		this.drillDiameter = diameter;
+	}
+	
+	public double getDrillDiameter() {
+		return drillDiameter;
+	}
+
+}
+>>>>>>> branch 'master' of https://github.com/PhineX98/CNC_Programm.git
