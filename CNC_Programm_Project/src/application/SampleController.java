@@ -1,13 +1,16 @@
 package application;
 
+import java.awt.Canvas;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
+import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -21,6 +24,7 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 /**
  * Dies ist die ControllerKlasse der Anwendung Von hier aus werden alle Button
@@ -56,7 +60,9 @@ public class SampleController implements Initializable {
 	public Circle circHomePosition;
 	public Circle circDrill;
 	public Path path;
+
 	public Pane drawPane;
+
 
 	public ListView<String> logList;
 
@@ -69,6 +75,7 @@ public class SampleController implements Initializable {
 	public Logging logger = new Logging();
 	public BtnManager btnManager = new BtnManager();
 	public ErrorHandler errorHandler = new ErrorHandler();
+	public static Path path1 = new Path();
 
 	////////////////////////////////////////
 	// Handlers
@@ -142,7 +149,7 @@ public class SampleController implements Initializable {
 		btnManager.commandDeleted(sc);
 	}
 
-	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables übertragen
+	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables Ã¼bertragen
 		ParseHandler ph1 = new ParseHandler();
 		String[] settings = ph1.handleSettings();
 		setSettings(settings);
@@ -181,7 +188,7 @@ public class SampleController implements Initializable {
 			/////////////////////////
 			// STARTEN DER SIMULATION
 			/////////////////////////
-			System.out.println("Fräse startet");
+			System.out.println("FrÃ¤se startet");
 			btnManager.startProcess(sc);
 
 			// Startpunkt anfahren
@@ -242,17 +249,17 @@ public class SampleController implements Initializable {
 		}
 	}
 
-	// geladene Einstellungen auf Anzeige und Fräser übertragen
+	// geladene Einstellungen auf Anzeige und FrÃ¤ser Ã¼bertragen
 	public void setSettings(String[] settings) {
 		fraeser.setHomePosX(Double.parseDouble(settings[0]));				//HomePos x
 		fraeser.setHomePosY(Double.parseDouble(settings[1]));				//HomePos y
-		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));	//Speed kühlung an
-		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));	//Speed kühlung aus
+		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));	//Speed kÃ¼hlung an
+		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));	//Speed kÃ¼hlung aus
 		fraeser.setFahrSpeed(Double.parseDouble(settings[4]));				//Speed zum verfahren
-		fraeser.setDrillDiameter(Double.parseDouble(settings[5]));			//Fräser Durchmesser
-		circDrill.setFill(btnManager.colorHandler(settings[6]));			//Farbe Fräser
-		drillSurface.setFill(btnManager.colorHandler(settings[7]));			//Farbe Oberfläche
-		//circDrill.setFill(btnManager.colorHandler(settings[8]));			//Farbe bearbeitete Oberfläche
+		fraeser.setDrillDiameter(Double.parseDouble(settings[5]));			//FrÃ¤ser Durchmesser
+		circDrill.setFill(btnManager.colorHandler(settings[6]));			//Farbe FrÃ¤ser
+		drillSurface.setFill(btnManager.colorHandler(settings[7]));			//Farbe OberflÃ¤che
+		//circDrill.setFill(btnManager.colorHandler(settings[8]));			//Farbe bearbeitete OberflÃ¤che
 		circHomePosition.setFill(btnManager.colorHandler(settings[9]));		//Farbe HomePos
 		
 		lblHomePos.setText(fraeser.getPosX() + " ; " + fraeser.getHomePosY());
@@ -333,31 +340,35 @@ public class SampleController implements Initializable {
 		//////////////////////////////////////////
 
 		MoveTo moveTo = new MoveTo();
-		moveTo.setX(0.0f);
-		moveTo.setY(0.0f);
+		moveTo.setX(50);
+		moveTo.setY(150);
 
-		QuadCurveTo quadCurveTo = new QuadCurveTo();
-		quadCurveTo.setX(120.0f);
-		quadCurveTo.setY(60.0f);
-		quadCurveTo.setControlX(100.0f);
-		quadCurveTo.setControlY(0.0f);
-
-		LineTo lineTo = new LineTo();
-		lineTo.setX(175.0f);
-		lineTo.setY(55.0f);
-
-		ArcTo arcTo = new ArcTo();
-		arcTo.setX(50.0f);
-		arcTo.setY(50.0f);
-		arcTo.setRadiusX(50.0f);
-		arcTo.setRadiusY(50.0f);
+		/*
+		 * QuadCurveTo quadCurveTo = new QuadCurveTo(); quadCurveTo.setX(120.0f);
+		 * quadCurveTo.setY(60.0f); quadCurveTo.setControlX(100.0f);
+		 * quadCurveTo.setControlY(0.0f);
+		 * 
+		 * LineTo lineTo = new LineTo(); lineTo.setX(175.0f); lineTo.setY(55.0f);
+		 * 
+		 * ArcTo arcTo = new ArcTo(); arcTo.setX(50.0f); arcTo.setY(50.0f);
+		 * arcTo.setRadiusX(50.0f); arcTo.setRadiusY(50.0f);
+		 */
+		
+		ArcTo arcTo1 = new ArcTo ();
+		arcTo1.setX(300);
+		arcTo1.setY(500);
+		arcTo1.setRadiusX(100);
+		arcTo1.setRadiusY(100);
+		
 
 		path.getElements().add(moveTo);
-		path.getElements().add(quadCurveTo);
-		path.getElements().add(lineTo);
-		path.getElements().add(arcTo);
+//		path.getElements().add(quadCurveTo);
+//		path.getElements().add(lineTo);
+		path.getElements().add(arcTo1);
 
 	}
+	
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

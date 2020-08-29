@@ -1,7 +1,7 @@
 package application;
 
 /**
-*Diese Klasse abstrahiert den Fräser mit seinen Eigenschaften um diesen steuern zu können.
+*Diese Klasse abstrahiert den FrÃ¤ser mit seinen Eigenschaften um diesen steuern zu kÃ¶nnen.
 *
 * @author Jannik Orth
 */
@@ -16,6 +16,7 @@ public class Fraeser {
 	public double posY;
 	public double homePosX;
 	public double homePosY;
+
 	private double drillDiameter;
 	private double aktSpeed;
 
@@ -54,12 +55,12 @@ public class Fraeser {
 	}
 	
 
-	// Fräser Status ausgeben
+	// FrÃ¤ser Status ausgeben
 	public boolean getFraeserStatus() {
 		return fraeserStatus;
 	}
 
-	// fräasenstatus setzen
+	// frÃ¤asenstatus setzen
 	public void setFraeserStatus(boolean status) {
 		this.fraeserStatus = status;
 	}
@@ -122,6 +123,7 @@ public class Fraeser {
 		return coolingStatus;
 	}
 
+
 	public void setDrillDiameter(double diameter) {
 		this.drillDiameter = diameter;
 	}
@@ -131,3 +133,4 @@ public class Fraeser {
 	}
 
 }
+
