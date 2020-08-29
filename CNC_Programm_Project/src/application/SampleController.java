@@ -7,6 +7,10 @@ import java.util.ResourceBundle;
 
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
+
+import javafx.animation.Animation;
+import javafx.animation.Timeline;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -91,9 +95,9 @@ public class SampleController implements Initializable {
 	////////////////////////////////////////
 
 	/*
-	 * Handling wenn ein Command ¸ber manuelle Zeile hinzugef¸gt wird Es wird
-	 * automatisch gepr¸ft ob dieser valide ist Falls ja wird er in die Commandliste
-	 * ¸bernommen und ist breit zum ausf¸hren
+	 * Handling wenn ein Command √ºber manuelle Zeile hinzugef√ºgt wird Es wird
+	 * automatisch gepr√ºft ob dieser valide ist Falls ja wird er in die Commandliste
+	 * √ºbernommen und ist breit zum ausf√ºhren
 	 */
 	public void btnAddCommand(ActionEvent actionEvent) {
 		tester.checkCommand(sc);
@@ -140,7 +144,7 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Lˆscht alle eingelesenen oder eingegebenen Commands
+	 * L√∂scht alle eingelesenen oder eingegebenen Commands
 	 */
 	public void btnCommandsDelete(ActionEvent actionEvent) {
 		commands.clear();
@@ -153,8 +157,8 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Einlesen der Einstellungen der Fr‰se. Muss am Anfang bet‰tigt werden.
-	 * Wa‰hrend das Programm l‰uft, kˆnnte die Settingsfile geupdatet werden und neu
+	 * Einlesen der Einstellungen der Fr√§se. Muss am Anfang bet√§tigt werden.
+	 * Wa√§hrend das Programm l√§uft, k√∂nnte die Settingsfile geupdatet werden und neu
 	 * eingelesen. Anezige der Einstellungen wird ebenfalls gesetzt.
 	 */
 	public void btnSettingsRead(ActionEvent actionEvent) {
@@ -167,9 +171,9 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Einlesen der Commands.json Datei um einen ganzen Befehlsblock ¸bernehem und
-	 * ausf¸hren zu kˆnnen W‰hrend des Einlesens wird die Validit‰t der Befehle
-	 * gepr¸ft und das Programm gibt Feedback, sollten ung¸ltige Befehle versucht
+	 * Einlesen der Commands.json Datei um einen ganzen Befehlsblock √ºbernehem und
+	 * ausf√ºhren zu k√∂nnen W√§hrend des Einlesens wird die Validit√§t der Befehle
+	 * gepr√ºft und das Programm gibt Feedback, sollten ung√ºltige Befehle versucht
 	 * werden einzulesen.
 	 */
 	public void btnCommandsRead(ActionEvent actionEvent) { // Alle Commands in die ArrayList commands einlesen
@@ -207,7 +211,7 @@ public class SampleController implements Initializable {
 			/////////////////////////
 			// STARTEN DER SIMULATION
 			/////////////////////////
-			System.out.println("Fr√§se startet");
+			System.out.println("Fr√É¬§se startet");
 			btnManager.startProcess(sc);
 
 			// Startpunkt anfahren
@@ -258,7 +262,7 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Lˆschen des Logverlaufes
+	 * L√∂schen des Logverlaufes
 	 */
 	public void btnDeleteLog(ActionEvent actionEvent) {
 		if (btnManager.getLoggingDeleted()) {
@@ -280,16 +284,16 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Alle wichtigen Einstellungen an die Komponenten ¸bertragen
+	 * Alle wichtigen Einstellungen an die Komponenten √ºbertragen
 	 * 0 -> HomePosX				6
 	 * 1 -> HomePosY
-	 * 2 -> Speed K¸hlung an
-	 * 3 -> Speed K¸hlung aus
+	 * 2 -> Speed K√ºhlung an
+	 * 3 -> Speed K√ºhlung aus
 	 * 4 -> Speed zum verfahren
-	 * 5 -> Radius des Fr‰sers
-	 * 6 -> Farbe des Fr‰sers
-	 * 7 -> Farbe der Oberfl‰che
-	 * 8 -> Farbe der bearbeiteten Oberfl‰che
+	 * 5 -> Radius des Fr√§sers
+	 * 6 -> Farbe des Fr√§sers
+	 * 7 -> Farbe der Oberfl√§che
+	 * 8 -> Farbe der bearbeiteten Oberfl√§che
 	 * 9 -> Farbe der Homeposition
 	 */
 	public void setSettings(String[] settings) {
@@ -371,7 +375,7 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Tempor‰rerButton
+	 * Tempor√§rerButton
 	 */
 	public void btnTest(ActionEvent actionEvent) {
 
@@ -420,5 +424,7 @@ public class SampleController implements Initializable {
 		sc = this;
 
 	}
+
+
 
 }

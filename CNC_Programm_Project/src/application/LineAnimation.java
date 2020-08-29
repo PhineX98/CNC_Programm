@@ -41,18 +41,18 @@ public class LineAnimation extends Animation {
 			temp.setVisible(false);
 		}
 		
-//		Circle cir = new Circle(SampleController.sc.fraeser.getPosX(), SampleController.sc.fraeser.getPosY(),7.5,Color.RED);
+//		Circle cir = new Circle(sc.fraeser.getPosX(), sc.fraeser.getPosY(),sc.fraeser.getDrillDiameter()/4,Color.RED);
 //		cir.toBack();
-//		SampleController.sc.drawPane.getChildren().add(cir);
+//		sc.drawPane.getChildren().add(cir);
 //		temp = cir;
 //		
-//
+
 //		Timeline t = new Timeline();
-//		t.getKeyFrames().add(new KeyFrame(Duration.seconds(getDauer( SampleController.sc.fraeser.getAktSpeed() ,xStart-SampleController.sc.fraeser.getPosX() , yStart + SampleController.sc.fraeser.getPosY())), 
-//				new KeyValue(line.endXProperty(), SampleController.sc.fraeser.getPosX()),
-//				new KeyValue(line.endYProperty(), SampleController.sc.fraeser.getPosY()),
-//				new KeyValue(cir.centerXProperty(), SampleController.sc.fraeser.getPosX()),
-//				new KeyValue(cir.centerYProperty(), SampleController.sc.fraeser.getPosY())
+//		t.getKeyFrames().add(new KeyFrame(Duration.seconds(getDauer( sc.fraeser.getAktSpeed() ,xStart-sc.fraeser.getPosX() , yStart + sc.fraeser.getPosY())), 
+//				new KeyValue(line.endXProperty(),sc.fraeser.getPosX()),
+//				new KeyValue(line.endYProperty(), sc.fraeser.getPosY()),
+//				new KeyValue(cir.centerXProperty(), sc.fraeser.getPosX()),
+//				new KeyValue(cir.centerYProperty(), sc.fraeser.getPosY())
 //							
 //				));
 //		
@@ -61,46 +61,45 @@ public class LineAnimation extends Animation {
 //		int intervalle = 200;
 //		for(int a = 1; a <= intervalle ; a++) {
 //		t2.getKeyFrames().add(new KeyFrame(Duration.seconds(((getDauer( SampleController.sc.fraeser.getAktSpeed() ,xStart-xEnd , yStart-1050 + yEnd))/intervalle)*a),
-//				new KeyValue(String.valueOf(SampleController.sc.fraeser.homePosX), String.valueOf(Math.round(xStart+((xEnd-xStart)/intervalle)*a)),
-//				new KeyValue(SampleController.sc., String.valueOf(Math.round(1050-yStart+((-1050+yEnd+yStart)/intervalle)*a))
-//				));
+//				new KeyValue(sc.statX.textProperty(), String.valueOf(Math.round(xStart+((xEnd-xStart)/intervalle)*a))),
+//				new KeyValue(sc.statY.textProperty(), String.valueOf(Math.round(1050-yStart+((-1050+yEnd+yStart)/intervalle)*a)))));
 //		}
 //		TranslateTransition trans = new TranslateTransition();
-//		trans.setNode(GUI.aktuellX);
-//		GUI.setAndPlayTimeline(t, t2);
+//		trans.setNode(sc.statX);
+////		sc.setAndPlayTimeline(t, t2);
 //		t.setOnFinished(ActionEvent ->{
-//			CodeVerarbeitung.setBoolWeiter(true);
+////			CodeVerarbeitung.setBoolWeiter(true);
 //		});
 //		
-//		GUI.setKopfX(xEnd);
-//		GUI.setKopfY(GUI.getHeight() - yEnd);
+//		sc.fraeser.setPosX(xEnd);
+//		sc.fraeser.setPosY(yEnd);
 //
 //	
-//		});
-//	}
-//	public static void lineJustKreis( double xEnd, double yEnd) {
+//		};
+	
+	public static void lineJustKreis( double xEnd, double yEnd, SampleController sc) {
 //		Platform.runLater(()->{
-//		double xStart = GUI.getKopfX();
-//		double yStart = GUI.getKopfY();
-//		
-//		if(GCodes.getEilgang()) {
-//			Main.setAktGeschwind_fahrt();
-//		}else if(Main.isKuehlungAktiv()){
-//			Main.setAktGeschwind_schnell();
-//		}else if(!Main.isKuehlungAktiv()) {
-//			Main.setAktGeschwind_langsam();
-//		}
-//		
-//		if(!(temp == null)) {
-//			temp.setVisible(false);
-//		}
-//		
-//		Circle cir = new Circle(GUI.getKopfX(), GUI.getKopfY(),GUI.getKopfRadius(),GUI.getKopfFill());
+		double xStart = sc.fraeser.getPosX();
+		double yStart = sc.fraeser.getPosY();
+		
+		if(!sc.fraeser.getFraeserStatus()) {
+			sc.fraeser.setFahrSpeed(sc.fraeser.fahrSpeed/60);;
+		}else if(sc.fraeser.getCoolingStatus()){
+			sc.fraeser.setFahrSpeed(sc.fraeser.schnittSpeedCooling/60);
+		}else if(!sc.fraeser.getCoolingStatus()) {
+			sc.fraeser.setFahrSpeed(sc.fraeser.getSchnittSpeedNoCooling()/60);
+		}
+		
+		if(!(temp == null)) {
+			temp.setVisible(false);
+		}
+		
+		Circle cir = new Circle(xStart,yStart,sc.fraeser.getDrillDiameter()/4,Color.RED);
 //		GUI.KopfsetVisible(false);
-//		cir.toBack();
-//		GUI.arbeitsF.getChildren().add(cir);
-//		temp = cir;
-//		
+		cir.toBack();
+		sc.drawPane.getChildren().add(cir);
+		temp = cir;
+		
 //		// Diese Timeline sorgt dafür, dass der Kopf animiert wird.
 //		Timeline t = new Timeline();
 //		t.getKeyFrames().add(new KeyFrame(Duration.seconds(getDauer( Main.getAktGeschw() ,xStart-xEnd , yStart-1050 + yEnd)),
@@ -123,10 +122,10 @@ public class LineAnimation extends Animation {
 //		t.setOnFinished(ActionEvent ->{
 //			CodeVerarbeitung.setBoolWeiter(true);
 //		});
-//		
-//		GUI.setKopfX(xEnd);
-//		GUI.setKopfY(GUI.getHeight() - yEnd);
-//	
+		
+		sc.fraeser.setPosX(xEnd);
+		sc.fraeser.setPosY(yEnd);
+
 //		});
 	}
 }
