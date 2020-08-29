@@ -14,6 +14,9 @@ public abstract class Befehl {
 
 	}
 
+	/*
+	 * Zum aktualisieren der Anzeige für den aktuellen Status der Maschine
+	 */
 	public void resetStatus(Spindel s, Fraeser f, SampleController c) {
 
 		// Setzen des eingestellten Fräserstatus
@@ -52,7 +55,6 @@ public abstract class Befehl {
 		} else {
 			c.statSpeed.setText("-");
 		}
-		
 
 	}
 }

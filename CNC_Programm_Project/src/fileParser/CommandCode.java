@@ -1,7 +1,7 @@
 package fileParser;
 
 /**
- * zur Speicherung der einzelnen Kommandobefehle in einer Arraylist diesen Typs.
+ * Zur Speicherung der einzelnen Kommandobefehle in einer Arraylist diesen Typs.
  * Spätere Manipulation der Werte ist möglich.
  *
  * @author Jannik Orth
