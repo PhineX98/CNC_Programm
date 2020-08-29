@@ -7,13 +7,12 @@ import java.util.ArrayList;
  * @author Jannik Orth
  */
 public class ParseHandler {
-
+	
+	/*
+	 * Ausgabe des CommandArrays zur weiteren Verarbeitung
+	 */
 	public ArrayList<CommandCode> handleCommand() {
 		ArrayList<CommandCode> commandArray;
-		// final String path = "C:\\Users\\janni\\iCloudDrive\\DHBW\\S2_Programmieren
-		// 2\\Projekt\\A_dateien\\Befehlscode.json";
-		// final String path = "
-		// C:\\Users\\bohne\\IdeaProjects\\CNC_Frase\\Files\\Json\\Befehlscode.json";
 		final String path = "src/fileParser/Befehlscode.json";
 
 		// Den Parser erstellen
@@ -28,6 +27,9 @@ public class ParseHandler {
 
 	}
 
+	/*
+	 * Ausgabe der gesetzten Einstellungen zur weiteren Verarbeitung
+	 */
 	public String[] handleSettings() {
 		final String settingsPath = "src/fileParser/Settings.json";
 

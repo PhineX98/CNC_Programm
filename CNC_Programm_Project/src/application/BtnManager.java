@@ -109,6 +109,7 @@ public class BtnManager {
 		logger.exportLog();
 	}
 
+	/*
 	public boolean checkCommand(SampleController sc) {
 		String cmd = sc.field_Befehl.getText().toUpperCase();
 
@@ -147,6 +148,7 @@ public class BtnManager {
 		}
 
 	}
+	*/
 
 	public Color colorHandler(String string) {
 		switch (string) {

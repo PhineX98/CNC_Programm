@@ -1,6 +1,7 @@
 package application;
 
 /**
+*Dies ist die MAIN Klasse, die das Programm startet
 *
 * @author Jannik Orth
 */
@@ -32,20 +33,6 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-
-		/*
-		 * Spindel spindel = new Spindel(); Fraeser fraeser = new Fraeser(0,0);
-		 * 
-		 * spindel.startLeft(); System.out.println(spindel.getStatus());
-		 * System.out.println(spindel.getRichtung());
-		 * System.out.println(fraeser.getCoolingStatus());
-		 * 
-		 * M13 handleM00 = new M13();
-		 * 
-		 * handleM00.exec(spindel, fraeser); System.out.println(spindel.getStatus());
-		 * System.out.println(spindel.getRichtung());
-		 * System.out.println(fraeser.getCoolingStatus());
-		 */
 
 	}
 

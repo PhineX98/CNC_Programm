@@ -1,5 +1,6 @@
 package application;
 
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -72,6 +73,22 @@ public class ErrorHandler {
 		alert.setContentText("Es existiert noch kein Log.");
 
 		alert.showAndWait();
-		
+	}
+
+	public void yourCommandsAreNotValid(SampleController sc, int stelle) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Achtung!");
+		alert.setHeaderText(null);
+		alert.setContentText("Der " + (stelle+1) + ". Befehl aus der Datei ist fehlerhaft und kann nicht verarbeitet werden. Bitte korrigieren und File neu laden.");
+
+		alert.showAndWait();
+	}
+
+	public void yourCoordinateIsOutOfRange(SampleController sc) {
+		sc.lblInfo.setText("Eingegebene Koordinaten nicht in Reichweite.");
+	}
+
+	public void yourCommandIsNotValid(SampleController sc) {
+		sc.lblInfo.setText("Ungültiger Befehl!");
 	}
 }
