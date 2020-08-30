@@ -28,8 +28,8 @@
             </Label>
             <Label layoutX="32.0" layoutY="46.0" text="xPosition" />
             <Label layoutX="32.0" layoutY="63.0" text="yPosition" />
-            <Label fx:id="statY" layoutX="125.0" layoutY="46.0" text="X" />
-            <Label fx:id="statX" layoutX="125.0" layoutY="63.0" text="Y" />
+            <Label fx:id="statX" layoutX="125.0" layoutY="46.0" text="X" />
+            <Label fx:id="statY" layoutX="125.0" layoutY="63.0" text="Y" />
             <Label layoutX="35.0" layoutY="106.0" text="Fräser" />
             <Label layoutX="35.0" layoutY="123.0" text="Drehrichtung" />
             <Label layoutX="35.0" layoutY="140.0" text="Kühlung" />

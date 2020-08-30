@@ -10,7 +10,7 @@ import fileParser.ParseHandler;
 
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
-
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -24,6 +24,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 /**
  * Dies ist die ControllerKlasse der Anwendung Von hier aus werden alle Button
@@ -59,11 +60,13 @@ public class SampleController implements Initializable {
 	public Circle circHomePosition;
 	public Circle circDrill;
 	public Path path;
+	public Color drillColor;
 
 	public Pane drawPane;
 
 	public ListView<String> logList;
-
+	
+	public int iterator = 0;
 	ArrayList<CommandCode> commands = new ArrayList<>();
 	ArrayList<CommandCode> tempCommands = new ArrayList<>();
 	Fraeser fraeser = new Fraeser();
@@ -93,6 +96,7 @@ public class SampleController implements Initializable {
 	G03 handleG03 = new G03();
 	G28 handleG28 = new G28();
 	////////////////////////////////////////
+	
 
 	/*
 	 * Handling wenn ein Command über manuelle Zeile hinzugefügt wird Es wird
@@ -241,9 +245,20 @@ public class SampleController implements Initializable {
 
 			// Liste mit commands anfahren
 			for (int i = 0; i < commands.size(); i++) {
-				cutCode(commands.get(i));
-				logger.refreshLog(sc);
+					cutCode(commands.get(i));
+					logger.refreshLog(sc);
+					Thread.sleep(3000);
 			}
+
+			//cutCode(commands.get(iterator));
+			
+			
+			
+			
+			
+			
+			
+	      
 
 			// Stop
 
@@ -327,7 +342,7 @@ public class SampleController implements Initializable {
 		fraeser.setDrillDiameter(Double.parseDouble(settings[5]) / 2); 
 		circDrill.setFill(btnManager.colorHandler(settings[6])); 
 		drillSurface.setFill(btnManager.colorHandler(settings[7])); 
-		// circDrill.setFill(btnManager.colorHandler(settings[8]));
+	    drillColor = (btnManager.colorHandler(settings[8]));
 		circHomePosition.setFill(btnManager.colorHandler(settings[9]));
 
 		lblHomePos.setText(fraeser.getPosX() + " ; " + fraeser.getHomePosY());
@@ -347,7 +362,7 @@ public class SampleController implements Initializable {
 	/*
 	 * Zur Abarbeitung der erstellten Befehlsfolge
 	 */
-	private void cutCode(CommandCode paramList) {
+	public void cutCode(CommandCode paramList) {
 
 		switch (paramList.getBefehl()) {
 		case "M00":
@@ -383,6 +398,7 @@ public class SampleController implements Initializable {
 			break;
 		case "G01":
 			handleG01.exec(spindel, fraeser, sc, logger, paramList);
+			paramList.printValues();
 			break;
 		case "G02":
 			handleG02.exec(spindel, fraeser, sc, logger, paramList);
@@ -453,6 +469,13 @@ public class SampleController implements Initializable {
 		// TODO Auto-generated method stub
 		sc = this;
 
+	}
+
+	public void refreshDrillPos() {
+		statX.setText(Double.toString(fraeser.getPosX()*2));
+		statY.setText(Double.toString(fraeser.getPosY()*2));
+		
+		
 	}
 
 
