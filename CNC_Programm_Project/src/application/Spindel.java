@@ -1,16 +1,17 @@
 package application;
 
 /**
+ * Dies ist die Abstraktion der Spindel des Fräskopfes
  *
  * @author Jannik Orth
  */
 public class Spindel {
 	
 	
-	public boolean drillStatus = false;
+	private boolean drillStatus = false;
 
 	// false -> Rechtslauf | true -> Linkslauf
-	public boolean drillRichtung = false;
+	private boolean drillRichtung = false;
 
 	// Drill Stoppen
 	public void stop() {

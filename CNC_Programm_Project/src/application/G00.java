@@ -7,7 +7,7 @@ import javafx.scene.shape.MoveTo;
 /**
  *Diese Klasse implemenmtiert eine Verfahrbewegung im Eilgang.
  *(nur ohne Bohren/Fräsen möglich !!!Nur möglich wenn fräser aus!!!
- *-> G01 des G-Codes
+ *-> G00 des G-Codes
  *
  * @author Jannik Orth
  */

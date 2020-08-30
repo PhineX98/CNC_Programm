@@ -14,6 +14,9 @@ public abstract class Befehl {
 
 	}
 
+	/*
+	 * Zum aktualisieren der Anzeige für den aktuellen Status der Maschine
+	 */
 	public void resetStatus(Spindel s, Fraeser f, SampleController c) {
 
 		// Setzen des eingestellten Fräserstatus
@@ -32,27 +35,26 @@ public abstract class Befehl {
 
 		// Setzen der angezeigten Drehrichtung (EIN/AUS oder - bei ausgeschalteter
 		// Fräse)
-		if (!s.drillRichtung && f.fraeserStatus) {
+		if (!s.getRichtung() && f.getFraeserStatus()) {
 			c.statDirection.setText("Rechts");
-		} else if (s.drillRichtung && f.fraeserStatus) {
+		} else if (s.getRichtung() && f.getFraeserStatus()) {
 			c.statDirection.setText("Links");
 		} else {
 			c.statDirection.setText("-");
 		}
 
 		// Einstellung der angezeigten Geschwindigkeit
-		if (s.drillStatus) {
+		if (s.getStatus()) {
 			c.statSpeed.setText(c.lblSpeedNoCooling.getText());
-		} else if (s.drillStatus && f.coolingStatus) {
+		} else if (s.getStatus() && f.getCoolingStatus()) {
 			c.statSpeed.setText(c.lblSpeedCooling.getText());
-		} else if (!s.drillStatus && f.getFraeserStatus()) {
+		} else if (!s.getStatus() && f.getFraeserStatus()) {
 			c.statSpeed.setText(c.lblSpeedNoDrill.getText());
 		} else if (!f.getFraeserStatus() && !s.getStatus()) {
 			c.statSpeed.setText("0");
 		} else {
 			c.statSpeed.setText("-");
 		}
-		
 
 	}
 }

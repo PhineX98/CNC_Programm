@@ -1,17 +1,18 @@
 package application;
 
-import java.awt.Canvas;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
+
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -20,12 +21,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import javafx.scene.shape.QuadCurveTo;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 /**
  * Dies ist die ControllerKlasse der Anwendung Von hier aus werden alle Button
@@ -64,13 +62,13 @@ public class SampleController implements Initializable {
 
 	public Pane drawPane;
 
-
 	public ListView<String> logList;
 
 	ArrayList<CommandCode> commands = new ArrayList<>();
 	ArrayList<CommandCode> tempCommands = new ArrayList<>();
 	Fraeser fraeser = new Fraeser();
 	Spindel spindel = new Spindel();
+	Tester tester = new Tester();
 
 	public static SampleController sc;
 	public Logging logger = new Logging();
@@ -96,53 +94,70 @@ public class SampleController implements Initializable {
 	G28 handleG28 = new G28();
 	////////////////////////////////////////
 
+	/*
+	 * Handling wenn ein Command über manuelle Zeile hinzugefügt wird Es wird
+	 * automatisch geprüft ob dieser valide ist Falls ja wird er in die Commandliste
+	 * übernommen und ist breit zum ausführen
+	 */
 	public void btnAddCommand(ActionEvent actionEvent) {
-		btnManager.checkCommand(field_Befehl.getText(), sc);
+		// tester.checkCommand(sc);
 
-		if (btnManager.checkCommand(field_Befehl.getText(), sc)) {
-			if (!btnManager.getCommandListSet()) {
-				if (field_Befehl.getText().length() > 1) {
-					CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
-							field_Befehl.getText().toUpperCase(), Double.parseDouble(field_x.getText()),
-							Double.parseDouble(field_y.getText()), Double.parseDouble(field_i.getText()),
-							Double.parseDouble(field_j.getText()));
+		if (btnManager.getLoggingDeleted()) {
+			if (tester.checkCommand(sc)) {
+				if (!btnManager.getCommandListSet()) {
+					if (field_Befehl.getText().length() > 1) {
+						CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
+								field_Befehl.getText().toUpperCase(), Double.parseDouble(field_x.getText()),
+								Double.parseDouble(field_y.getText()), Double.parseDouble(field_i.getText()),
+								Double.parseDouble(field_j.getText()));
 
-					tempCommands.add(cc);
+						tempCommands.add(cc);
 
-					for (int i = 1; i < tempCommands.size(); i++) {
-						for (int j = 0; j < tempCommands.size() - i; j++) {
-							if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
-									.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
+						for (int i = 1; i < tempCommands.size(); i++) {
+							for (int j = 0; j < tempCommands.size() - i; j++) {
+								if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
+										.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
 
-								CommandCode temp = tempCommands.get(j);
-								tempCommands.set(j, tempCommands.get(j + 1));
-								tempCommands.set(j + 1, temp);
+									CommandCode temp = tempCommands.get(j);
+									tempCommands.set(j, tempCommands.get(j + 1));
+									tempCommands.set(j + 1, temp);
+								}
 							}
 						}
+
+						int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
+						field_Pos.setText("N" + zaehler);
+						logger.addToLog(cc.toString());
+						logger.refreshLog(sc);
+						field_Befehl.clear();
+
+						commands = tempCommands;
+
+						// Ausgabe in der Konsole
+						for (int i = 0; i < commands.size(); i++) {
+							commands.get(i).printValues();
+						}
+
+						btnManager.commandAdded(sc);
 					}
 
-					int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
-					field_Pos.setText("N" + zaehler);
-					commands = tempCommands;
-
-					// Ausgabe in der Konsole
-					for (int i = 0; i < commands.size(); i++) {
-						commands.get(i).printValues();
-					}
-
-					btnManager.commandAdded(sc);
+				} else {
+					errorHandler.firstDeleteCommands();
 				}
-
-			} else {
-				errorHandler.firstDeleteCommands();
 			}
+		} else {
+			errorHandler.firstDeleteLog();
 		}
 
 	}
 
+	/*
+	 * L�scht alle eingelesenen oder eingegebenen Commands
+	 */
 	public void btnCommandsDelete(ActionEvent actionEvent) {
 		commands.clear();
 		tempCommands.clear();
+		field_Pos.setText("N00");
 		for (int i = 0; i < commands.size(); i++) {
 			commands.get(i).printValues();
 		}
@@ -150,33 +165,56 @@ public class SampleController implements Initializable {
 		btnManager.commandDeleted(sc);
 	}
 
-	public void btnSettingsRead(ActionEvent actionEvent) { // Setting einlesen und auf Lables übertragen
+	/*
+	 * Einlesen der Einstellungen der Fräse. Muss am Anfang betätigt werden.
+	 * Waährend das Programm läuft, könnte die Settingsfile geupdatet werden und neu
+	 * eingelesen. Anezige der Einstellungen wird ebenfalls gesetzt.
+	 */
+	public void btnSettingsRead(ActionEvent actionEvent) {
 		ParseHandler ph1 = new ParseHandler();
 		String[] settings = ph1.handleSettings();
 		setSettings(settings);
 
-		
-
+		// fraeser.printValues();
 		btnManager.settingsInitialized(sc);
 	}
 
+	/*
+	 * Einlesen der Commands.json Datei um einen ganzen Befehlsblock übernehem und
+	 * ausführen zu können Während des Einlesens wird die Validität der Befehle
+	 * geprüft und das Programm gibt Feedback, sollten ungültige Befehle versucht
+	 * werden einzulesen.
+	 */
 	public void btnCommandsRead(ActionEvent actionEvent) { // Alle Commands in die ArrayList commands einlesen
-		if (!btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
-			ParseHandler ph2 = new ParseHandler();
-			commands = ph2.handleCommand();
+		if (btnManager.getLoggingDeleted()) {
 
-			// Ausgabe in der Konsole
-			for (int i = 0; i < commands.size(); i++) {
-				commands.get(i).printValues();
+			if (!btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
+				ParseHandler ph2 = new ParseHandler();
+				commands = ph2.handleCommand();
+				if (tester.checkBlock(sc)) {
+
+					// Ausgabe in der Konsole
+					for (int i = 0; i < commands.size(); i++) {
+						commands.get(i).printValues();
+					} ////////////////////
+					
+					logger.addToLog("Befehlscode.json eingelesen");
+					logger.refreshLog(sc);
+					btnManager.commandListInitialized(sc);
+				}
+
+			} else {
+				errorHandler.firstDeleteCommands();
 			}
-
-			btnManager.commandListInitialized(sc);
 		} else {
-			errorHandler.firstDeleteCommands();
+			errorHandler.firstDeleteLog();
 		}
 
 	}
 
+	/*
+	 * Starten der Befehlsverarbeitung und Simulation der eingegebenen Befehle
+	 */
 	public void btnStart(ActionEvent actionEvent) throws InterruptedException {
 		if (!btnManager.getSettingsSet() && !btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
 			errorHandler.firstReadSettingsCommands();
@@ -184,12 +222,19 @@ public class SampleController implements Initializable {
 			errorHandler.firstReadSettings();
 		} else if (btnManager.getSettingsSet() && !btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
 			errorHandler.firstReadCommands();
-		} else {
+		} 
+		
+		/*
+		else if (!btnManager.getLoggingDeleted()) {
+			errorHandler.firstDeleteLog();	
+		}
+		*/
+		else {
 
 			/////////////////////////
 			// STARTEN DER SIMULATION
 			/////////////////////////
-			System.out.println("Fräse startet");
+			System.out.println("FrÃ¤se startet");
 			btnManager.startProcess(sc);
 
 			// Startpunkt anfahren
@@ -206,8 +251,10 @@ public class SampleController implements Initializable {
 
 	}
 
+	/*
+	 * Pausieren der Befehlsfolge
+	 */
 	public void btnPause(ActionEvent actionEvent) {
-		System.out.println("5");
 		if (!btnManager.getProcessStarted() || btnManager.getProcessStopped()) {
 			errorHandler.firstStartProcess();
 		} else {
@@ -219,6 +266,9 @@ public class SampleController implements Initializable {
 
 	}
 
+	/*
+	 * Stoppen der Befehlsfolge
+	 */
 	public void btnStopp(ActionEvent actionEvent) throws InterruptedException {
 		if (btnManager.getProcessStopped()) {
 			errorHandler.youStoppedProcess();
@@ -233,16 +283,21 @@ public class SampleController implements Initializable {
 
 	}
 
+	/*
+	 * L�schen des Logverlaufes
+	 */
 	public void btnDeleteLog(ActionEvent actionEvent) {
 		if (btnManager.getLoggingDeleted()) {
 			errorHandler.thereIsNoLog();
 		} else {
 			btnManager.logDelete(sc, logger);
-
 		}
 	}
 
-	public void btnExportLog(ActionEvent actionEvent) {
+	/*
+	 * Exportieren des zur Laufzeit geschriebenen Logs
+	 */
+	public void btnExportLog(ActionEvent actionEvent) throws IOException {
 		if (btnManager.getLoggingDeleted()) {
 			errorHandler.thereIsNoLog();
 		} else {
@@ -250,34 +305,48 @@ public class SampleController implements Initializable {
 		}
 	}
 
-	// geladene Einstellungen auf Anzeige und Fräser übertragen
+	/*
+	 * Alle wichtigen Einstellungen an die Komponenten übertragen
+	 * 0 -> HomePosX				6
+	 * 1 -> HomePosY
+	 * 2 -> Speed Kühlung an
+	 * 3 -> Speed Kühlung aus
+	 * 4 -> Speed zum verfahren
+	 * 5 -> Radius des Fräsers
+	 * 6 -> Farbe des Fräsers
+	 * 7 -> Farbe der Oberfläche
+	 * 8 -> Farbe der bearbeiteten Oberfläche
+	 * 9 -> Farbe der Homeposition
+	 */
 	public void setSettings(String[] settings) {
-		fraeser.setHomePosX(Double.parseDouble(settings[0]));				//HomePos x
-		fraeser.setHomePosY(Double.parseDouble(settings[1]));				//HomePos y
-		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));	//Speed kühlung an
-		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));	//Speed kühlung aus
-		fraeser.setFahrSpeed(Double.parseDouble(settings[4]));				//Speed zum verfahren
-		fraeser.setDrillDiameter(Double.parseDouble(settings[5]));			//Fräser Durchmesser
-		circDrill.setFill(btnManager.colorHandler(settings[6]));			//Farbe Fräser
-		drillSurface.setFill(btnManager.colorHandler(settings[7]));			//Farbe Oberfläche
-		//circDrill.setFill(btnManager.colorHandler(settings[8]));			//Farbe bearbeitete Oberfläche
-		circHomePosition.setFill(btnManager.colorHandler(settings[9]));		//Farbe HomePos
-		
+		fraeser.setHomePosX(Double.parseDouble(settings[0]));
+		fraeser.setHomePosY(Double.parseDouble(settings[1])); 
+		fraeser.setSchnittSpeedCooling(Double.parseDouble(settings[2]));
+		fraeser.setSchnittSpeedNoCooling(Double.parseDouble(settings[3]));
+		fraeser.setFahrSpeed(Double.parseDouble(settings[4])); 
+		fraeser.setDrillDiameter(Double.parseDouble(settings[5]) / 2); 
+		circDrill.setFill(btnManager.colorHandler(settings[6])); 
+		drillSurface.setFill(btnManager.colorHandler(settings[7])); 
+		// circDrill.setFill(btnManager.colorHandler(settings[8]));
+		circHomePosition.setFill(btnManager.colorHandler(settings[9]));
+
 		lblHomePos.setText(fraeser.getPosX() + " ; " + fraeser.getHomePosY());
 		lblSpeedCooling.setText(fraeser.getSchnittSpeedCooling() + "m/min");
 		lblSpeedNoCooling.setText(fraeser.getSchnittSpeedNoCooling() + "m/min");
 		lblSpeedNoDrill.setText(fraeser.getFahrSpeed() + "m/min");
-		lblDrillDiameter.setText(fraeser.getDrillDiameter() + "mm");
-		
+		lblDrillDiameter.setText(fraeser.getDrillDiameter() * 2 + "mm");
+
 		circHomePosition.setLayoutX(fraeser.getHomePosX());
 		circHomePosition.setLayoutY(fraeser.getHomePosY());
 		circDrill.setLayoutX(fraeser.getHomePosX());
 		circDrill.setLayoutY(fraeser.getHomePosY());
 		circDrill.setRadius(fraeser.getDrillDiameter() / 2);
-		
-		
+
 	}
 
+	/*
+	 * Zur Abarbeitung der erstellten Befehlsfolge
+	 */
 	private void cutCode(CommandCode paramList) {
 
 		switch (paramList.getBefehl()) {
@@ -327,16 +396,27 @@ public class SampleController implements Initializable {
 		}
 	}
 
+	/*
+	 * TemporärerButton
+	 */
 	public void btnTest(ActionEvent actionEvent) {
 		
+		//Draw pain clearen und neue oberfl�che machen
+		drawPane.getChildren().clear();
+		drawPane.getChildren().add(drillSurface);
+		
+		
+		/*
 		Line line = new Line();
 		line.setStartX(50);
 		line.setStartY(50);
 		line.setEndX(100);
 		line.setEndY(50);
 		line.setStroke(Color.RED);
-		
+
 		drawPane.getChildren().add(line);
+		
+		System.out.println(sc.fraeser.getDrillDiameter());
 
 		//////////////////////////////////////////
 
@@ -354,30 +434,25 @@ public class SampleController implements Initializable {
 		 * ArcTo arcTo = new ArcTo(); arcTo.setX(50.0f); arcTo.setY(50.0f);
 		 * arcTo.setRadiusX(50.0f); arcTo.setRadiusY(50.0f);
 		 */
-		
-		ArcTo arcTo1 = new ArcTo ();
+/*
+		ArcTo arcTo1 = new ArcTo();
 		arcTo1.setX(300);
 		arcTo1.setY(500);
 		arcTo1.setRadiusX(100);
 		arcTo1.setRadiusY(100);
-		
 
 		path.getElements().add(moveTo);
-//		path.getElements().add(quadCurveTo);
-//		path.getElements().add(lineTo);
+		path.getElements().add(quadCurveTo);
+	path.getElements().add(lineTo);
 		path.getElements().add(arcTo1);
-
+		*/
 	}
-	
-	
-
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		sc = this;
 
-		
 	}
 
 

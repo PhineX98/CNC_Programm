@@ -1,5 +1,7 @@
 package application;
 
+
+
 /**
 *Diese Klasse abstrahiert den Fräser mit seinen Eigenschaften um diesen steuern zu können.
 *
@@ -7,19 +9,21 @@ package application;
 */
 public class Fraeser {
 
-	public double fahrSpeed;
-	public double schnittSpeedCooling;
-	public double schnittSpeedNoCooling;
-	public boolean fraeserStatus = false;
-	public boolean coolingStatus = false;
-	public double posX;
-	public double posY;
-	public double homePosX;
-	public double homePosY;
-
+	private double fahrSpeed;
+	private double schnittSpeedCooling;
+	private double schnittSpeedNoCooling;
+	private boolean fraeserStatus = false;
+	private boolean coolingStatus = false;
+	private double posX;
+	private double posY;
+	private double homePosX;
+	private double homePosY;
 	private double drillDiameter;
 	private double aktSpeed;
 
+	
+	
+	
 	public double getHomePosX() {
 		return homePosX;
 	}
@@ -130,6 +134,17 @@ public class Fraeser {
 	
 	public double getDrillDiameter() {
 		return drillDiameter;
+	}
+	
+	public void printValues() {
+
+		System.out.println(fahrSpeed);
+		System.out.println(schnittSpeedCooling);
+		System.out.println(schnittSpeedNoCooling);
+		System.out.println(homePosX+ posX);
+		System.out.println(homePosY+ posY);
+		System.out.println(this.drillDiameter);
+
 	}
 
 }

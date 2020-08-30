@@ -1,7 +1,7 @@
 package fileParser;
 
 /**
- * zur Speicherung der einzelnen Kommandobefehle in einer Arraylist diesen Typs.
+ * Zur Speicherung der einzelnen Kommandobefehle in einer Arraylist diesen Typs.
  * SpÃ¤tere Manipulation der Werte ist mÃ¶glich.
  *
  * @author Jannik Orth
@@ -65,6 +65,20 @@ public class CommandCode {
 
 	public void printValues() {
 		System.out.println(pos + " " + befehl + " x" + x + " y" + y + " i" + i + " j" + j);
+	}
+
+	public String toString() {
+
+		if (befehl.equals("G00") || befehl.equals("G01")) {
+			return befehl + "; x" + x + "; y" + y + " hinzugefügt";
+		} else if (befehl.equals("G03") || befehl.equals("G02")) {
+			return befehl + "; x" + x + "; y" + y + "; i" + i + "; j" + j + " hinzugefügt";
+		} else if (befehl.equals("G28")) {
+			return befehl + " hinzugefügt";
+		} else {
+			return befehl + " hinzugefügt";
+		}
+
 	}
 
 	public CommandCode(String pos, String befehl, double x, double y, double i, double j) {

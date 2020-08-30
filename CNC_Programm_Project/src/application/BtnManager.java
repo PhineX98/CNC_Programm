@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.scene.paint.Color;
 
 /**
@@ -61,6 +63,7 @@ public class BtnManager {
 	public void commandListInitialized(SampleController sc) {
 		sc.lblInfo.setText("Commandliste geladen.");
 		commandListSet = true;
+		logDeleted = false;
 	}
 
 	public void commandAdded(SampleController sc) {
@@ -102,23 +105,51 @@ public class BtnManager {
 		logger.clearLogs(sc);
 	}
 
-	public void exportLog(SampleController sc, Logging logger) {
+	public void exportLog(SampleController sc, Logging logger) throws IOException {
 		sc.lblInfo.setText("Log wurde exportiert");
 		logger.exportLog();
 	}
 
-	public boolean checkCommand(String cmd, SampleController sc) {
-		cmd = cmd.toUpperCase();
+	/*
+	public boolean checkCommand(SampleController sc) {
+		String cmd = sc.field_Befehl.getText().toUpperCase();
+
+		if (sc.field_x.getText().isEmpty()) {
+			sc.field_x.setText("0");
+
+		}
+		if (sc.field_y.getText().isEmpty()) {
+			sc.field_y.setText("0");
+
+		}
+		if (sc.field_i.getText().isEmpty()) {
+			sc.field_i.setText("0");
+		}
+		if (sc.field_j.getText().isEmpty()) {
+			sc.field_j.setText("0");
+		}
+
+		Double x = Double.parseDouble(sc.field_x.getText());
+		Double y = Double.parseDouble(sc.field_y.getText());
+
 		if (cmd.equals("M00") || cmd.equals("M02") || cmd.equals("M03") || cmd.equals("M04") || cmd.equals("M05")
 				|| cmd.equals("M08") || cmd.equals("M09") || cmd.equals("M13") || cmd.equals("M14") || cmd.equals("G00")
 				|| cmd.equals("G01") || cmd.equals("G02") || cmd.equals("G03") || cmd.equals("G28")) {
-			return true;
+
+			if (x >= 0 && x <= 1400 && y >= 0 && y <= 1050) {
+				return true;
+			} else {
+				sc.lblInfo.setText("Eingegebene Koordinaten nicht in Reichweite.");
+				return false;
+			}
+
 		} else {
 			sc.lblInfo.setText("Ungültiger Befehl!");
 			return false;
 		}
 
 	}
+	*/
 
 	public Color colorHandler(String string) {
 		switch (string) {
