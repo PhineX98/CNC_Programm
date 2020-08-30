@@ -400,7 +400,13 @@ public class SampleController implements Initializable {
 	 * Tempor√§rerButton
 	 */
 	public void btnTest(ActionEvent actionEvent) {
-
+		
+		//Draw pain clearen und neue oberfl‰che machen
+		drawPane.getChildren().clear();
+		drawPane.getChildren().add(drillSurface);
+		
+		
+		/*
 		Line line = new Line();
 		line.setStartX(50);
 		line.setStartY(50);
@@ -409,6 +415,8 @@ public class SampleController implements Initializable {
 		line.setStroke(Color.RED);
 
 		drawPane.getChildren().add(line);
+		
+		System.out.println(sc.fraeser.getDrillDiameter());
 
 		//////////////////////////////////////////
 
@@ -426,7 +434,7 @@ public class SampleController implements Initializable {
 		 * ArcTo arcTo = new ArcTo(); arcTo.setX(50.0f); arcTo.setY(50.0f);
 		 * arcTo.setRadiusX(50.0f); arcTo.setRadiusY(50.0f);
 		 */
-
+/*
 		ArcTo arcTo1 = new ArcTo();
 		arcTo1.setX(300);
 		arcTo1.setY(500);
@@ -434,10 +442,10 @@ public class SampleController implements Initializable {
 		arcTo1.setRadiusY(100);
 
 		path.getElements().add(moveTo);
-//		path.getElements().add(quadCurveTo);
-//		path.getElements().add(lineTo);
+		path.getElements().add(quadCurveTo);
+	path.getElements().add(lineTo);
 		path.getElements().add(arcTo1);
-
+		*/
 	}
 
 	@Override

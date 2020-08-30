@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.util.Duration;
 
 //test
 
@@ -19,7 +18,8 @@ public class LineAnimation extends Animation {
 		
 		double xStart = sc.fraeser.getPosX();
 		double yStart = sc.fraeser.getPosY();
-		
+		xEnd = xEnd/2;
+		yEnd = yEnd/2;
 		
 		if(!sc.fraeser.getFraeserStatus()) {
 			sc.fraeser.setFahrSpeed(sc.fraeser.getFahrSpeed()/60);;
@@ -28,16 +28,19 @@ public class LineAnimation extends Animation {
 		}else if(!sc.fraeser.getCoolingStatus()) {
 			sc.fraeser.setFahrSpeed(sc.fraeser.getSchnittSpeedNoCooling()/60);
 		}
+		
+		System.out.println(xEnd + "  " + yEnd);
+		
 		Line line = new Line();
 		line.setStartX(xStart);		
 		line.setStartY(yStart);
 		line.setEndX(xEnd);
 		line.setEndY(yEnd);
-		line.setStrokeWidth(sc.fraeser.getDrillDiameter()/4);
+		line.setStrokeWidth(sc.fraeser.getDrillDiameter());
 		line.setStroke(Color.BLACK);
 	
 		sc.drawPane.getChildren().add(line);
-		line.toBack();
+		//line.toBack();
 		if(!(temp == null)) {
 			temp.setVisible(false);
 		}
