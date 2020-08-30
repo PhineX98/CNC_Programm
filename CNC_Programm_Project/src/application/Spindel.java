@@ -8,10 +8,10 @@ package application;
 public class Spindel {
 	
 	
-	public boolean drillStatus = false;
+	private boolean drillStatus = false;
 
 	// false -> Rechtslauf | true -> Linkslauf
-	public boolean drillRichtung = false;
+	private boolean drillRichtung = false;
 
 	// Drill Stoppen
 	public void stop() {

@@ -63,6 +63,7 @@ public class BtnManager {
 	public void commandListInitialized(SampleController sc) {
 		sc.lblInfo.setText("Commandliste geladen.");
 		commandListSet = true;
+		logDeleted = false;
 	}
 
 	public void commandAdded(SampleController sc) {

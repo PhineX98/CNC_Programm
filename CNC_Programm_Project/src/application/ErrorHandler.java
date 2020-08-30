@@ -70,7 +70,7 @@ public class ErrorHandler {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Achtung!");
 		alert.setHeaderText(null);
-		alert.setContentText("Es existiert noch kein Log.");
+		alert.setContentText("Es existiert noch kein Log den du exportieren kannst.");
 
 		alert.showAndWait();
 	}
@@ -85,10 +85,20 @@ public class ErrorHandler {
 	}
 
 	public void yourCoordinateIsOutOfRange(SampleController sc) {
-		sc.lblInfo.setText("Eingegebene Koordinaten nicht in Reichweite.");
+		sc.lblInfo.setText("Eingegebene Koordinaten nicht in Reichweite!");
 	}
 
 	public void yourCommandIsNotValid(SampleController sc) {
 		sc.lblInfo.setText("Ungültiger Befehl!");
+	}
+
+	public void firstDeleteLog() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Achtung!");
+		alert.setHeaderText(null);
+		alert.setContentText("Du musst erst den aktiven Log löschen bevor du fortfahren kannst.");
+
+		alert.showAndWait();
+		
 	}
 }

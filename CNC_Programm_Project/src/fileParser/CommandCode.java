@@ -67,6 +67,20 @@ public class CommandCode {
 		System.out.println(pos + " " + befehl + " x" + x + " y" + y + " i" + i + " j" + j);
 	}
 
+	public String toString() {
+
+		if (befehl.equals("G00") || befehl.equals("G01")) {
+			return befehl + "; x" + x + "; y" + y + " hinzugefügt";
+		} else if (befehl.equals("G03") || befehl.equals("G02")) {
+			return befehl + "; x" + x + "; y" + y + "; i" + i + "; j" + j + " hinzugefügt";
+		} else if (befehl.equals("G28")) {
+			return befehl + " hinzugefügt";
+		} else {
+			return befehl + " hinzugefügt";
+		}
+
+	}
+
 	public CommandCode(String pos, String befehl, double x, double y, double i, double j) {
 		this.pos = pos;
 		this.befehl = befehl;

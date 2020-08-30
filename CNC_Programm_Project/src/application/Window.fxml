@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="653.0" prefWidth="216.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane prefHeight="652.0" prefWidth="1241.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <left>
       <AnchorPane prefHeight="719.0" prefWidth="228.0" style="-fx-background-color: skyblue;" BorderPane.alignment="CENTER">
          <children>
@@ -81,14 +81,14 @@
                <children>
                   <Label layoutX="17.0" layoutY="49.0" text="Info:" AnchorPane.leftAnchor="15.0" />
                   <Label fx:id="lblInfo" layoutX="12.0" layoutY="66.0" textFill="BLUE" underline="true" AnchorPane.leftAnchor="15.0" />
-                  <Button layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnDeleteLog" prefHeight="25.0" prefWidth="167.0" text="Log löschen" AnchorPane.rightAnchor="15.0" />
-                  <Button layoutX="747.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnExportLog" prefHeight="25.0" prefWidth="169.0" text="Log exportieren" />
+                  <Button layoutX="749.0" layoutY="11.0" mnemonicParsing="false" onAction="#btnDeleteLog" prefHeight="70.0" prefWidth="100.0" text="Log löschen" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="126.0" />
+                  <Button layoutX="858.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnExportLog" prefHeight="70.0" prefWidth="100.0" text="Log exportieren" AnchorPane.bottomAnchor="15.0" />
                   <Button layoutX="644.0" layoutY="33.0" mnemonicParsing="false" onAction="#btnTest" text="Button" />
                </children>
             </AnchorPane>
          </bottom>
          <right>
-            <ListView fx:id="logList" prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <ListView fx:id="logList" prefHeight="516.0" prefWidth="246.0" BorderPane.alignment="CENTER" />
          </right>
          <top>
             <AnchorPane prefHeight="39.0" prefWidth="929.0" BorderPane.alignment="CENTER">

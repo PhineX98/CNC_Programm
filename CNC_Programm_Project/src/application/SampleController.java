@@ -100,55 +100,64 @@ public class SampleController implements Initializable {
 	 * übernommen und ist breit zum ausführen
 	 */
 	public void btnAddCommand(ActionEvent actionEvent) {
-		tester.checkCommand(sc);
+		// tester.checkCommand(sc);
 
-		if (tester.checkCommand(sc)) {
-			if (!btnManager.getCommandListSet()) {
-				if (field_Befehl.getText().length() > 1) {
-					CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
-							field_Befehl.getText().toUpperCase(), Double.parseDouble(field_x.getText()),
-							Double.parseDouble(field_y.getText()), Double.parseDouble(field_i.getText()),
-							Double.parseDouble(field_j.getText()));
+		if (btnManager.getLoggingDeleted()) {
+			if (tester.checkCommand(sc)) {
+				if (!btnManager.getCommandListSet()) {
+					if (field_Befehl.getText().length() > 1) {
+						CommandCode cc = new CommandCode(field_Pos.getText().toUpperCase(),
+								field_Befehl.getText().toUpperCase(), Double.parseDouble(field_x.getText()),
+								Double.parseDouble(field_y.getText()), Double.parseDouble(field_i.getText()),
+								Double.parseDouble(field_j.getText()));
 
-					tempCommands.add(cc);
+						tempCommands.add(cc);
 
-					for (int i = 1; i < tempCommands.size(); i++) {
-						for (int j = 0; j < tempCommands.size() - i; j++) {
-							if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
-									.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
+						for (int i = 1; i < tempCommands.size(); i++) {
+							for (int j = 0; j < tempCommands.size() - i; j++) {
+								if (Integer.parseInt(tempCommands.get(j).getPos().substring(1)) > Integer
+										.parseInt(tempCommands.get(j + 1).getPos().substring(1))) {
 
-								CommandCode temp = tempCommands.get(j);
-								tempCommands.set(j, tempCommands.get(j + 1));
-								tempCommands.set(j + 1, temp);
+									CommandCode temp = tempCommands.get(j);
+									tempCommands.set(j, tempCommands.get(j + 1));
+									tempCommands.set(j + 1, temp);
+								}
 							}
 						}
+
+						int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
+						field_Pos.setText("N" + zaehler);
+						logger.addToLog(cc.toString());
+						logger.refreshLog(sc);
+						field_Befehl.clear();
+
+						commands = tempCommands;
+
+						// Ausgabe in der Konsole
+						for (int i = 0; i < commands.size(); i++) {
+							commands.get(i).printValues();
+						}
+
+						btnManager.commandAdded(sc);
 					}
 
-					int zaehler = Integer.parseInt(field_Pos.getText().substring(1)) + 10;
-					field_Pos.setText("N" + zaehler);
-					commands = tempCommands;
-
-					// Ausgabe in der Konsole
-					for (int i = 0; i < commands.size(); i++) {
-						commands.get(i).printValues();
-					}
-
-					btnManager.commandAdded(sc);
+				} else {
+					errorHandler.firstDeleteCommands();
 				}
-
-			} else {
-				errorHandler.firstDeleteCommands();
 			}
+		} else {
+			errorHandler.firstDeleteLog();
 		}
 
 	}
 
 	/*
-	 * Löscht alle eingelesenen oder eingegebenen Commands
+	 * L�scht alle eingelesenen oder eingegebenen Commands
 	 */
 	public void btnCommandsDelete(ActionEvent actionEvent) {
 		commands.clear();
 		tempCommands.clear();
+		field_Pos.setText("N00");
 		for (int i = 0; i < commands.size(); i++) {
 			commands.get(i).printValues();
 		}
@@ -177,21 +186,28 @@ public class SampleController implements Initializable {
 	 * werden einzulesen.
 	 */
 	public void btnCommandsRead(ActionEvent actionEvent) { // Alle Commands in die ArrayList commands einlesen
-		if (!btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
-			ParseHandler ph2 = new ParseHandler();
-			commands = ph2.handleCommand();
-			if (tester.checkBlock(sc)) {
+		if (btnManager.getLoggingDeleted()) {
 
-				// Ausgabe in der Konsole
-				for (int i = 0; i < commands.size(); i++) {
-					commands.get(i).printValues();
-				} ////////////////////
+			if (!btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
+				ParseHandler ph2 = new ParseHandler();
+				commands = ph2.handleCommand();
+				if (tester.checkBlock(sc)) {
 
-				btnManager.commandListInitialized(sc);
+					// Ausgabe in der Konsole
+					for (int i = 0; i < commands.size(); i++) {
+						commands.get(i).printValues();
+					} ////////////////////
+					
+					logger.addToLog("Befehlscode.json eingelesen");
+					logger.refreshLog(sc);
+					btnManager.commandListInitialized(sc);
+				}
+
+			} else {
+				errorHandler.firstDeleteCommands();
 			}
-
 		} else {
-			errorHandler.firstDeleteCommands();
+			errorHandler.firstDeleteLog();
 		}
 
 	}
@@ -206,7 +222,14 @@ public class SampleController implements Initializable {
 			errorHandler.firstReadSettings();
 		} else if (btnManager.getSettingsSet() && !btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
 			errorHandler.firstReadCommands();
-		} else {
+		} 
+		
+		/*
+		else if (!btnManager.getLoggingDeleted()) {
+			errorHandler.firstDeleteLog();	
+		}
+		*/
+		else {
 
 			/////////////////////////
 			// STARTEN DER SIMULATION
@@ -232,7 +255,6 @@ public class SampleController implements Initializable {
 	 * Pausieren der Befehlsfolge
 	 */
 	public void btnPause(ActionEvent actionEvent) {
-		System.out.println("5");
 		if (!btnManager.getProcessStarted() || btnManager.getProcessStopped()) {
 			errorHandler.firstStartProcess();
 		} else {
@@ -262,7 +284,7 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Löschen des Logverlaufes
+	 * L�schen des Logverlaufes
 	 */
 	public void btnDeleteLog(ActionEvent actionEvent) {
 		if (btnManager.getLoggingDeleted()) {

@@ -24,10 +24,4 @@ public class M02 extends Befehl {
 		l.addToLog("M02 ausgeführt");
 		resetStatus(s, f, c);
 	}
-
-	// Programm Ende
-	// Spindel aus
-	// Vorschub aus
-	// KÃ¼hlmittel aus
-	// Bohrspeed = 0
 }
