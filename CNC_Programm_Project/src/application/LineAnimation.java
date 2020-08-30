@@ -10,6 +10,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
+//test
 
 public class LineAnimation extends Animation {
 	
@@ -21,9 +22,9 @@ public class LineAnimation extends Animation {
 		
 		
 		if(!sc.fraeser.getFraeserStatus()) {
-			sc.fraeser.setFahrSpeed(sc.fraeser.fahrSpeed/60);;
+			sc.fraeser.setFahrSpeed(sc.fraeser.getFahrSpeed()/60);;
 		}else if(sc.fraeser.getCoolingStatus()){
-			sc.fraeser.setFahrSpeed(sc.fraeser.schnittSpeedCooling/60);
+			sc.fraeser.setFahrSpeed(sc.fraeser.getSchnittSpeedNoCooling()/60);
 		}else if(!sc.fraeser.getCoolingStatus()) {
 			sc.fraeser.setFahrSpeed(sc.fraeser.getSchnittSpeedNoCooling()/60);
 		}
@@ -40,7 +41,7 @@ public class LineAnimation extends Animation {
 		if(!(temp == null)) {
 			temp.setVisible(false);
 		}
-		
+	}
 //		Circle cir = new Circle(sc.fraeser.getPosX(), sc.fraeser.getPosY(),sc.fraeser.getDrillDiameter()/4,Color.RED);
 //		cir.toBack();
 //		sc.drawPane.getChildren().add(cir);
@@ -83,9 +84,9 @@ public class LineAnimation extends Animation {
 		double yStart = sc.fraeser.getPosY();
 		
 		if(!sc.fraeser.getFraeserStatus()) {
-			sc.fraeser.setFahrSpeed(sc.fraeser.fahrSpeed/60);;
+			sc.fraeser.setFahrSpeed(sc.fraeser.getFahrSpeed()/60);
 		}else if(sc.fraeser.getCoolingStatus()){
-			sc.fraeser.setFahrSpeed(sc.fraeser.schnittSpeedCooling/60);
+			sc.fraeser.setFahrSpeed(sc.fraeser.getSchnittSpeedCooling()/60);
 		}else if(!sc.fraeser.getCoolingStatus()) {
 			sc.fraeser.setFahrSpeed(sc.fraeser.getSchnittSpeedNoCooling()/60);
 		}

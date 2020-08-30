@@ -9,19 +9,21 @@ package application;
 */
 public class Fraeser {
 
-	public double fahrSpeed;
-	public double schnittSpeedCooling;
-	public double schnittSpeedNoCooling;
-	public boolean fraeserStatus = false;
-	public boolean coolingStatus = false;
-	public double posX;
-	public double posY;
-	public double homePosX;
-	public double homePosY;
-
+	private double fahrSpeed;
+	private double schnittSpeedCooling;
+	private double schnittSpeedNoCooling;
+	private boolean fraeserStatus = false;
+	private boolean coolingStatus = false;
+	private double posX;
+	private double posY;
+	private double homePosX;
+	private double homePosY;
 	private double drillDiameter;
 	private double aktSpeed;
 
+	
+	
+	
 	public double getHomePosX() {
 		return homePosX;
 	}
