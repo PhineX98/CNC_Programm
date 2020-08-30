@@ -1,5 +1,7 @@
 package application;
 
+import fileParser.CommandCode;
+
 /**
  *Diese Klasse implementiert den M00 Befehl des G-Codes ->
  *

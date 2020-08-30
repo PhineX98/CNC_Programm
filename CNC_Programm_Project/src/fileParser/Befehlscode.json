@@ -1,25 +1,8 @@
 [
-    {
-        "command": {
-            "number":"N0010",
-			"code":"M03",
-			"parameters": {
-				
-			}
-        }
-    },
-    {
-        "command": {
-            "number":"N0020",
-			"code":"M08",
-			"parameters": {
 
-			}	
-        }
-    },
-	{
+    {
         "command": {
-           "number":"N0030",
+           "number":"N00",
 			"code":"G01",
 			"parameters": { 
 				"x":0,
@@ -29,14 +12,43 @@
     },
     {
         "command": {
-            "number":"N0040",
-			"code":"G02",
-			"parameters": {
+           "number":"N10",
+			"code":"G01",
+			"parameters": { 
+				"x":100,
+				"y":0
+			}	
+        }
+    },
+    {
+        "command": {
+           "number":"N20",
+			"code":"G01",
+			"parameters": { 
+				"x":100,
+				"y":100
+			}	
+        }
+    },
+    {
+        "command": {
+           "number":"N30",
+			"code":"G01",
+			"parameters": { 
 				"x":0,
-				"y":10,
-				"i":0,
-				"j":5
+				"y":200
 			}	
         }
     }
+        {
+        "command": {
+           "number":"N40",
+			"code":"G01",
+			"parameters": { 
+				"x":0,
+				"y":10
+			}	
+        }
+    }
+
 ]

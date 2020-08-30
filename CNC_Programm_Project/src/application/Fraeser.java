@@ -104,7 +104,7 @@ public class Fraeser {
 
 	// getten
 	public double getPosX() {
-		return posX;
+		return Math.round(posX);
 	}
 
 	// posY setzten
@@ -114,7 +114,7 @@ public class Fraeser {
 
 	// getten
 	public double getPosY() {
-		return posY;
+		return Math.round(posY);
 	}
 
 	// cooling setzen

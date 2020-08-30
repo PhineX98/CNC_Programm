@@ -1,5 +1,6 @@
 package application;
 
+import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -137,6 +138,8 @@ public class SampleController implements Initializable {
 
 						commands = tempCommands;
 
+						
+						
 						// Ausgabe in der Konsole
 						for (int i = 0; i < commands.size(); i++) {
 							commands.get(i).printValues();
@@ -228,11 +231,7 @@ public class SampleController implements Initializable {
 			errorHandler.firstReadCommands();
 		} 
 		
-		/*
-		else if (!btnManager.getLoggingDeleted()) {
-			errorHandler.firstDeleteLog();	
-		}
-		*/
+
 		else {
 
 			/////////////////////////
@@ -241,22 +240,21 @@ public class SampleController implements Initializable {
 			System.out.println("FrÃ¤se startet");
 			btnManager.startProcess(sc);
 
-			// Startpunkt anfahren
-
-			// Liste mit commands anfahren
-			for (int i = 0; i < commands.size(); i++) {
-					cutCode(commands.get(i));
-					logger.refreshLog(sc);
-					Thread.sleep(3000);
-			}
-
-			//cutCode(commands.get(iterator));
+//			cutCode(commands.get(iterator));
+//			iterator++;
+//			launchCommand();
+			
+			
+//			for (int i = 0; i < commands.size(); i++) {
+//				launchCommand();
+//			}
+			
+			launchCommand();
 			
 			
 			
 			
-			
-			
+//			logger.refreshLog(sc);
 			
 	      
 
@@ -398,7 +396,6 @@ public class SampleController implements Initializable {
 			break;
 		case "G01":
 			handleG01.exec(spindel, fraeser, sc, logger, paramList);
-			paramList.printValues();
 			break;
 		case "G02":
 			handleG02.exec(spindel, fraeser, sc, logger, paramList);
@@ -411,15 +408,41 @@ public class SampleController implements Initializable {
 			break;
 		}
 	}
+	
+	
+	
+	public void launchCommand() {
+//		Platform.runLater(() -> {
+//			
+//				cutCode(commands.get(iterator));
+//				iterator ++;
+//				logger.refreshLog(sc);
+//			
+//       	 
+//        });
+		
+		cutCode(commands.get(iterator));
+		iterator ++;
+		logger.refreshLog(sc);
+
+	}
 
 	/*
 	 * TemporärerButton
 	 */
 	public void btnTest(ActionEvent actionEvent) {
 		
+		
+		
+		
+	
+		
+		
+		
+		
 		//Draw pain clearen und neue oberfl�che machen
-		drawPane.getChildren().clear();
-		drawPane.getChildren().add(drillSurface);
+//		drawPane.getChildren().clear();
+//		drawPane.getChildren().add(drillSurface);
 		
 		
 		/*
@@ -436,9 +459,7 @@ public class SampleController implements Initializable {
 
 		//////////////////////////////////////////
 
-		MoveTo moveTo = new MoveTo();
-		moveTo.setX(50);
-		moveTo.setY(150);
+		
 
 		/*
 		 * QuadCurveTo quadCurveTo = new QuadCurveTo(); quadCurveTo.setX(120.0f);
