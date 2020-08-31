@@ -1,4 +1,4 @@
-package application;
+package komponenten;
 
 /**
  * Diese Klasse abstrahiert den Fräser mit seinen Eigenschaften um diesen

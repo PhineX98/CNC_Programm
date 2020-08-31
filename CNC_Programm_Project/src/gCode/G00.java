@@ -1,6 +1,12 @@
-package application;
+package gCode;
 
+import application.SampleController;
 import fileParser.CommandCode;
+import handler.AnimationHandler;
+import handler.Befehl;
+import komponenten.Fraeser;
+import komponenten.Spindel;
+import logging.Logging;
 
 
 /**

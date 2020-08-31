@@ -1,4 +1,10 @@
-package application;
+package mCode;
+
+import application.SampleController;
+import handler.Befehl;
+import komponenten.Fraeser;
+import komponenten.Spindel;
+import logging.Logging;
 
 /**
  *Diese Klasse implementiert den M08 Befehl des G-Codes ->

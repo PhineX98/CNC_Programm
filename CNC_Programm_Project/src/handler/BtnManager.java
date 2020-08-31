@@ -1,8 +1,10 @@
-package application;
+package handler;
 
 import java.io.IOException;
 
+import application.SampleController;
 import javafx.scene.paint.Color;
+import logging.Logging;
 
 /**
  * Diese Klasse überprüft in welchem Zustand sich die Simulation befindet

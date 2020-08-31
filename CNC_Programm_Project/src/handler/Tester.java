@@ -1,4 +1,6 @@
-package application;
+package handler;
+
+import application.SampleController;
 
 /**
  * Dies ist die Klasse zum überprüfen der Korrektheit von eingegebenen oder

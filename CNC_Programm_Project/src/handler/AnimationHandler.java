@@ -1,13 +1,14 @@
-package application;
+package handler;
 
+import application.SampleController;
 import javafx.application.Platform;
 import javafx.scene.shape.Circle;
-
 
 /**
  * Diese Klasse implementiert die Handhabung der Animation des Fräsvorgangs
  *
  * @author Jannik Orth
+ * @author Simon Bohner
  */
 public class AnimationHandler {
 
@@ -27,7 +28,7 @@ public class AnimationHandler {
 				Platform.runLater(() -> {
 
 					Circle circle = new Circle(sc.fraeser.getPosX(), sc.fraeser.getPosY(),
-					sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
+							sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
 					sc.drawPane.getChildren().add(circle);
 					sc.circDrill.toFront();
 
@@ -71,7 +72,7 @@ public class AnimationHandler {
 					Platform.runLater(() -> {
 
 						Circle circle = new Circle(sc.fraeser.getPosX(), sc.fraeser.getPosY(),
-						sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
+								sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
 						sc.drawPane.getChildren().add(circle);
 						sc.circDrill.toFront();
 
@@ -101,92 +102,38 @@ public class AnimationHandler {
 
 	}
 
-	
-//	public void circle (double xRead,double yRead,double xCenter, double yCenter,double sDeg, double eDeg, double r, SampleController sc, double speed) {
-//		//System.out.println("forfor");
-//			new Thread(() -> {
-//				//System.out.println("forfor IN");
-//				System.out.println(eDeg);
-//			//for (double z = 0; z <= eDeg-sDeg; z = z + 1 ) { //Math.PI/180
-//				for (double z = sDeg; z <= sDeg + Math.PI/180*eDeg; z = z + 1*Math.PI/180 ) { 
-//				System.out.println(z + "   " + eDeg);
-//				sc.fraeser.setDeg(z);
-//				//sc.fraeser.getDeg();
-//				try {
-//					//Thread.sleep((long) speed);
-//					Thread.sleep(5);
-//
-//				} catch (InterruptedException ex) {
-//					ex.printStackTrace();
-//				}
-//				Platform.runLater(() -> {
-//					
-//					Circle circle = new Circle(sc.fraeser.getPosX(), sc.fraeser.getPosY(),
-//					sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
-//					sc.drawPane.getChildren().add(circle);
-//					sc.circDrill.toFront();
-//					
-//					sc.circDrill.setLayoutX(xCenter +  r*Math.cos(sc.fraeser.getDeg()));// *Math.PI/180));
-//					System.out.println(r*Math.cos(sc.fraeser.getDeg()));
-//					sc.fraeser.setPosX(sc.circDrill.getLayoutX());
-//					sc.circDrill.setLayoutY(yCenter + r*Math.sin(sc.fraeser.getDeg()));//*180/Math.PI);
-//					sc.fraeser.setPosY(sc.circDrill.getLayoutY());
-//
-////					System.out.println(sc.circDrill.getLayoutX() + "  " + sc.circDrill.getLayoutY() + "  Winkel:" + sc.fraeser.getDeg()
-////							+ "   dx" + r*Math.cos(sc.fraeser.getDeg())*180/Math.PI + "   dy" + r*Math.sin(sc.fraeser.getDeg())*180/Math.PI);
-//
-//					sc.refreshDrillPos();
-//
-//					//System.out.println("testeinnen");
-//					
-//
-//				});
-//			}
-//
-//			if (Thread.interrupted()) {
-//				return;
-//
-//			}
-//		}).start();
-//	}
-	
-	public void circle (double xRead,double yRead,double xCenter, double yCenter,double sDeg, double eDeg, double r, SampleController sc, double speed) {
-		//System.out.println("forfor");
-			new Thread(() -> {
-				//System.out.println("forfor IN");
-				System.out.println(eDeg);
-			//for (double z = 0; z <= eDeg-sDeg; z = z + 1 ) { //Math.PI/180
-				for (double z = sDeg * Math.PI/180; z <=  Math.PI/180*eDeg; z = z + 1*Math.PI/180 ) { 
+	public void circle(double xRead, double yRead, double xCenter, double yCenter, double sDeg, double eDeg, double r,
+			SampleController sc, double speed) {
+
+		new Thread(() -> {
+
+			System.out.println(eDeg);
+
+			for (double z = sDeg * Math.PI / 180; z <= Math.PI / 180 * eDeg; z = z + 1 * Math.PI / 180) {
 				System.out.println(z + "   " + eDeg);
 				sc.fraeser.setDeg(z);
-				//sc.fraeser.getDeg();
+
 				try {
-					//Thread.sleep((long) speed);
-					Thread.sleep(5);
+
+					Thread.sleep(12);
 
 				} catch (InterruptedException ex) {
 					ex.printStackTrace();
 				}
 				Platform.runLater(() -> {
-					
+
 					Circle circle = new Circle(sc.fraeser.getPosX(), sc.fraeser.getPosY(),
-					sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
+							sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
 					sc.drawPane.getChildren().add(circle);
 					sc.circDrill.toFront();
-					
-					sc.circDrill.setLayoutX(xCenter +  r*Math.cos(sc.fraeser.getDeg()));// *Math.PI/180));
-					System.out.println(r*Math.cos(sc.fraeser.getDeg()));
+
+					sc.circDrill.setLayoutX(xCenter + r * Math.cos(sc.fraeser.getDeg()));
+					System.out.println(r * Math.cos(sc.fraeser.getDeg()));
 					sc.fraeser.setPosX(sc.circDrill.getLayoutX());
-					sc.circDrill.setLayoutY(yCenter + r*Math.sin(sc.fraeser.getDeg()));//*180/Math.PI);
+					sc.circDrill.setLayoutY(yCenter + r * Math.sin(sc.fraeser.getDeg()));
 					sc.fraeser.setPosY(sc.circDrill.getLayoutY());
 
-//					System.out.println(sc.circDrill.getLayoutX() + "  " + sc.circDrill.getLayoutY() + "  Winkel:" + sc.fraeser.getDeg()
-//							+ "   dx" + r*Math.cos(sc.fraeser.getDeg())*180/Math.PI + "   dy" + r*Math.sin(sc.fraeser.getDeg())*180/Math.PI);
-
 					sc.refreshDrillPos();
-
-					//System.out.println("testeinnen");
-					
 
 				});
 			}
@@ -197,11 +144,13 @@ public class AnimationHandler {
 			}
 		}).start();
 	}
-	
-	public void revcircle (double xRead,double yRead,double xCenter, double yCenter,double targetDeg, double r,SampleController sc, double speed) {
+
+	public void revcircle(double xRead, double yRead, double xCenter, double yCenter, double sDeg, double eDeg,
+			double r, SampleController sc, double speed) {
+
 		new Thread(() -> {
 
-			for (double z = targetDeg; z > 0; z = z - 0.5) {
+			for (double z = sDeg * Math.PI / 180; z >= eDeg * Math.PI / 180; z = z - Math.PI / 180) {
 
 				try {
 					Thread.sleep((long) speed);
@@ -210,19 +159,21 @@ public class AnimationHandler {
 					ex.printStackTrace();
 				}
 				Platform.runLater(() -> {
-					double iterator = targetDeg;
-					sc.circDrill.setLayoutX(xCenter +  r*Math.cos(iterator)*180/Math.PI);
-					sc.fraeser.setPosX(sc.circDrill.getLayoutX());
-					sc.circDrill.setLayoutY(yCenter + r*Math.sin(iterator)*180/Math.PI);
-					sc.fraeser.setPosY(sc.circDrill.getLayoutY());
 
-					System.out.println(sc.circDrill.getLayoutX() + "  " + sc.circDrill.getLayoutY() + "  Winkel:" + iterator
-							+ "   dx" + r*Math.cos(iterator)*180/Math.PI + "   dy" + r*Math.sin(iterator)*180/Math.PI);
+					Circle circle = new Circle(sc.fraeser.getPosX(), sc.fraeser.getPosY(),
+							sc.fraeser.getDrillDiameter() / 2, sc.drillColor);
+					sc.drawPane.getChildren().add(circle);
+					sc.circDrill.toFront();
+
+					sc.circDrill.setLayoutX(xCenter - r * Math.cos(sc.fraeser.getDeg()));
+					sc.fraeser.setPosX(sc.circDrill.getLayoutX());
+					sc.circDrill.setLayoutY(yCenter - r * Math.sin(sc.fraeser.getDeg()));
+					sc.fraeser.setPosY(sc.circDrill.getLayoutY());
 
 					sc.refreshDrillPos();
 
 					System.out.println("testeinnenRevCircle");
-					iterator -= 0.5;
+
 				});
 			}
 

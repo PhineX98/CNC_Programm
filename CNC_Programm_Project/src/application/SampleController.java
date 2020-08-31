@@ -7,7 +7,14 @@ import java.util.ResourceBundle;
 
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
-
+import gCode.G00;
+import gCode.G01;
+import gCode.G02;
+import gCode.G03;
+import gCode.G28;
+import handler.BtnManager;
+import handler.ErrorHandler;
+import handler.Tester;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -18,6 +25,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import komponenten.Fraeser;
+import komponenten.Spindel;
+import logging.Logging;
+import mCode.M00;
+import mCode.M02;
+import mCode.M03;
+import mCode.M04;
+import mCode.M05;
+import mCode.M08;
+import mCode.M09;
+import mCode.M13;
+import mCode.M14;
 
 
 /**
@@ -69,9 +88,9 @@ public class SampleController implements Initializable {
 	public int iterator = 0;
 	public BtnManager btnManager = new BtnManager();
 	public ErrorHandler errorHandler = new ErrorHandler();
-	ArrayList<CommandCode> commands = new ArrayList<>();
+	public ArrayList<CommandCode> commands = new ArrayList<>();
 	ArrayList<CommandCode> tempCommands = new ArrayList<>();
-	Fraeser fraeser = new Fraeser();
+	public Fraeser fraeser = new Fraeser();
 	Spindel spindel = new Spindel();
 	Tester tester = new Tester();
 
@@ -289,7 +308,7 @@ public class SampleController implements Initializable {
 	}
 
 	/*
-	 * Stoppen der Befehlsfolge
+	 * Stoppen der Anwendung
 	 */
 	public void btnStopp(ActionEvent actionEvent) throws InterruptedException {
 		if (btnManager.getProcessStopped()) {
@@ -297,11 +316,7 @@ public class SampleController implements Initializable {
 		} else if (!btnManager.getProcessPaused() && !btnManager.getProcessStarted()) {
 			errorHandler.firstStartProcess();
 		} else {
-
-			// ProgrammS Stoppen
-			
-			
-			
+			System.exit(1);
 			btnManager.stopProcess(sc);
 		}
 
@@ -433,9 +448,15 @@ public class SampleController implements Initializable {
 //       	 
 //        });
 		
-		cutCode(commands.get(iterator));
-		iterator ++;
+		
+		
 		logger.refreshLog(sc);
+		if (iterator < commands.size()) {
+			cutCode(commands.get(iterator));
+			iterator ++;
+		}else {
+			errorHandler.NoMoreCommands();
+		}
 
 	}
 

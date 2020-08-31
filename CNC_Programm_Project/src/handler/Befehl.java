@@ -1,4 +1,9 @@
-package application;
+package handler;
+
+import application.SampleController;
+import komponenten.Fraeser;
+import komponenten.Spindel;
+import logging.Logging;
 
 /**
  * Abstrakte Klasse zur Erstellung der Command Handler

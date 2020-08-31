@@ -1,4 +1,4 @@
-package application;
+package komponenten;
 
 /**
  * Dies ist die Abstraktion der Spindel des Fräskopfes

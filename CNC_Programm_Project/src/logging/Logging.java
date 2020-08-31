@@ -1,4 +1,4 @@
-package application;
+package logging;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import application.SampleController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

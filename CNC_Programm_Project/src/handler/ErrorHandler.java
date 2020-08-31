@@ -1,5 +1,6 @@
-package application;
+package handler;
 
+import application.SampleController;
 import fileParser.CommandCode;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -150,6 +151,15 @@ public class ErrorHandler {
 
 		alert.showAndWait();
 		
+	}
+
+	public void NoMoreCommands() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Achtung!");
+		alert.setHeaderText(null);
+		alert.setContentText("Alle Kommandos abgearbeitet");
+
+		alert.showAndWait();
 	}
 
 }
