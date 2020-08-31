@@ -10,20 +10,35 @@ import fileParser.CommandCode;
  */
 public class G01 extends Befehl {
 
+	/*
+	 * Ausführen des eingehenden Verfahrbefehls
+	 */
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l, CommandCode values) {
 		System.out.println("g01");
 		l.zeitStarten();
 
-		if(f.getFraeserStatus()) {
-			starten(s, f, c, l, values);
-		}else {
+		if (f.getFraeserStatus()) {
+			startAnimation(s, f, c, l, values);
+		} else {
 			c.errorHandler.youHaveToStartTheDrillViaCommand();
 		}
 	}
-	
-	
-	private void starten(Spindel s, Fraeser f, SampleController c, Logging l, CommandCode values){
 
+	/*
+	 * Benötigte Logik zum Starten und Animieren des Fahrbefehls
+	 */
+	private void startAnimation(Spindel s, Fraeser f, SampleController c, Logging l, CommandCode values) {
+
+		/*
+		 * xRead 	-> eingegebener xZeilwert
+		 * yRead 	-> 			    yZielwert
+		 * aktX	 	-> aktuelle xPosition
+		 * aktY  	-> 		 	yPosition
+		 * xToDrill -> zu fräsen in xRichtung
+		 * yToDrill -> 				yRichtung
+		 * dx	-> Steps in xRichtung
+		 * dy 	-> Steps in yRichtung
+		 */
 		double xRead = values.getX() / 2;
 		double yRead = values.getY() / 2;
 		double aktX = f.getPosX();
@@ -31,91 +46,64 @@ public class G01 extends Befehl {
 		double xToDrill = Math.abs(xRead - aktX);
 		double yToDrill = Math.abs(yRead - aktY);
 		double dx, dy;
-		
+
+		// Fahrtrichtung und Schritte in x und y Richtung festlegen
 		if (xToDrill > yToDrill) {
-			//dx = Math.round(Math.signum(xRead));
-			//dx = xToDrill;
-			dx=1;
-			if (aktX>xRead) {
+
+			dx = 1;
+			if (aktX > xRead) {
 				dx = -1;
 			}
-			//dy = Math.round(yToDrill / xToDrill);
-			dy = (yToDrill ) / (xToDrill );
-			
-//			AnimationHandler cutter = new AnimationHandler();
-//			System.out.println("Y");
-			//cutter.lineY(xRead, yRead, c, dx, dy,yToDrill);
-			
+
+			dy = (yToDrill) / (xToDrill);
+
 		} else if (xToDrill < yToDrill) {
-			//dx = Math.round(xToDrill / yToDrill);
+
 			dx = xToDrill / yToDrill;
-			//dy = Math.round(Math.signum(yRead));
-			//dy= yToDrill;
-			dy=1;
-			if (aktY>yRead) {
+
+			dy = 1;
+			if (aktY > yRead) {
 				dy = -1;
-			} 
-			
-			
-//			AnimationHandler cutter = new AnimationHandler();
-//			cutter.lineX(xRead, yRead, c, dx, dy,xToDrill);
-			System.out.println("X");
-			//cutter.lineX(xRead, yRead, c, dx, dy);
-		}else {
-				if (xRead<aktX) {
-					dx = -1;
-				}else {
-					dx = 1;
-				}
-				if (yRead<aktY) {
-					dy = -1;
-				}else {
-					dy = 1;
-				}
+			}
+
+		} else {
+			if (xRead < aktX) {
+				dx = -1;
+			} else {
+				dx = 1;
+			}
+			if (yRead < aktY) {
+				dy = -1;
+			} else {
+				dy = 1;
+			}
 		}
-		
+
 		AnimationHandler cutter = new AnimationHandler();
-		double lengthStep = Math.sqrt(dx*dx + dy*dy);
-		double temp = f.getAktSpeed()*10/lengthStep;
-		double temp2 = 600/temp;
-		//temp2 = 20;
-		
-		
-		System.out.println(xRead + " " + yRead + " " +dx + " "+ dy + "dgzasgfzgzgfzaggzvn" + xToDrill + "  " + yToDrill + "  " +aktX + "  " + aktY);
+		double lengthStep = Math.sqrt(dx * dx + dy * dy);
+		double temp = f.getAktSpeed() * 10 / lengthStep;
+		double speed = 600 / temp;
+
+//		System.out.println(xRead + " " + yRead + " " + dx + " " + dy + "   " + xToDrill + "  "
+//				+ yToDrill + "  " + aktX + "  " + aktY);
+
 		
 		if (dx == 0) {
-			//dy = 1;
-			//AnimationHandler cutter = new AnimationHandler();
-			cutter.lineY(xRead, yRead, c, dx, dy,yToDrill, temp2);
-			System.out.println("1");
-		}else if (dy == 0) {
-			//AnimationHandler cutter = new AnimationHandler();
-			//dx = 1;
-			cutter.lineX(xRead, yRead, c, dx, dy,xToDrill, temp2);
-			System.out.println("2");
-		}
+			cutter.lineY(xRead, yRead, c, dx, dy, yToDrill, speed);
 
-		 else if (xToDrill < yToDrill) {
-			// AnimationHandler cutter = new AnimationHandler();
-		
-				cutter.lineX(xRead, yRead, c, dx, dy,xToDrill, temp2);
-				System.out.println("3");
-				
-		} else if (xToDrill > yToDrill){
-			//AnimationHandler cutter = new AnimationHandler();
-	
-			cutter.lineY(xRead, yRead, c, dx, dy,yToDrill, temp2);
-			System.out.println("4");
+		} else if (dy == 0) {
+			cutter.lineX(xRead, yRead, c, dx, dy, xToDrill, speed);
+
+		} else if (xToDrill < yToDrill) {
+			cutter.lineX(xRead, yRead, c, dx, dy, xToDrill, speed);
+
+		} else if (xToDrill > yToDrill) {
+			cutter.lineY(xRead, yRead, c, dx, dy, yToDrill, speed);
+
 		} else {
-			//AnimationHandler cutter = new AnimationHandler();
-			
-			cutter.lineY(xRead, yRead, c, dx, dy,yToDrill, temp2);
-			System.out.println("5");
-			
-		}
-		
+			cutter.lineY(xRead, yRead, c, dx, dy, yToDrill, speed);
 
-		
+		}
 
 		l.addToLog("G01 ausgeführt in " + l.zeitGebraucht());
 	}

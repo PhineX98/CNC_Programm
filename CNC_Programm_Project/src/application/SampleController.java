@@ -28,7 +28,8 @@ import javafx.scene.shape.Rectangle;
  */
 
 public class SampleController implements Initializable {
-
+	
+	//Status Lables
 	public Label statX;
 	public Label statY;
 	public Label statCooling;
@@ -36,6 +37,7 @@ public class SampleController implements Initializable {
 	public Label statFraeser;
 	public Label statSpeed;
 
+	//Einstellungsanzeige
 	public Label lblHomePos;
 	public Label lblSpeedCooling;
 	public Label lblSpeedNoCooling;
@@ -43,6 +45,7 @@ public class SampleController implements Initializable {
 	public Label lblDrillDiameter;
 	public Label lblInfo;
 
+	//Eingabefelder
 	public TextField field_Befehl;
 	public TextField field_Pos;
 	public TextField field_x;
@@ -50,28 +53,30 @@ public class SampleController implements Initializable {
 	public TextField field_i;
 	public TextField field_j;
 
+	//Anzeige der Animation
 	public Rectangle drillSurface;
 	public Circle circHomePosition;
 	public Circle circDrill;
 	public Path path;
 	public Color drillColor;
-
 	public Pane drawPane;
-
-	public ListView<String> logList;
 	
+	//Logging
+	public ListView<String> logList;
+	public Logging logger = new Logging();
+	
+	//Andere
 	public int iterator = 0;
+	public BtnManager btnManager = new BtnManager();
+	public ErrorHandler errorHandler = new ErrorHandler();
 	ArrayList<CommandCode> commands = new ArrayList<>();
 	ArrayList<CommandCode> tempCommands = new ArrayList<>();
 	Fraeser fraeser = new Fraeser();
 	Spindel spindel = new Spindel();
 	Tester tester = new Tester();
 
+	//Overlay zugängig machen
 	public static SampleController sc;
-	public Logging logger = new Logging();
-	public BtnManager btnManager = new BtnManager();
-	public ErrorHandler errorHandler = new ErrorHandler();
-	public static Path path1 = new Path();
 
 	////////////////////////////////////////
 	// Handlers
@@ -89,7 +94,6 @@ public class SampleController implements Initializable {
 	G02 handleG02 = new G02();
 	G03 handleG03 = new G03();
 	G28 handleG28 = new G28();
-	private boolean angeshaltet = false;
 	////////////////////////////////////////
 	
 
@@ -130,9 +134,7 @@ public class SampleController implements Initializable {
 						logger.refreshLog(sc);
 						field_Befehl.clear();
 
-						commands = tempCommands;
-
-						
+						commands = tempCommands;		
 						
 						// Ausgabe in der Konsole
 						for (int i = 0; i < commands.size(); i++) {
@@ -270,6 +272,7 @@ public class SampleController implements Initializable {
 
 	}
 
+	
 	/*
 	 * Pausieren der Befehlsfolge
 	 */
@@ -296,7 +299,9 @@ public class SampleController implements Initializable {
 		} else {
 
 			// ProgrammS Stoppen
-
+			
+			
+			
 			btnManager.stopProcess(sc);
 		}
 
@@ -406,7 +411,6 @@ public class SampleController implements Initializable {
 			break;
 		case "G02":
 			handleG02.exec(spindel, fraeser, sc, logger, paramList);
-			System.out.println("go2dsdsdsdsdsd");
 			break;
 		case "G03":
 			handleG02.exec(spindel, fraeser, sc, logger, paramList);

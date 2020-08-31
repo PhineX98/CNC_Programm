@@ -37,9 +37,9 @@ public abstract class Befehl {
 
 		// Setzen der angezeigten Drehrichtung (EIN/AUS oder - bei ausgeschalteter
 		// Fräse)
-		if (!s.getRichtung() && f.getFraeserStatus()) {
+		if (!s.getDirection() && f.getFraeserStatus()) {
 			c.statDirection.setText("Rechts");
-		} else if (s.getRichtung() && f.getFraeserStatus()) {
+		} else if (s.getDirection() && f.getFraeserStatus()) {
 			c.statDirection.setText("Links");
 		} else {
 			c.statDirection.setText("-");

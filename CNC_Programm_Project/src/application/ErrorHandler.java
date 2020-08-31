@@ -8,6 +8,8 @@ import javafx.scene.control.Alert.AlertType;
  * Diese Klasse ruft Errormeldungen auf, die dem Nutzer sagen, was er falsch
  * gemacht hat und was zu beachten ist, bevor er den gewünschten Schritt
  * ausführen kann.
+ * 
+ * Die Bezeichnungen entsprechen hierbei den Fällen die abgefangen werden
  *
  * @author Jannik Orth
  */

@@ -11,7 +11,7 @@ public class Spindel {
 	private boolean drillStatus = false;
 
 	// false -> Rechtslauf | true -> Linkslauf
-	private boolean drillRichtung = false;
+	private boolean drillDirection = false;
 
 	// Drill Stoppen
 	public void stop() {
@@ -21,13 +21,13 @@ public class Spindel {
 	// Drill Starten rechtsherum
 	public void startRight() {
 		drillStatus = true;
-		drillRichtung = false;
+		drillDirection = false;
 	}
 
 	// Drill Starten linksrum
 	public void startLeft() {
 		drillStatus = true;
-		drillRichtung = true;
+		drillDirection = true;
 	}
 
 	// get Drill Status
@@ -36,8 +36,8 @@ public class Spindel {
 	}
 
 	// get Drill Richtung
-	public boolean getRichtung() {
-		return drillRichtung;
+	public boolean getDirection() {
+		return drillDirection;
 	}
 
 

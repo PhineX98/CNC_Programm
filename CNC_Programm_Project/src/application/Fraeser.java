@@ -1,12 +1,11 @@
 package application;
 
-
-
 /**
-*Diese Klasse abstrahiert den FrÃ¤ser mit seinen Eigenschaften um diesen steuern zu kÃ¶nnen.
-*
-* @author Jannik Orth
-*/
+ * Diese Klasse abstrahiert den FrÃ¤ser mit seinen Eigenschaften um diesen
+ * steuern zu kÃ¶nnen.
+ *
+ * @author Jannik Orth
+ */
 public class Fraeser {
 
 	private double fahrSpeed;
@@ -22,9 +21,7 @@ public class Fraeser {
 	private double aktSpeed;
 	private double deg;
 
-	
-	
-	
+	// HomePosition X
 	public double getHomePosX() {
 		return homePosX;
 	}
@@ -33,6 +30,7 @@ public class Fraeser {
 		this.homePosX = homePosX;
 	}
 
+	// HomePostion Y
 	public double getHomePosY() {
 		return homePosY;
 	}
@@ -41,55 +39,51 @@ public class Fraeser {
 		this.homePosY = homePosY;
 	}
 
-
-	
+	// Aktuelle absolute Fhargeschwindikeit
 	public void setAktSpeed(Spindel s) {
 		if (coolingStatus && fraeserStatus) {
 			this.aktSpeed = schnittSpeedCooling;
-		}else if (!coolingStatus && fraeserStatus) {
+		} else if (!coolingStatus && fraeserStatus) {
 			this.aktSpeed = schnittSpeedNoCooling;
-		}else if (fraeserStatus && !s.getStatus()) {
+		} else if (fraeserStatus && !s.getStatus()) {
 			this.aktSpeed = fahrSpeed;
-		}else {
+		} else {
 			this.aktSpeed = 0;
 		}
 	}
-	
-	public double getAktSpeed(){
+
+	public double getAktSpeed() {
 		return aktSpeed;
 	}
-	
 
-	// FrÃ¤ser Status ausgeben
+	// Aktueller Fräserstatus
 	public boolean getFraeserStatus() {
 		return fraeserStatus;
 	}
 
-	// frÃ¤asenstatus setzen
 	public void setFraeserStatus(boolean status) {
 		this.fraeserStatus = status;
 	}
 
-	// drivespeed setzten
+	// Geschwindigkeit für Eilgang
 	public void setFahrSpeed(double speed) {
 		this.fahrSpeed = speed;
 	}
 
-	// getten
 	public double getFahrSpeed() {
 		return fahrSpeed;
 	}
 
-	// schnittgeschwindigkeit setzen
+	// Eingestellte Geschwindigkeit mit Kühlung
 	public void setSchnittSpeedCooling(double speed) {
 		this.schnittSpeedCooling = speed;
 	}
 
-	// getten
 	public double getSchnittSpeedCooling() {
 		return schnittSpeedCooling;
 	}
-	
+
+	// Eingestellte Geschwindigkeit ohne Kühlung
 	public double getSchnittSpeedNoCooling() {
 		return schnittSpeedNoCooling;
 	}
@@ -98,62 +92,60 @@ public class Fraeser {
 		this.schnittSpeedNoCooling = schnittSpeedNoCooling;
 	}
 
-	// posX setzen
+	// Aktuelle x-Position
 	public void setPosX(double pos) {
 		this.posX = pos;
 	}
 
-	// getten
 	public double getPosX() {
 		return Math.round(posX);
 	}
 
-	// posY setzten
+	// Aktuelle y-Position
 	public void setPosY(double pos) {
 		posY = pos;
 	}
 
-	// getten
 	public double getPosY() {
 		return Math.round(posY);
 	}
 
-	// cooling setzen
+	// Kühlung
 	public void setCoolingStatus(boolean stat) {
 		this.coolingStatus = stat;
 	}
 
-	// cooling getten
 	public boolean getCoolingStatus() {
 		return coolingStatus;
 	}
 
-
+	// Bohrdurchmesser
 	public void setDrillDiameter(double diameter) {
 		this.drillDiameter = diameter;
 	}
-	
+
 	public double getDrillDiameter() {
 		return drillDiameter;
 	}
-	
-	public void printValues() {
 
-		System.out.println(fahrSpeed);
-		System.out.println(schnittSpeedCooling);
-		System.out.println(schnittSpeedNoCooling);
-		System.out.println(homePosX+ posX);
-		System.out.println(homePosY+ posY);
-		System.out.println(this.drillDiameter);
-
-	}
-
+	// Gradzahl
 	public double getDeg() {
 		return deg;
 	}
 
 	public void setDeg(double deg) {
 		this.deg = deg;
+	}
+
+	public void printValues() {
+
+		System.out.println(fahrSpeed);
+		System.out.println(schnittSpeedCooling);
+		System.out.println(schnittSpeedNoCooling);
+		System.out.println(homePosX + posX);
+		System.out.println(homePosY + posY);
+		System.out.println(this.drillDiameter);
+
 	}
 
 }
