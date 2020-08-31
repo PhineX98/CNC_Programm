@@ -11,6 +11,7 @@ import fileParser.CommandCode;
 public class G01 extends Befehl {
 
 	public void exec(Spindel s, Fraeser f, SampleController c, Logging l, CommandCode values) {
+		System.out.println("g01");
 		l.zeitStarten();
 
 		if(f.getFraeserStatus()) {

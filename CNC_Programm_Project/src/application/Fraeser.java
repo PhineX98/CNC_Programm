@@ -20,6 +20,7 @@ public class Fraeser {
 	private double homePosY;
 	private double drillDiameter;
 	private double aktSpeed;
+	private double deg;
 
 	
 	
@@ -147,5 +148,12 @@ public class Fraeser {
 
 	}
 
-}
+	public double getDeg() {
+		return deg;
+	}
 
+	public void setDeg(double deg) {
+		this.deg = deg;
+	}
+
+}

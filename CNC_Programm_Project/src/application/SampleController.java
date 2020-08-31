@@ -246,16 +246,16 @@ public class SampleController implements Initializable {
 			
 			launchCommand();
 			
-			new Thread(() -> {
-	
-				do {
-					System.out.println("nice");
-				} while (angeshaltet );
-
-					if (Thread.interrupted()) {
-						return;
-					}
-				}).start();
+//			new Thread(() -> {
+//	
+//				do {
+//					System.out.println("nice");
+//				} while (angeshaltet );
+//
+//					if (Thread.interrupted()) {
+//						return;
+//					}
+//				}).start();
 			
 			
 			
@@ -406,6 +406,7 @@ public class SampleController implements Initializable {
 			break;
 		case "G02":
 			handleG02.exec(spindel, fraeser, sc, logger, paramList);
+			System.out.println("go2dsdsdsdsdsd");
 			break;
 		case "G03":
 			handleG02.exec(spindel, fraeser, sc, logger, paramList);
@@ -434,63 +435,7 @@ public class SampleController implements Initializable {
 
 	}
 
-	/*
-	 * Tempor√§rerButton
-	 */
-	public void btnTest(ActionEvent actionEvent) {
-		
-		
-		
-		
 	
-		
-		
-		
-		
-		//Draw pain clearen und neue oberfl‰che machen
-//		drawPane.getChildren().clear();
-//		drawPane.getChildren().add(drillSurface);
-		
-		
-		/*
-		Line line = new Line();
-		line.setStartX(50);
-		line.setStartY(50);
-		line.setEndX(100);
-		line.setEndY(50);
-		line.setStroke(Color.RED);
-
-		drawPane.getChildren().add(line);
-		
-		System.out.println(sc.fraeser.getDrillDiameter());
-
-		//////////////////////////////////////////
-
-		
-
-		/*
-		 * QuadCurveTo quadCurveTo = new QuadCurveTo(); quadCurveTo.setX(120.0f);
-		 * quadCurveTo.setY(60.0f); quadCurveTo.setControlX(100.0f);
-		 * quadCurveTo.setControlY(0.0f);
-		 * 
-		 * LineTo lineTo = new LineTo(); lineTo.setX(175.0f); lineTo.setY(55.0f);
-		 * 
-		 * ArcTo arcTo = new ArcTo(); arcTo.setX(50.0f); arcTo.setY(50.0f);
-		 * arcTo.setRadiusX(50.0f); arcTo.setRadiusY(50.0f);
-		 */
-/*
-		ArcTo arcTo1 = new ArcTo();
-		arcTo1.setX(300);
-		arcTo1.setY(500);
-		arcTo1.setRadiusX(100);
-		arcTo1.setRadiusY(100);
-
-		path.getElements().add(moveTo);
-		path.getElements().add(quadCurveTo);
-	path.getElements().add(lineTo);
-		path.getElements().add(arcTo1);
-		*/
-	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

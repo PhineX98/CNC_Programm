@@ -1,38 +1,25 @@
 [
-
     {
         "command": {
-           "number":"N00",
+            "number":"N0010",
 			"code":"M03",
-			"parameters": { 
+			"parameters": {
 				
-			}	
+			}
         }
     },
+    {
+        "command": {
+            "number":"N0020",
+			"code":"M08",
+			"parameters": {
 
-    {
-        "command": {
-           "number":"N10",
-			"code":"G01",
-			"parameters": { 
-				"x":0,
-				"y":100
 			}	
         }
     },
-    {
+	{
         "command": {
-           "number":"N20",
-			"code":"G01",
-			"parameters": { 
-				"x":100,
-				"y":0
-			}	
-        }
-    },
-    {
-        "command": {
-           "number":"N30",
+           "number":"N0030",
 			"code":"G01",
 			"parameters": { 
 				"x":100,
@@ -42,23 +29,14 @@
     },
     {
         "command": {
-           "number":"N40",
-			"code":"G01",
-			"parameters": { 
-				"x":0,
-				"y":200
+            "number":"N0040",
+			"code":"G02",
+			"parameters": {
+				"x":100,
+				"y":200,
+				"i":100,
+				"j":100
 			}	
         }
     }
-        {
-        "command": {
-           "number":"N50",
-			"code":"G01",
-			"parameters": { 
-				"x":0,
-				"y":10
-			}	
-        }
-    }
-
 ]

@@ -113,7 +113,7 @@ public class ErrorHandler {
 		alert.setTitle("Achtung!");
 		alert.setHeaderText(null);
 		alert.setContentText(
-				"Ungültige Befehlsfolge. Du musst die Fräse Einschalten bevor du beginnst zu fräsen. Bitte Korrigieren.");
+				"Ungültige Befehlsfolge. Du musst die Fräse Einschalten bevor du beginnst zu fräsen. Bitte korrigieren.");
 
 		alert.showAndWait();
 	}
@@ -125,14 +125,29 @@ public class ErrorHandler {
 				pos = i;
 			}
 		}
-
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Achtung!");
 		alert.setHeaderText(null);
-		alert.setContentText("Der Command an" + pos + ". Position kann so nicht umgesetzt werden. Bitte Korrigieren.");
+		alert.setContentText("Der Command an " + pos + ". Position kann so nicht umgesetzt werden. Bitte korrigieren.");
 
 		alert.showAndWait();
 
+	}
+
+	public void yourEndCoordinateIsNotOnCircle(SampleController c, CommandCode values) {
+		Integer pos = null;
+		for (int i = 0; i < c.commands.size(); i++) {
+			if (c.commands.get(i).getBefehl().equals(values.getBefehl())) {
+				pos = i;
+			}
+		}
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Achtung!");
+		alert.setHeaderText(null);
+		alert.setContentText("Der Command an " + pos + ". Position kann so nicht umgesetzt werden. Endkoordinaten liegen nicht auf dem Kreis. Bitte korrigieren.");
+
+		alert.showAndWait();
+		
 	}
 
 }
