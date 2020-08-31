@@ -1,6 +1,5 @@
 package application;
 
-import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,9 +8,6 @@ import java.util.ResourceBundle;
 import fileParser.CommandCode;
 import fileParser.ParseHandler;
 
-import javafx.animation.Animation;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -19,13 +15,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+
 
 /**
  * Dies ist die ControllerKlasse der Anwendung Von hier aus werden alle Button
@@ -96,6 +89,7 @@ public class SampleController implements Initializable {
 	G02 handleG02 = new G02();
 	G03 handleG03 = new G03();
 	G28 handleG28 = new G28();
+	private boolean angeshaltet = false;
 	////////////////////////////////////////
 	
 
@@ -107,7 +101,7 @@ public class SampleController implements Initializable {
 	public void btnAddCommand(ActionEvent actionEvent) {
 		// tester.checkCommand(sc);
 
-		if (btnManager.getLoggingDeleted()) {
+		
 			if (tester.checkCommand(sc)) {
 				if (!btnManager.getCommandListSet()) {
 					if (field_Befehl.getText().length() > 1) {
@@ -152,11 +146,7 @@ public class SampleController implements Initializable {
 					errorHandler.firstDeleteCommands();
 				}
 			}
-		} else {
-			errorHandler.firstDeleteLog();
-		}
-
-	}
+		} 
 
 	/*
 	 * Löscht alle eingelesenen oder eingegebenen Commands
@@ -178,12 +168,18 @@ public class SampleController implements Initializable {
 	 * eingelesen. Anezige der Einstellungen wird ebenfalls gesetzt.
 	 */
 	public void btnSettingsRead(ActionEvent actionEvent) {
-		ParseHandler ph1 = new ParseHandler();
-		String[] settings = ph1.handleSettings();
-		setSettings(settings);
+		
+		if (!btnManager.getSettingsSet()) {
+			ParseHandler ph1 = new ParseHandler();
+			String[] settings = ph1.handleSettings();
+			setSettings(settings);
 
-		// fraeser.printValues();
-		btnManager.settingsInitialized(sc);
+			// fraeser.printValues();
+			btnManager.settingsInitialized(sc);
+		}else {
+			errorHandler.settingsAreAlreadyLoaded(sc);
+		}
+		
 	}
 
 	/*
@@ -193,10 +189,11 @@ public class SampleController implements Initializable {
 	 * werden einzulesen.
 	 */
 	public void btnCommandsRead(ActionEvent actionEvent) { // Alle Commands in die ArrayList commands einlesen
-		if (btnManager.getLoggingDeleted()) {
+		
 
 			if (!btnManager.getCommandsSet() && !btnManager.getCommandListSet()) {
 				ParseHandler ph2 = new ParseHandler();
+				commands.clear();
 				commands = ph2.handleCommand();
 				if (tester.checkBlock(sc)) {
 
@@ -213,9 +210,7 @@ public class SampleController implements Initializable {
 			} else {
 				errorHandler.firstDeleteCommands();
 			}
-		} else {
-			errorHandler.firstDeleteLog();
-		}
+		 
 
 	}
 
@@ -250,6 +245,17 @@ public class SampleController implements Initializable {
 //			}
 			
 			launchCommand();
+			
+			new Thread(() -> {
+	
+				do {
+					System.out.println("nice");
+				} while (angeshaltet );
+
+					if (Thread.interrupted()) {
+						return;
+					}
+				}).start();
 			
 			
 			
@@ -351,6 +357,7 @@ public class SampleController implements Initializable {
 
 		circHomePosition.setLayoutX(fraeser.getHomePosX());
 		circHomePosition.setLayoutY(fraeser.getHomePosY());
+		circHomePosition.setRadius(fraeser.getDrillDiameter()+1);
 		circDrill.setLayoutX(fraeser.getHomePosX());
 		circDrill.setLayoutY(fraeser.getHomePosY());
 		circDrill.setRadius(fraeser.getDrillDiameter() / 2);

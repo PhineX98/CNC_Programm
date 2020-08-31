@@ -13,6 +13,8 @@ public abstract class Befehl {
 		// Commands.
 
 	}
+	
+
 
 	/*
 	 * Zum aktualisieren der Anzeige für den aktuellen Status der Maschine
@@ -20,10 +22,10 @@ public abstract class Befehl {
 	public void resetStatus(Spindel s, Fraeser f, SampleController c) {
 
 		// Setzen des eingestellten Fräserstatus
-		if (f.getFraeserStatus()) {
-			c.statFraeser.setText("AN");
-		} else {
+		if (!f.getFraeserStatus() || !s.getStatus()) {
 			c.statFraeser.setText("AUS");
+		} else {
+			c.statFraeser.setText("AN");
 		}
 
 		// Setzen des eingestellten Kühlungsstatus
@@ -44,17 +46,7 @@ public abstract class Befehl {
 		}
 
 		// Einstellung der angezeigten Geschwindigkeit
-		if (s.getStatus()) {
-			c.statSpeed.setText(c.lblSpeedNoCooling.getText());
-		} else if (s.getStatus() && f.getCoolingStatus()) {
-			c.statSpeed.setText(c.lblSpeedCooling.getText());
-		} else if (!s.getStatus() && f.getFraeserStatus()) {
-			c.statSpeed.setText(c.lblSpeedNoDrill.getText());
-		} else if (!f.getFraeserStatus() && !s.getStatus()) {
-			c.statSpeed.setText("0");
-		} else {
-			c.statSpeed.setText("-");
-		}
+		c.statSpeed.setText(Double.toString(f.getAktSpeed()));
 
 	}
 }

@@ -3,20 +3,20 @@
     {
         "command": {
            "number":"N00",
-			"code":"G01",
+			"code":"M03",
 			"parameters": { 
-				"x":0,
-				"y":100
+				
 			}	
         }
     },
+
     {
         "command": {
            "number":"N10",
 			"code":"G01",
 			"parameters": { 
-				"x":100,
-				"y":0
+				"x":0,
+				"y":100
 			}	
         }
     },
@@ -26,13 +26,23 @@
 			"code":"G01",
 			"parameters": { 
 				"x":100,
-				"y":100
+				"y":0
 			}	
         }
     },
     {
         "command": {
            "number":"N30",
+			"code":"G01",
+			"parameters": { 
+				"x":100,
+				"y":100
+			}	
+        }
+    },
+    {
+        "command": {
+           "number":"N40",
 			"code":"G01",
 			"parameters": { 
 				"x":0,
@@ -42,7 +52,7 @@
     }
         {
         "command": {
-           "number":"N40",
+           "number":"N50",
 			"code":"G01",
 			"parameters": { 
 				"x":0,
